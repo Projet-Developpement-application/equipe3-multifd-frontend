@@ -17,7 +17,7 @@ const SearchFilterBar = ({ searchTerm, onSearchChange }) => {
                     value={searchTerm}
                     onChange={onSearchChange}
                 />
-                <button className="btn btn-outline-primary d-flex align-items-center bg-gris-pale">
+                <button className="btn btn-outline-primary d-flex align-items-center bg-gris-plus-pale">
                     <i className="bi bi-search"> </i></button>
 
             </div>

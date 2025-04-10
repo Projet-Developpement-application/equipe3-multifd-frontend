@@ -11,7 +11,7 @@ export default function Navbar(){
                     <ul className="navbar-nav align-items-end ms-auto ">
                         <li className="nav-item me-5">
                             <button
-                                className="nav-link btn btn-navbar left pb-0 mb-2 " href="#"> Panier
+                                className="nav-link btn btn-navbar left pb-0 mb-2 mb" href="#"> Panier
                             </button>
                         </li>
                         <li className="nav-item me-5">

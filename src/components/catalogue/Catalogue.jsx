@@ -184,12 +184,12 @@ const Catalogue = () => {
             <BarreRecherche searchTerm={""} onSearchChange={""} />
             <div className="d-flex flex-column min-vh-100">
                 <div className="container mt-5 pt-5 flex-grow-1">
-                    <div className="row">
+                    <div className="row ">
                         {currentProducts.map((product) => (
-                            <div key={product.id} className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-                                <div className="card h-100 border-1 shadow-lg">
-                                    <img src={product.image} className="card-img-top" alt={product.name}/>
-                                    <div className="card-body d-flex flex-column">
+                            <div key={product.id} className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 ">
+                                <div className="card h-100 border-1 rounded shadow-lg product-card-hover ">
+                                    <img src={product.image} className="card-img-top rounded-top" alt={product.name}/>
+                                    <div className="card-body   d-flex flex-column">
                                         <h5 className="card-title">{product.name}</h5>
                                         <p className="card-text">{product.description}</p>
                                         <div className="mt-auto">

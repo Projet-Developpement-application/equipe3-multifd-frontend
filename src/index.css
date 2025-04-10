@@ -10,3 +10,12 @@
     border-bottom: 2px solid #000000;
     border-right: none;
 }
+
+.product-card-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transition douce pour le mouvement et l'ombre */
+}
+
+.product-card-hover:hover {
+    transform: translateY(-10px); /* Déplace toute la carte vers le haut */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Ombre pour donner de la profondeur */
+}
