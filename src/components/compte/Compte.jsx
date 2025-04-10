@@ -20,8 +20,8 @@ const Compte = () => {
     };
 
     return (
-        <div className="container mt-4 pt-5">
-            <h2 className="mb-3 fw-bold">Mon compte</h2>
+        <div className="container pt-5">
+            <h2 className="mb-5 fw-bold">Mon compte</h2>
             {modeEdition ? (
                 <CompteForm
                     informations={informations}

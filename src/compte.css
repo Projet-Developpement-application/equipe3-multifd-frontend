@@ -1,0 +1,11 @@
+.input-border-black {
+    border: 2px solid #7e7c7c;
+    transition: border-color 0.3s ease;
+    color:black;
+}
+
+.input-border-black:focus {
+    border-color: black;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    color:black;
+}

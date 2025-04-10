@@ -7,7 +7,7 @@ return(
 
         <Navbar/>
 
-        <div style={{padding: '100px 0'}}>
+        <div>
             <Compte/>
         </div>
 

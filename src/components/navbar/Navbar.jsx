@@ -1,6 +1,6 @@
 export default function Navbar(){
     return (
-        <nav className="navbar position-fixed w-100 z-1 navbar-expand-lg text-white bg-primary" data-bs-theme="dark">
+        <nav className="navbar w-100 z-1 navbar-expand-lg text-white bg-primary" data-bs-theme="dark">
             <div className="container-fluid">
                 <a className="navbar-brand  m-2" href="#">MULTI FD</a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
