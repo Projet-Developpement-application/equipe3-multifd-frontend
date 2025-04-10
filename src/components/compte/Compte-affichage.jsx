@@ -10,13 +10,13 @@ export default function CompteAffichage({ informations, onEdit }){
                 <div className="col-md-6"><strong>Courriel :</strong> {informations.courriel}</div>
                 <div className="col-md-6"><strong>Téléphone :</strong> {informations.telephone}</div>
             </div>
-            <div className="mb-2"><strong>Entreprise :</strong> {informations.entreprise}</div>
             <div className="row mb-3">
                 <div className="col-md-6"><strong>Adresse :</strong> {informations.adresse}</div>
                 <div className="col-md-6"><strong>Ville :</strong> {informations.ville}</div>
             </div>
+            <div className="mb-2"><strong>Entreprise :</strong> {informations.entreprise}</div>
             <div className="d-flex justify-content-end">
-                <button className="btn btn-outline-secondary btn-sm" onClick={onEdit}>
+                <button className="btn btn-outline-dark btn-sm" onClick={onEdit}>
                     Modifier
                 </button>
             </div>
