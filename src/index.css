@@ -1,0 +1,12 @@
+/* Barre de filtre et recherche dans le catalogue */
+
+.barre-recherche{
+    background-color: #d4d4d6;
+}
+
+.bordure-recherche-input {
+    border-top: 2px solid #000000;
+    border-left: 2px solid #000000;
+    border-bottom: 2px solid #000000;
+    border-right: none;
+}

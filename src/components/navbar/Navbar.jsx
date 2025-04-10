@@ -20,10 +20,7 @@ export default function Navbar(){
                             </button>
                         </li>
 
-                        <li className="nav-item me-3">
-                            <button className="nav-link btn btn-navbar " href="#"><i className="bi bi-github"> </i>
-                            </button>
-                        </li>
+
                     </ul>
                 </div>
             </div>
