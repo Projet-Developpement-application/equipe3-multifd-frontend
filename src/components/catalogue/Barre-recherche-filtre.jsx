@@ -1,25 +1,22 @@
 import React from "react";
 
-const SearchFilterBar = ({ searchTerm, onSearchChange }) => {
+const SearchFilterBar = ({ searchTerm, onSearchChange, onFilterClick }) => {
     return (
         <div className="d-flex justify-content-between align-items-center mb-4 barre-recherche pt-2 pb-2">
-
-            <button className="btn btn-outline-primary d-flex align-items-center ms-3 bg-white">
-                <i className="bi bi-funnel-fill me-2"> </i> Filtrer
+            <button className="btn btn-outline-dark-flex align-items-center ms-3 bg-white" onClick={onFilterClick}>
+                <i className="bi bi-funnel-fill me-2"></i> Filtrer
             </button>
-
-            {/* Barre de recherche */}
-            <div className="input-group me-4 " style={{maxWidth: "300px"}}>
+            <div className="input-group me-4" style={{ maxWidth: "300px" }}>
                 <input
                     type="text"
-                    className="form-control bordure-recherche-input"
+                    className="form-control "
                     placeholder="Rechercher..."
                     value={searchTerm}
                     onChange={onSearchChange}
                 />
-                <button className="btn btn-outline-primary d-flex align-items-center bg-gris-plus-pale">
-                    <i className="bi bi-search"> </i></button>
-
+                <button className="btn  btn-dark d-flex align-items-center ">
+                    <i className="bi bi-search"></i>
+                </button>
             </div>
         </div>
     );
