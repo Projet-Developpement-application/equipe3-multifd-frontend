@@ -20,6 +20,12 @@
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Ombre pour donner de la profondeur */
 }
 
+
+
+.carte-arrondie{
+    border-radius: 10px;
+}
+
 /* Barre de navigation de filtres sur le catalogue */
 
 .sidebar {

@@ -3,6 +3,7 @@ import BarreRechercheFiltre from "./Barre-recherche-filtre.jsx";
 import Sidebar from "./Sidebar.jsx";
 import { Link } from "react-router-dom";
 import { fetchAllProduits } from "../../scripts/http.js";
+import image from "../../assets/generique.jpg"
 
 const Catalogue = () => {
     const [produits, setProduits] = useState([]);
@@ -37,16 +38,16 @@ const Catalogue = () => {
                 <div className="container mt-5 pt-5 flex-grow-1">
                     <div className="row">
                         {currentProducts.map((product) => (
-                            <div key={product.id} className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-                                <Link to={`/produit/${product.id}`} className="text-decoration-none">
-                                    <div className="card h-100 border-1 rounded shadow-lg product-card-hover">
-                                        <img src={product.image} className="card-img-top rounded-top"
+                            <div key={product.id} className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 ">
+                                <Link to={"/produit/"+ product.id} className="text-decoration-none">
+                                    <div className="card h-100 border-1 carte-arrondie shadow-lg product-card-hover">
+                                        <img src={image} className="card-img-top carte-arrondie"
                                              alt={product.nom}/>
                                         <div className="card-body d-flex flex-column">
                                             <h5 className="card-title">{product.nom}</h5>
                                             <p className="card-text">{product.description}</p>
                                             <div className="mt-auto">
-                                                <p className="card-text fw-bold">{product.prix}</p>
+                                                <p className="card-text fw-bold">{product.prix} $</p>
                                                 <button className="btn btn-dark w-100">Ajouter au panier</button>
                                             </div>
                                         </div>
@@ -61,7 +62,7 @@ const Catalogue = () => {
                     <ul className="pagination justify-content-center mb-4">
                         {Array.from({length: totalPages}, (_, index) => (
                             <li key={index} className={`page-item ${pageCourrante === index + 1 ? "active" : ""}`}>
-                                <button onClick={() => paginate(index + 1)} className="page-link">
+                                <button onClick={() => paginate(index + 1)} className="page-link bg-dark">
                                     {index + 1}
                                 </button>
                             </li>
