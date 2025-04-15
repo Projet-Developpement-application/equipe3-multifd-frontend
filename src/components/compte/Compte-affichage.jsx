@@ -1,6 +1,6 @@
 export default function CompteAffichage({ informations, onEdit }){
     return (
-        <div className="border rounded border-2 p-4">
+        <div className="border rounded border-2 p-4 bg-light">
             <h3 className="mb-3">Mes informations de contact</h3>
             <div className="row mb-2">
                 <div className="col-md-6"><strong>Nom :</strong> {informations.nom}</div>
@@ -16,7 +16,7 @@ export default function CompteAffichage({ informations, onEdit }){
             </div>
             <div className="mb-2"><strong>Entreprise :</strong> {informations.entreprise}</div>
             <div className="d-flex justify-content-end">
-                <button className="btn btn-outline-dark btn-sm" onClick={onEdit}>
+                <button className="btn btn-dark btn-sm" onClick={onEdit}>
                     Modifier
                 </button>
             </div>

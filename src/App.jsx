@@ -4,6 +4,7 @@ import Compte from "./components/compte/Compte.jsx";
 import Catalogue from "./components/catalogue/Catalogue.jsx";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import DevisForm from "./components/devis/Devis-form.jsx";
+import GestionProduit from "./components/gestion-produits/Gestion-Produit-adm.jsx";
 
 
 function App() {
@@ -26,7 +27,7 @@ function App() {
 
                     <Route path="compte" element={<Compte />} />
                     <Route path="panier" element={<DevisForm />} />
-
+                    <Route path="AjouterProduit" element={<GestionProduit/>} />
 
                 </Routes>
 

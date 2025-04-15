@@ -41,7 +41,7 @@ const CompteForm = ({ informations, onSave, onCancel }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className={"bg-light"}>
             <div className="border rounded border-2 p-4">
                 <h3 className="mb-3">Modifier mes informations de contact</h3>
 
@@ -52,7 +52,7 @@ const CompteForm = ({ informations, onSave, onCancel }) => {
                             type="text"
                             id="nom"
                             name="nom"
-                            className="form-control input-border-black"
+                            className="form-control"
                             value={formData.nom}
                             onChange={handleChange}
                         />
@@ -65,7 +65,7 @@ const CompteForm = ({ informations, onSave, onCancel }) => {
                             type="text"
                             id="prenom"
                             name="prenom"
-                            className="form-control input-border-black"
+                            className="form-control"
                             value={formData.prenom}
                             onChange={handleChange}
                         />
@@ -80,7 +80,7 @@ const CompteForm = ({ informations, onSave, onCancel }) => {
                             type="text"
                             id="courriel"
                             name="courriel"
-                            className="form-control input-border-black"
+                            className="form-control"
                             value={formData.courriel}
                             onChange={handleChange}
                         />
@@ -93,7 +93,7 @@ const CompteForm = ({ informations, onSave, onCancel }) => {
                             type="tel"
                             id="telephone"
                             name="telephone"
-                            className="form-control input-border-black"
+                            className="form-control"
                             value={formData.telephone}
                             onChange={handleChange}
                         />
@@ -107,7 +107,7 @@ const CompteForm = ({ informations, onSave, onCancel }) => {
                         type="text"
                         id="entreprise"
                         name="entreprise"
-                        className="form-control input-border-black"
+                        className="form-control"
                         value={formData.entreprise}
                         onChange={handleChange}
                     />
@@ -121,7 +121,7 @@ const CompteForm = ({ informations, onSave, onCancel }) => {
                             type="text"
                             id="adresse"
                             name="adresse"
-                            className="form-control input-border-black"
+                            className="form-control"
                             value={formData.adresse}
                             onChange={handleChange}
                         />
@@ -134,7 +134,7 @@ const CompteForm = ({ informations, onSave, onCancel }) => {
                             type="text"
                             id="ville"
                             name="ville"
-                            className="form-control input-border-black"
+                            className="form-control"
                             value={formData.ville}
                             onChange={handleChange}
                         />
@@ -142,7 +142,7 @@ const CompteForm = ({ informations, onSave, onCancel }) => {
                     </div>
                 </div>
                 <div className="d-flex justify-content-between">
-                    <button type="button" className="btn btn-outline-secondary btn-sm" onClick={onCancel}>
+                    <button type="button" className="btn btn-dark btn-sm" onClick={onCancel}>
                         Annuler
                     </button>
 
