@@ -1,0 +1,51 @@
+/*Couleurs de texte */
+
+.texte-bleu-fonce1 {
+color: #080d2b;
+}
+.texte-bleu-fonce2 {
+    color: #05091e;
+}
+
+.texte-bleu-bouton {
+    color: #212758;
+}
+
+.texte-bleu-pale {
+    color: #47adfd;
+}
+.texte-gris-fonce {
+    color: #575b5e;
+}
+.texte-gris-pale {
+    color: #b0b0b2;
+}
+
+
+/*Couleurs de background */
+
+.bg-bleu-fonce1 {
+    background-color: #080d2b;
+}
+.bg-bleu-fonce2 {
+    background-color: #05091e;
+}
+.bg-bleu-bouton {
+    background-color: #212758;
+}
+
+.bg-bleu-pale {
+    background-color: #47adfd;
+}
+
+.bg-gris-fonce {
+    background-color: #575b5e;
+}
+.bg-gris-pale {
+    background-color: #b0b0b2;
+}
+
+.bg-gris-plus-pale{
+    background-color: #d4d4d6;
+
+}
