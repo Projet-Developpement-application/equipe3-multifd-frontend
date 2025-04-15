@@ -47,13 +47,17 @@ const GestionProduit = () => {
         const requiredFields = ['nom', 'prix', 'poids', 'voltage', 'hp', 'amperage', 'courant'];
 
         requiredFields.forEach(field => {
-            if (!product[field]) {
+            const value = product[field];
+            if (!value && value !== 0) {
                 newErrors[field] = 'Ce champ est requis.';
-            } else if (['prix', 'poids', 'voltage', 'hp', 'amperage'].includes(field)) {
-                if (isNaN(product[field])) {
+            } else if (['prix', 'poids', 'voltage', 'hp', 'amperage', 'courant'].includes(field)) {
+                const num = Number(value);
+                if (isNaN(num)) {
                     newErrors[field] = 'Doit être un nombre.';
-                } else if (field === 'prix' && Number(product[field]) < 1) {
-                    newErrors[field] = 'Le prix doit être supérieur ou égal à 1.';
+                } else {
+                    if (num < 0) {
+                        newErrors[field] = 'La valeur ne peut pas être négative.';
+                    }
                 }
             }
         });
@@ -72,8 +76,6 @@ const GestionProduit = () => {
         if (validate()) {
             alert("Produit enregistré !");
             console.log(product);
-        } else {
-            alert("Merci de corriger les erreurs.");
         }
     };
 
