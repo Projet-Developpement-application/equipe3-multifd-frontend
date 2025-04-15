@@ -20,12 +20,12 @@ export default function Navbar() {
                     <ul className="navbar-nav align-items-center ms-auto">
                         <li className="nav-item me-5">
                             <button className="nav-link btn btn-navbar left pb-0 mb-2 text-uppercase">
-                                <Link to="/compte">  <i className="bi bi-person me-2"></i> Mon Compte </Link>
+                                <Link to="/compte" className="text-decoration-none">  <i className="bi bi-person me-2"></i> Mon Compte </Link>
                             </button>
                         </li>
                         <li className="nav-item me-5">
                             <button className="nav-link btn btn-navbar left pb-0 mb-2 text-uppercase">
-                                <Link to="/panier">  <i className="bi bi-cart me-2"></i> Panier </Link>
+                                <Link to="/panier" className="text-decoration-none">  <i className="bi bi-cart me-2"></i> Panier </Link>
                             </button>
                         </li>
                     </ul>
