@@ -1,6 +1,6 @@
 import React from "react";
 
-const SearchFilterBar = ({ searchTerm, onSearchChange, onFilterClick }) => {
+const ZoneRecherhe = ({ motCle, onSearchChange, onFilterClick }) => {
     return (
         <div className="d-flex justify-content-between align-items-center mb-4 barre-recherche pt-2 pb-2">
             <button className="btn btn-outline-dark-flex align-items-center ms-3 bg-white" onClick={onFilterClick}>
@@ -11,7 +11,7 @@ const SearchFilterBar = ({ searchTerm, onSearchChange, onFilterClick }) => {
                     type="text"
                     className="form-control "
                     placeholder="Rechercher..."
-                    value={searchTerm}
+                    value={motCle}
                     onChange={onSearchChange}
                 />
                 <button className="btn  btn-dark d-flex align-items-center ">
@@ -22,4 +22,4 @@ const SearchFilterBar = ({ searchTerm, onSearchChange, onFilterClick }) => {
     );
 };
 
-export default SearchFilterBar;
+export default ZoneRecherhe;

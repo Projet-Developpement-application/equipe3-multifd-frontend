@@ -11,9 +11,9 @@ export default function Navbar() {
         <nav className="navbar w-100 z-1 navbar-expand-lg text-white bg-dark" data-bs-theme="dark">
             <div className="container-fluid d-flex flex-column align-items-start position-relative">
                 <div className="container-fluid ">
-                    <Link to={"/"}> <a className="navbar-brand navbar-logo ">
+                    <Link className="navbar-brand navbar-logo " to={"/"}>
                         <img src={logoNavbar} alt="logo-multi-fd"  height="100" />
-                    </a></Link>
+                    </Link>
                 </div>
 
                 <div className="collapse navbar-collapse w-100" id="navbarNav">

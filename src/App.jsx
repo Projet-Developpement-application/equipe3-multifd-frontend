@@ -5,6 +5,7 @@ import Catalogue from "./components/catalogue/Catalogue.jsx";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import DevisForm from "./components/devis/Devis-form.jsx";
 import Produit from "./components/produit/Produit.jsx";
+import CatalogueTest from "./components/catalogue/CatalogueTestBackend.jsx";
 
 
 function App() {

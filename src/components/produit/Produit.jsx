@@ -29,27 +29,27 @@ export default function Produit() {
                                     <tbody>
                                     <tr className="align-middle">
                                         <td className="pe-3 py-2" style={{ width: "40%" }}>Poids</td>
-                                        <td className="py-2">123</td>
+                                        <td className="py-2">kg</td>
                                     </tr>
                                     <tr className="align-middle">
                                         <td className="pe-3 py-2">Voltage</td>
-                                        <td className="py-2">12</td>
+                                        <td className="py-2">V</td>
                                     </tr>
                                     <tr className="align-middle">
                                         <td className="pe-3 py-2">HP</td>
-                                        <td className="py-2"></td>
+                                        <td className="py-2">HP</td>
                                     </tr>
                                     <tr className="align-middle">
                                         <td className="pe-3 py-2">État</td>
-                                        <td className="py-2"></td>
+                                        <td className="py-2">(NEUF)</td>
                                     </tr>
                                     <tr className="align-middle">
                                         <td className="pe-3 py-2">Ampérage</td>
-                                        <td className="py-2"></td>
+                                        <td className="py-2">A</td>
                                     </tr>
                                     <tr className="align-middle">
                                         <td className="pe-3 py-2">Courant</td>
-                                        <td className="py-2"></td>
+                                        <td className="py-2">Phase</td>
                                     </tr>
                                     </tbody>
                                 </table>
