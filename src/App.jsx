@@ -28,7 +28,7 @@ function App() {
 
                     <Route path="compte" element={<Compte />} />
                     <Route path="panier" element={<DevisForm />} />
-                    <Route path="produit" element={<Produit />} />
+                    <Route path="/produit/:id" element={<Produit />} />
 
 
                 </Routes>
