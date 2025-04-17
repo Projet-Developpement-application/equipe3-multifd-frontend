@@ -1,3 +1,12 @@
+
+/* Empêche l'icône d'affichage du mot de passe natif */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear,
+input[type="password"]::-webkit-credentials-auto-fill-button,
+input[type="password"]::-webkit-password-reveal-button {
+    display: none !important;
+}
+
 /* Barre de filtre et recherche dans le catalogue */
 
 .barre-recherche{
@@ -76,8 +85,3 @@
 }
 
 
-.navbar-logo {
-    background-color: #ffffff;
-    padding: 5px;
-    display: inline-block;
-}
