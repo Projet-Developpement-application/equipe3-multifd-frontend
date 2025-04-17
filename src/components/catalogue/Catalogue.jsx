@@ -2,20 +2,15 @@ import React, { useState, useEffect } from "react";
 import BarreRechercheFiltre from "./Barre-recherche-filtre.jsx";
 import Sidebar from "./Sidebar.jsx";
 import { Link } from "react-router-dom";
-import { fetchAllProduits } from "../../scripts/http.js";
 import image from "../../assets/generique.jpg"
+import {useProduits} from "../../assets/contexte/ProduitContext.jsx";
 
 const Catalogue = () => {
-    const [produits, setProduits] = useState([]);
+
+    const {produits} = useProduits()
     const [pageCourrante, setPageCourrante] = useState(1);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const maxProduitPage = 20;
-
-    useEffect(() => {
-        fetchAllProduits()
-            .then(data => setProduits(data))
-            .catch(error => console.error("Erreur lors du chargement des produits:", error));
-    }, []);
 
     if (!produits.length) {
         return <div>Chargement des produits...</div>;

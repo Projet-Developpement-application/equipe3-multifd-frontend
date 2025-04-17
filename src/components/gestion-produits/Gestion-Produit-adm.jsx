@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
+import {ajouterProduit} from "../../scripts/http.js";
+import {useProduits} from "../../assets/contexte/ProduitContext.jsx";
 
 const GestionProduit = () => {
     const etats = ["Neuf", "Usagé", "Remis à neuf"];
     const marques = ["Siemens", "ABB", "Schneider", "Eaton"];
 
+    const { ajouterProduitLocal } = useProduits();
     const [product, setProduct] = useState({
         nom: '',
-        disponible: false,
+        disponible: 'Disponible',
         prix: '',
         etat: etats[0],
         poids: '',
@@ -74,8 +77,32 @@ const GestionProduit = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (validate()) {
-            alert("Produit enregistré !");
-            console.log(product);
+            ajouterProduit(product)
+                .then((res) => {
+                    alert("Produit enregistré !");
+                    ajouterProduitLocal({ ...product, id: res.id || Date.now() });
+
+                    // Réinitialiser le formulaire
+                    setProduct({
+                        nom: '',
+                        disponibilite: 'Disponible',
+                        prix: '',
+                        etat: etats[0],
+                        poids: '',
+                        voltage: '',
+                        hp: '',
+                        amperage: '',
+                        courant: '',
+                        marque: marques[0],
+                        image: null,
+                        imagePreview: null
+                    });
+                })
+                .catch(err => {
+                    console.error("Erreur lors de l'ajout :", err);
+
+                    alert("Erreur lors de l'enregistrement du produit." +  err);
+                });
         }
     };
 
@@ -89,10 +116,18 @@ const GestionProduit = () => {
                                 src={product.imagePreview}
                                 alt="Prévisualisation"
                                 className="img-fluid rounded mb-2"
-                                style={{ maxHeight: '250px', objectFit: 'contain' }}
+                                style={{
+                                    width: '100%',
+                                    maxWidth: '300px',
+                                    height: '300px',
+                                    objectFit: 'cover',
+                                    objectPosition: 'center',
+                                }}
                             />
                         ) : (
-                            <div className="bg-secondary text-white d-flex align-items-center justify-content-center rounded" style={{ height: '250px' }}>
+                            <div
+                                className="bg-secondary text-white d-flex align-items-center justify-content-center rounded"
+                                style={{width: '100%', maxWidth: '300px', height: '300px'}}>
                                 <span>Prévisualisation image</span>
                             </div>
                         )}
@@ -104,6 +139,7 @@ const GestionProduit = () => {
                         />
                         {errors.image && <div className="invalid-feedback">{errors.image}</div>}
                     </div>
+
 
                     <div className="col-md-8">
                         <div className="row">
@@ -121,7 +157,7 @@ const GestionProduit = () => {
                             </div>
 
                             <div className="col-md-6 mb-3">
-                                <label className="form-label">Prix ($)</label>
+                            <label className="form-label">Prix ($)</label>
                                 <input
                                     type="number"
                                     name="prix"
@@ -141,18 +177,20 @@ const GestionProduit = () => {
                                 </select>
                             </div>
 
-                            <div className="col-md-6 mb-4 d-flex align-items-end">
-                                <div className="form-check">
-                                    <input
-                                        className="form-check-input"
-                                        type="checkbox"
-                                        name="disponible"
-                                        checked={product.disponible}
-                                        onChange={handleChange}
-                                    />
-                                    <label className="form-check-label">Disponible</label>
-                                </div>
+                            <div className="col-md-6 mb-4">
+                                <label className="form-label">Disponibilité</label>
+                                <select
+                                    name="disponibilite"
+                                    value={product.disponibilite}
+                                    onChange={handleChange}
+                                    className="form-select"
+                                >
+                                    <option value="Disponible">Disponible</option>
+                                    <option value="Pas en stock">Pas en stock</option>
+                                    <option value="Sur commande">Sur commande</option>
+                                </select>
                             </div>
+
 
                             <h3>Caractéristiques</h3>
 

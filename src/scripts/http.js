@@ -1,7 +1,6 @@
 const BASE_URL = "http://localhost:8080/user/";
 
 
-
 export async function fetchTexteClient() {
     const response = await fetch("http://localhost:8080/user/produits");
     if (!response.ok) {
@@ -9,8 +8,6 @@ export async function fetchTexteClient() {
     }
     return await response.text();
 }
-
-
 
 
 /**
@@ -41,9 +38,25 @@ export async function fetchProduitParId(id) {
  * @param produit les données du produit à ajouter
  */
 export async function ajouterProduit(produit) {
-    const response = await fetch(BASE_URL, {
+    console.log(produit);
+    produit.disponible = true;
+    let nouveau = {
+        nom: produit.nom,
+        disponible: true,
+        prix: parseInt(produit.prix),
+        etat: 'NEUF',
+        poids: parseInt(produit.poids),
+        marque: {nom: produit.marque},
+        voltage: parseInt(produit.voltage),
+        amperage: parseInt(produit.amperage),
+        hp: parseInt(produit.hp),
+        courant: parseInt(produit.courant)
+    };
+    console.log(nouveau);
+
+    const response = await fetch("http://localhost:8080/admin/ajouteProduit", {
         method: 'POST',
-        body: JSON.stringify(produit),
+        body: JSON.stringify(nouveau),
         headers: {
             'Content-Type': 'application/json'
         }
@@ -51,7 +64,8 @@ export async function ajouterProduit(produit) {
     if (!response.ok) {
         throw new Error("Erreur lors de l'ajout du produit.");
     }
-    return await response.json();
+
+    return response;
 }
 
 /**
