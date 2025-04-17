@@ -1,5 +1,4 @@
 
-import logoNavbar from "../../assets/logo/logo-navbar.png";
 import RetourSiteBar from "./RetourSiteBar.jsx";
 import {Link, Outlet} from "react-router-dom";
 
@@ -12,7 +11,7 @@ export default function Navbar() {
             <div className="container-fluid d-flex flex-column align-items-start position-relative">
                 <div className="container-fluid ">
                     <Link className="navbar-brand navbar-logo " to={"/"}>
-                        <img src={logoNavbar} alt="logo-multi-fd"  height="100" />
+                      vcbgcn
                     </Link>
                 </div>
 
