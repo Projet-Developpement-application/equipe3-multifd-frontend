@@ -99,3 +99,21 @@ export async function supprimerProduit(id) {
         throw new Error("Erreur lors de la suppression du produit ID: " + id);
     }
 }
+/**
+ * Modifie un produit existant par ID
+ * @param id identifiant du produit à modifier
+ * @param utilisateur les nouvelles données du produit
+ */
+export async function modifierUtilisateur(id, utilisateur) {
+    const response = await fetch(BASE_URL + "/" + id, {
+        method: 'PUT',
+        body: JSON.stringify(utilisateur),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    if (!response.ok) {
+        throw new Error("Erreur lors de la modification du produit ID: " + id);
+    }
+    return await response.json();
+}
