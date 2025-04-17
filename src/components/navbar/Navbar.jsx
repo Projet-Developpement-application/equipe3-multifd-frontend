@@ -15,19 +15,15 @@ export default function Navbar() {
                     {/* Liens */}
                     <div className="collapse navbar-collapse" id="navbarNav">
                         <ul className="navbar-nav ms-auto">
-                            <li className="nav-item me-3">
-                                <button className="nav-link btn btn-navbar  text-uppercase">
-                                    <Link to="/compte" className="text-decoration-none text-white">
+                            <li className="nav-item me-4 ">
+                                    <Link to="/compte" className="text-uppercase nav-link text-white hover-underline-animation left pb-1">
                                         <i className="bi bi-person me-2"></i> Mon Compte
                                     </Link>
-                                </button>
                             </li>
-                            <li className="nav-item me-3">
-                                <button className="nav-link btn btn-navbar left pb-0 mb-2 text-uppercase">
-                                    <Link to="/panier" className="text-decoration-none text-white">
+                            <li className="nav-item me-4 ">
+                                    <Link to="/panier" className="text-uppercase nav-link text-white hover-underline-animation left pb-1">
                                         <i className="bi bi-cart me-2"></i> Panier
                                     </Link>
-                                </button>
                             </li>
                         </ul>
                     </div>
