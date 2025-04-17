@@ -1,5 +1,6 @@
 
-/* Empêche l'icône d'affichage du mot de passe natif */
+/* Empêche l'icône d'affichage du mot de passe natif sur Edge */
+
 input[type="password"]::-ms-reveal,
 input[type="password"]::-ms-clear,
 input[type="password"]::-webkit-credentials-auto-fill-button,
@@ -30,6 +31,7 @@ input[type="password"]::-webkit-password-reveal-button {
 }
 
 
+/* Les cartes sur le catalogue */
 
 .carte-arrondie{
     border-radius: 10px;
@@ -65,7 +67,7 @@ input[type="password"]::-webkit-password-reveal-button {
     overflow-y: auto;
 }
 
-/* Overlay pour l'effet grisâtre */
+/* Overlay pour l'effet grisâtre quand la navigation filtre est ouverte*/
 .overlay {
     position: fixed;
     top: 0;
