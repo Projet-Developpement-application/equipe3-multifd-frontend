@@ -87,11 +87,11 @@ input[type="password"]::-webkit-password-reveal-button {
 }
 
 
-/* Page de connexion */
+/* Page de connexion et d'inscription */
 /* Marge au dessus qui ne s'applique pas sur mobile */
 
 @media (min-width: 768px) {
-    .marge-custom-connexion {
+    .marge-custom{
         margin-top: 10vh;
     }
 }

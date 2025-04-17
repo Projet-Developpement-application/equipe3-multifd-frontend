@@ -80,13 +80,13 @@ export default function Inscription() {
     };
 
     return (
-        <div className="container-fluid min-vh-100 d-flex align-items-center justify-content-center">
+        <div className="container-fluid min-vh-100 d-flex align-items-start justify-content-center marge-custom ">
             <div className="row w-100 shadow-lg rounded overflow-hidden border border-2" style={{ maxWidth: '1000px' }}>
                 <div className="col-md-5 d-flex justify-content-center align-items-center bg-bleu-fonce1">
                     <img src={logo} alt="Logo multifd" className="w-100 p-4" style={{ maxHeight: "90%" }} />
                 </div>
 
-                <div className="col-md-7 bg-light p-4 text-black">
+                <div className="col-md-7 bg-light p-5 text-black">
                     <h3 className="text-center mb-3 texte-bleu-fonce1">
                         <strong>Formulaire d'inscription</strong>
                     </h3>
