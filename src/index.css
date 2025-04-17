@@ -1,3 +1,13 @@
+
+/* Empêche l'icône d'affichage du mot de passe natif sur Edge */
+
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear,
+input[type="password"]::-webkit-credentials-auto-fill-button,
+input[type="password"]::-webkit-password-reveal-button {
+    display: none !important;
+}
+
 /* Barre de filtre et recherche dans le catalogue */
 
 .barre-recherche{
@@ -21,6 +31,7 @@
 }
 
 
+/* Les cartes sur le catalogue */
 
 .carte-arrondie{
     border-radius: 10px;
@@ -56,7 +67,7 @@
     overflow-y: auto;
 }
 
-/* Overlay pour l'effet grisâtre */
+/* Overlay pour l'effet grisâtre quand la navigation filtre est ouverte*/
 .overlay {
     position: fixed;
     top: 0;
@@ -76,8 +87,42 @@
 }
 
 
-.navbar-logo {
-    background-color: #ffffff;
-    padding: 5px;
+/* Page de connexion et d'inscription */
+/* Marge au dessus qui ne s'applique pas sur mobile */
+
+@media (min-width: 768px) {
+    .marge-custom{
+        margin-top: 10vh;
+    }
+}
+
+
+/* Animation de hover sur les liens de la navbar */
+.hover-underline-animation {
     display: inline-block;
+    position: relative;
+}
+
+.hover-underline-animation::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #ffffff;
+    transition: transform 0.25s ease-out;
+}
+
+.hover-underline-animation:hover::after {
+    transform: scaleX(1);
+}
+
+
+.hover-underline-animation.left:hover::after {
+    transform-origin: bottom left;
+}
+.hover-underline-animation.left::after {
+    transform-origin: bottom right;
 }
