@@ -1,9 +1,10 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import logo from "../../assets/logo/multifd-logo.svg";
 
 export default function Connexion() {
     const location = useLocation();
+    const navigate = useNavigate();
     const successMessage = location.state?.successMessage || null;
 
     const [formData, setFormData] = useState({
@@ -16,6 +17,20 @@ export default function Connexion() {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        // Simule une connexion réussie (à remplacer par ton appel API réel)
+        const loginSuccess = true;
+
+        if (loginSuccess) {
+            navigate("/");
+        } else {
+            // Gérer les erreurs si besoin
+            alert("Connexion échouée");
+        }
     };
 
     return (
@@ -37,7 +52,7 @@ export default function Connexion() {
                         </div>
                     )}
 
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <div className="mb-3">
                             <label className="form-label">Courriel</label> <span className="text-danger">*</span>
                             <input
