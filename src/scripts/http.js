@@ -1,5 +1,4 @@
-const BASE_URL = "http://localhost:8080/user/";
-
+const BASE_URL = "http://localhost:8080/user";
 
 export async function fetchTexteClient() {
     const response = await fetch("http://localhost:8080/user/produits");
@@ -26,7 +25,8 @@ export async function fetchAllProduits() {
  * @param id identifiant du produit
  */
 export async function fetchProduitParId(id) {
-    const response = await fetch(BASE_URL + "/" + id);
+    const response = await fetch(BASE_URL + "/produit/" + id);
+    console.log(response);
     if (!response.ok) {
         throw new Error("Erreur lors du chargement du produit avec ID: " + id);
     }
