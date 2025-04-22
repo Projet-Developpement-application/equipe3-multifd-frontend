@@ -28,7 +28,8 @@ export async function fetchAllProduits() {
  * @param id identifiant du produit
  */
 export async function fetchProduitParId(id) {
-    const response = await fetch(BASE_URL + "/" + id);
+    const response = await fetch(BASE_URL + "/produit/" + id);
+    console.log(response);
     if (!response.ok) {
         throw new Error("Erreur lors du chargement du produit avec ID: " + id);
     }
