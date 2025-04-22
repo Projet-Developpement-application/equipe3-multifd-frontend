@@ -28,7 +28,7 @@ const Catalogue = () => {
         <>
             <BarreRechercheFiltre searchTerm={""} onSearchChange={""} onFilterClick={toggleSidebar} />
             {isSidebarOpen && <div className="overlay" onClick={toggleSidebar}></div>}
-            <Sidebar isOpen={isSidebarOpen} onClose={toggleSidebar} />
+            <Sidebar ouvert={isSidebarOpen} fermeture={toggleSidebar} />
             <div className="d-flex flex-column min-vh-100">
                 <div className="container mt-5 pt-5 flex-grow-1">
                     <div className="row">
