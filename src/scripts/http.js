@@ -1,5 +1,4 @@
-const BASE_URL = "http://localhost:8080/user/";
-
+const BASE_URL = "http://localhost:8080/user";
 
 
 export async function fetchTexteClient() {
