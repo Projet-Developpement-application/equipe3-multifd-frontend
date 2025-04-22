@@ -12,7 +12,6 @@ import {ProduitProvider} from "./assets/contexte/ProduitContext.jsx";
 import Connexion from "./components/authentification/Connexion.jsx";
 
 
-
 function App() {
     return (
         <>
