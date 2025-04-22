@@ -2,15 +2,14 @@
   "name": "equipe3-multifd-frontend",
   "homepage": "https://projet-developpement-application.github.io/equipe3-multifd-frontend",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.01",
   "type": "module",
   "scripts": {
     "predeploy": "npm run build",
-  "deploy": "gh-pages -d build",
-  "start": "react-scripts start",
-    "dev": "vite",
+    "deploy": "gh-pages -d dist",
+    "start": "react-scripts start",
+    "dev": "vite --host",
     "build": "vite build",
-    "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
