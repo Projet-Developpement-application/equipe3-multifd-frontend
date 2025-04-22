@@ -99,6 +99,7 @@ export async function supprimerProduit(id) {
         throw new Error("Erreur lors de la suppression du produit ID: " + id);
     }
 }
+
 /**
  * Modifie un produit existant par ID
  * @param id identifiant du produit à modifier
@@ -138,6 +139,16 @@ export async function connexion(formData, setError) {
     const data = await response.json();
     sessionStorage.setItem("token", data)
     return true;
+}
 
+export function fetchProduitFilter(motCle) {
+    return fetch("http://localhost:8080/rechercheProduit?nomFiltre=" + motCle)
+        .then((r) => {
+            if (r.ok) {
+                return r.json();
+            } else {
+                throw new Error("Erreur réseau");
+            }
+        });
 }
 

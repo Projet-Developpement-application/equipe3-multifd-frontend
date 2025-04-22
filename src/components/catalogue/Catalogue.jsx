@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, {useState} from "react";
 import BarreRechercheFiltre from "./Barre-recherche-filtre.jsx";
 import Sidebar from "./Sidebar.jsx";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import image from "../../assets/generique.jpg"
 import {useProduits} from "../../assets/contexte/ProduitContext.jsx";
 
@@ -26,7 +26,7 @@ const Catalogue = () => {
 
     return (
         <>
-            <BarreRechercheFiltre searchTerm={""} onSearchChange={""} onFilterClick={toggleSidebar} />
+            <BarreRechercheFiltre onFilterClick={toggleSidebar} />
             {isSidebarOpen && <div className="overlay" onClick={toggleSidebar}></div>}
             <Sidebar ouvert={isSidebarOpen} fermeture={toggleSidebar} />
             <div className="d-flex flex-column min-vh-100">
