@@ -1,7 +1,4 @@
-import {redirect} from "react-router-dom";
-
-const BASE_URL = "http://localhost:8080/user/";
-
+const BASE_URL = "http://localhost:8080/user";
 
 export async function fetchTexteClient() {
     const response = await fetch("http://localhost:8080/user/produits");
@@ -28,7 +25,8 @@ export async function fetchAllProduits() {
  * @param id identifiant du produit
  */
 export async function fetchProduitParId(id) {
-    const response = await fetch(BASE_URL + "/" + id);
+    const response = await fetch(BASE_URL + "/produit/" + id);
+    console.log(response);
     if (!response.ok) {
         throw new Error("Erreur lors du chargement du produit avec ID: " + id);
     }
@@ -100,6 +98,24 @@ export async function supprimerProduit(id) {
     if (!response.ok) {
         throw new Error("Erreur lors de la suppression du produit ID: " + id);
     }
+}
+/**
+ * Modifie un produit existant par ID
+ * @param id identifiant du produit à modifier
+ * @param utilisateur les nouvelles données du produit
+ */
+export async function modifierUtilisateur(id, utilisateur) {
+    const response = await fetch(BASE_URL + "/" + id, {
+        method: 'PUT',
+        body: JSON.stringify(utilisateur),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    if (!response.ok) {
+        throw new Error("Erreur lors de la modification du produit ID: " + id);
+    }
+    return await response.json();
 }
 
 export async function connexion(formData, setError) {
