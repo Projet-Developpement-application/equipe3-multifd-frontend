@@ -1,3 +1,5 @@
+import {redirect} from "react-router-dom";
+
 const BASE_URL = "http://localhost:8080/user/";
 
 
@@ -99,3 +101,27 @@ export async function supprimerProduit(id) {
         throw new Error("Erreur lors de la suppression du produit ID: " + id);
     }
 }
+
+export async function connexion(formData, setError) {
+
+    const response = await fetch('http://localhost:8080/connexion', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    });
+
+    if (!response.ok) {
+        if (response.status === 400) {
+            setError({error: "Erreur authentification", message: "le courriel ou le mot de passe ne sont pas bon"})
+        }
+        return false;
+    }
+
+    const data = await response.json();
+    sessionStorage.setItem("token", data)
+    return true;
+
+}
+
