@@ -33,7 +33,6 @@ export default function Produit() {
     return (
 
         <div className="container-fluid p-0">
-            {console.log(produit)}
             <div className="container py-5 mt-5">
                 <div className="row mx-3">
                     <div className="col-12 col-lg-5 d-flex flex-column align-items-start mb-4 mb-lg-0">

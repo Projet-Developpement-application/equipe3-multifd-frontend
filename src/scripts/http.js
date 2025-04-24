@@ -1,7 +1,7 @@
-const BASE_URL = "http://localhost:8080/user";
+const BASE_URL = "http://localhost:8080";
 
 export async function fetchTexteClient() {
-    const response = await fetch("http://localhost:8080/user/produits");
+    const response = await fetch(BASE_URL+"/user/produits");
     if (!response.ok) {
         throw new Error("Erreur lors du chargement du message client.");
     }
@@ -13,7 +13,10 @@ export async function fetchTexteClient() {
  * Récupère tous les produits du backend
  */
 export async function fetchAllProduits() {
-    const response = await fetch("http://localhost:8080/user/produits");
+    const response = await fetch(BASE_URL+"/toutProduits",{
+        method:"GET",
+        headers:{"Content-type":"application/json"}
+    });
     if (!response.ok) {
         throw new Error("Erreur lors du chargement des produits.");
     }
@@ -25,8 +28,10 @@ export async function fetchAllProduits() {
  * @param id identifiant du produit
  */
 export async function fetchProduitParId(id) {
-    const response = await fetch(BASE_URL + "/produit/" + id);
-    console.log(response);
+    const response = await fetch(BASE_URL + "/produit/" + id,{
+        method:"GET",
+        headers:{"Content-type":"application/json"}
+    });
     if (!response.ok) {
         throw new Error("Erreur lors du chargement du produit avec ID: " + id);
     }
@@ -54,7 +59,7 @@ export async function ajouterProduit(produit) {
     };
     console.log(nouveau);
 
-    const response = await fetch("http://localhost:8080/admin/ajouteProduit", {
+    const response = await fetch(BASE_URL+"/admin/ajouteProduit", {
         method: 'POST',
         body: JSON.stringify(nouveau),
         headers: {
@@ -74,7 +79,7 @@ export async function ajouterProduit(produit) {
  * @param produit les nouvelles données du produit
  */
 export async function modifierProduit(id, produit) {
-    const response = await fetch(BASE_URL + "/" + id, {
+    const response = await fetch(BASE_URL + "/admin/" + id, {
         method: 'PUT',
         body: JSON.stringify(produit),
         headers: {
@@ -121,7 +126,7 @@ export async function modifierUtilisateur(id, utilisateur) {
 
 export async function connexion(formData, setError) {
 
-    const response = await fetch('http://localhost:8080/connexion', {
+    const response = await fetch(BASE_URL+'/connexion', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -142,7 +147,10 @@ export async function connexion(formData, setError) {
 }
 
 export function fetchProduitFilter(motCle) {
-    return fetch("http://localhost:8080/rechercheProduit?nomFiltre=" + motCle)
+    return fetch("http://localhost:8080/rechercheProduit?nomFiltre=" + motCle,{
+        method:"GET",
+        headers:{"Content-type":"application/json"}
+    })
         .then((r) => {
             if (r.ok) {
                 return r.json();
