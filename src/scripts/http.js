@@ -105,13 +105,24 @@ export async function supprimerProduit(id) {
     }
 }
 
+export async function fetchUtilisateur(email) {
+    const response = await fetch(BASE_URL + "/client/info/"+ email,{
+        method:"GET",
+        headers:{"Content-type":"application/json"}
+    });
+    if (!response.ok) {
+        throw new Error("Erreur lors de la récupération de l'utilisateur " + email);
+    }
+    return await response.json();
+}
+
 /**
  * Modifie un produit existant par ID
  * @param id identifiant du produit à modifier
  * @param utilisateur les nouvelles données du produit
  */
-export async function modifierUtilisateur(id, utilisateur) {
-    const response = await fetch(BASE_URL + "/" + id, {
+export async function modifierUtilisateur(email, utilisateur) {
+    const response = await fetch(BASE_URL + "/client/modifier/"+ email, {
         method: 'PUT',
         body: JSON.stringify(utilisateur),
         headers: {
@@ -119,7 +130,7 @@ export async function modifierUtilisateur(id, utilisateur) {
         }
     });
     if (!response.ok) {
-        throw new Error("Erreur lors de la modification du produit ID: " + id);
+        throw new Error("Erreur lors de la modification de l'utilisateur " + email);
     }
     return await response.json();
 }
