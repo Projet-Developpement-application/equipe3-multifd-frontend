@@ -82,7 +82,6 @@ const GestionProduit = () => {
                     alert("Produit enregistré !");
                     ajouterProduitLocal({ ...product, id: res.id || Date.now() });
 
-                    // Réinitialiser le formulaire
                     setProduct({
                         nom: '',
                         disponibilite: 'Disponible',
@@ -99,9 +98,7 @@ const GestionProduit = () => {
                     });
                 })
                 .catch(err => {
-                    console.error("Erreur lors de l'ajout :", err);
-
-                    alert("Erreur lors de l'enregistrement du produit." +  err);
+                    alert("Erreur lors de l'enregistrement du produit.");
                 });
         }
     };

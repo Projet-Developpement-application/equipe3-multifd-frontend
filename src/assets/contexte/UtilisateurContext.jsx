@@ -11,10 +11,7 @@ export const UtilisateurProvider = ({ children }) => {
         nom: '',
         prenom: '',
         courriel: '',
-        telephone: '',
         entreprise: '',
-        adresse: '',
-        ville: ''
     });
 
     useEffect(() => {

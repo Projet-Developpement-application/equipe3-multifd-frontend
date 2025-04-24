@@ -2,14 +2,24 @@ import CompteForm from "./Compte-form.jsx";
 import CompteAffichage from "./Compte-affichage.jsx";
 import {useState} from "react";
 import {useUtilisateur} from "../../assets/contexte/UtilisateurContext.jsx";
+import {modifierUtilisateur} from "../../scripts/http.js";
 
 const Compte = () => {
     const [modeEdition, setModeEdition] = useState(false);
     const { utilisateur, updateUtilisateur } = useUtilisateur();
 
     const handleSave = (nouvellesInfos) => {
-        updateUtilisateur(nouvellesInfos);
-        setModeEdition(false);
+        modifierUtilisateur(utilisateur.email,nouvellesInfos)
+            .then((res) => {
+                alert("YIPPI !");
+                updateUtilisateur(nouvellesInfos);
+                setModeEdition(false);
+            })
+            .catch(err => {
+                console.error("Erreur lors de la modification :", err);
+
+                alert("Erreur lors de la modification.");
+            });
     };
 
     return (
