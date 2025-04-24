@@ -142,7 +142,10 @@ export async function connexion(formData, setError) {
     }
 
     const data = await response.json();
-    sessionStorage.setItem("token", data)
+    sessionStorage.setItem("token", data.bearer);
+    sessionStorage.setItem("mail", data.mail);
+    sessionStorage.setItem("role", data.role);
+    sessionStorage.setItem("isConnected",true);
     return true;
 }
 
