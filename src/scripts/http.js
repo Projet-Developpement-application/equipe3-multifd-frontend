@@ -125,8 +125,7 @@ export async function modifierUtilisateur(id, utilisateur) {
 }
 
 export async function connexion(formData, setError) {
-
-    const response = await fetch(BASE_URL+'/connexion', {
+    const response = await fetch(BASE_URL + '/connexion', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -136,17 +135,17 @@ export async function connexion(formData, setError) {
 
     if (!response.ok) {
         if (response.status === 400) {
-            setError({error: "Erreur authentification", message: "le courriel ou le mot de passe ne sont pas bon"})
+            setError({ error: "Erreur authentification", message: "le courriel ou le mot de passe ne sont pas bon" });
         }
-        return false;
+        return null;
     }
 
     const data = await response.json();
     sessionStorage.setItem("token", data.bearer);
     sessionStorage.setItem("mail", data.mail);
     sessionStorage.setItem("role", data.role);
-    sessionStorage.setItem("isConnected",true);
-    return true;
+    sessionStorage.setItem("isConnected", true);
+    return data; // Retourne les informations utilisateur
 }
 
 export function fetchProduitFilter(motCle) {

@@ -11,6 +11,7 @@ import GestionProduit from "./components/gestion-produits/Gestion-Produit-adm.js
 import {ProduitProvider} from "./assets/contexte/ProduitContext.jsx";
 import Connexion from "./components/authentification/Connexion.jsx";
 import {UtilisateurProvider} from "./assets/contexte/UtilisateurContext.jsx";
+import GestionUtilisateurAdm from "./components/gestion-comptes/Gestion-utilisateur-adm.jsx";
 
 
 function App() {
@@ -40,6 +41,8 @@ function App() {
                             <Route path="AjouterProduit" element={<GestionProduit/>} />
                             <Route path="Inscription" element={<Inscription/>}/>
                             <Route path="Connexion" element={<Connexion/>}/>
+                            <Route path="GestionUtilisateur" element={<GestionUtilisateurAdm/>}/>
+
 
 
                         </Routes>

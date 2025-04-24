@@ -56,7 +56,8 @@ export default function Connexion() {
 
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3">
-                            <label className="form-label">Courriel</label> <span className="text-danger">*</span>
+                            <label className="form-label">Courriel</label>
+                            <span className="text-danger">*</span>
                             <input
                                 type="email"
                                 name="mail"
@@ -68,7 +69,8 @@ export default function Connexion() {
                         </div>
 
                         <div className="mb-4 position-relative">
-                            <label className="form-label">Mot de passe</label> <span className="text-danger">*</span>
+                            <label className="form-label">Mot de passe</label>
+                            <span className="text-danger">*</span>
                             <div className="input-group">
                                 <input
                                     type={showPassword ? "text" : "password"}

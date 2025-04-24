@@ -1,4 +1,4 @@
-import {createContext, useContext, useState} from "react";
+import {createContext, useContext, useState, useEffect} from "react";
 
 const UtilisateurContext = createContext();
 
@@ -15,6 +15,18 @@ export const UtilisateurProvider = ({ children }) => {
         ville: ''
     });
 
+    useEffect(() => {
+        const role = sessionStorage.getItem("role");
+        const email = sessionStorage.getItem("mail");
+        if (role || email) {
+            setUtilisateur((prev) => ({
+                ...prev,
+                role: role,
+                email: email
+            }));
+        }
+    }, []);
+
     const updateUtilisateur = (nouvellesInfos) => {
         setUtilisateur((prev) => ({
             ...prev,
@@ -29,5 +41,4 @@ export const UtilisateurProvider = ({ children }) => {
     );
 };
 
-
-export const useUtilisateur  = () => useContext(UtilisateurContext);
+export const useUtilisateur = () => useContext(UtilisateurContext);
