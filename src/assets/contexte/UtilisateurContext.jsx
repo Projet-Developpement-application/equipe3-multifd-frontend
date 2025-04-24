@@ -1,6 +1,7 @@
 import {createContext, useContext, useEffect, useState} from "react";
 import {fetchUtilisateur, modifierUtilisateur} from "../../scripts/http.js";
 
+
 const UtilisateurContext = createContext();
 
 export const UtilisateurProvider = ({ children }) => {
@@ -15,6 +16,18 @@ export const UtilisateurProvider = ({ children }) => {
         adresse: '',
         ville: ''
     });
+
+    useEffect(() => {
+        const role = sessionStorage.getItem("role");
+        const email = sessionStorage.getItem("mail");
+        if (role || email) {
+            setUtilisateur((prev) => ({
+                ...prev,
+                role: role,
+                email: email
+            }));
+        }
+    }, []);
 
     const updateUtilisateur = (nouvellesInfos) => {
         setUtilisateur((prev) => ({
@@ -49,5 +62,4 @@ export const UtilisateurProvider = ({ children }) => {
     );
 };
 
-
-export const useUtilisateur  = () => useContext(UtilisateurContext);
+export const useUtilisateur = () => useContext(UtilisateurContext);
