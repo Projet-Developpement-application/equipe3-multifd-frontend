@@ -1,17 +1,15 @@
 import React, {useState} from "react";
-import {useProduits} from "../../assets/contexte/ProduitContext.jsx";
 import {fetchProduitFilter} from "../../scripts/http.js";
 
 export default function ZoneRecherhe({onFilterClick}) {
-    const {produits,setProduits} = useProduits();
-    //TODO transformer en ref
     const [motCle, setMotCle] = useState("");
 
 
     async function search() {
         try {
             const data = await fetchProduitFilter(motCle);
-            setProduits(data); // ou filtrerProduit(data) si tu l’ajoutes au contexte
+            // setProduits(data);
+            console.log(data);
         } catch (err) {
             console.error("Erreur filtrage:", err);
         }

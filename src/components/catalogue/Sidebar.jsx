@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
+import FiltreMulti from "./Filtres/FiltreMulti.jsx";
+import FiltreRadio from "./Filtres/FiltreRadio.jsx";
 
-const Sidebar = ({ ouvert, fermeture, onApplyFilters, onClearFilters }) => {
-    const [selectedFilters, setSelectedFilters] = useState({});
-    const [checkedState, setCheckedState] = useState({});
+const Sidebar = ({ouvert, fermeture, onApplyFilter, filtres, clearFilter}) => {
     const [amperageOuvert, setAmperageOuvert] = useState(false);
     const [voltageOuvert, setVoltageOuvert] = useState(false);
     const [marqueOuvert, setMarqueOuvert] = useState(false);
@@ -11,26 +11,38 @@ const Sidebar = ({ ouvert, fermeture, onApplyFilters, onClearFilters }) => {
     const [conditionOuvert, setConditionOuvert] = useState(false);
     const [prixOuvert, setPrixOuvert] = useState(false);
 
-    const handleFilterChange = (filterCategory, value) => {
-        setSelectedFilters((prev) => ({
-            ...prev,
-            [filterCategory]: value,
-        }));
-        setCheckedState((prev) => ({
-            ...prev,
-            [filterCategory]: value,
-        }));
-    };
+    const [marques, setMarques] = useState([]);
 
-    const handleApply = () => {
-        onApplyFilters(selectedFilters);
-    };
 
-    const handleClear = () => {
-        setSelectedFilters({});
-        setCheckedState({});
-        onClearFilters();
-    };
+    async function fetchMarques() {
+        try {
+            const data = await fetch("http://localhost:8080/marques", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+            const json = await data.json();
+            setMarques(json);
+        } catch (err) {
+            console.error("Erreur filtrage:", err);
+        }
+    }
+
+    useEffect(() => {
+        fetchMarques();
+    }, [setMarques]);
+
+    function ajouterFiltre(type, valeur,isChecked) {
+        if (isChecked) {
+            filtres.current[type].push(valeur);
+        }else {
+            console.log(filtres.current[type]);
+            filtres.current[type] = filtres.current[type].filter(item => item !== valeur);
+            console.log(filtres.current[type]);
+        }
+    }
+
 
     return (
         <div className={`sidebar ${ouvert ? "open" : ""}`}>
@@ -41,32 +53,12 @@ const Sidebar = ({ ouvert, fermeture, onApplyFilters, onClearFilters }) => {
             <div className="sidebar-content ps-2">
                 <div className="mb-5">
                     <h6>Trier par</h6>
-                    <div className="form-check">
-                        <input
-                            className="form-check-input"
-                            type="radio"
-                            name="sortOptions"
-                            id="sortPriceAsc"
-                            checked={checkedState["sort"] === "asc"}
-                            onChange={() => handleFilterChange("sort", "asc")}
-                        />
-                        <label className="form-check-label" htmlFor="sortPriceAsc">
-                            Prix croissant
-                        </label>
-                    </div>
-                    <div className="form-check mb-4">
-                        <input
-                            className="form-check-input"
-                            type="radio"
-                            name="sortOptions"
-                            id="sortPriceDesc"
-                            checked={checkedState["sort"] === "desc"}
-                            onChange={() => handleFilterChange("sort", "desc")}
-                        />
-                        <label className="form-check-label" htmlFor="sortPriceDesc">
-                            Prix décroissant
-                        </label>
-                    </div>
+                    <FiltreRadio valeur={"asc"} name={"sortOptions"} identifiant={"sortPriceAsc"}
+                                 motAffiche={"Prix croissant"} type={true}
+                                 handleChange={ajouterFiltre}/>
+                    <FiltreRadio valeur={"desc"} name={"sortOptions"} identifiant={"sortPriceDesc"}
+                                 motAffiche={"Prix décroissant"} type={false}
+                                 handleChange={ajouterFiltre}/>
                 </div>
 
                 <h6 className="mt-4 mb-4">Filtrer</h6>
@@ -82,30 +74,12 @@ const Sidebar = ({ ouvert, fermeture, onApplyFilters, onClearFilters }) => {
                     </div>
                     {amperageOuvert && (
                         <div className="filter-options">
-                            <div className="form-check">
-                                <input
-                                    className="form-check-input"
-                                    type="checkbox"
-                                    id="amp10"
-                                    checked={!!checkedState["amperage10A"]}
-                                    onChange={(e) =>
-                                        handleFilterChange("amperage10A", e.target.checked ? "10A" : null)
-                                    }
-                                />
-                                <label className="form-check-label" htmlFor="amp10">10A</label>
-                            </div>
-                            <div className="form-check">
-                                <input
-                                    className="form-check-input"
-                                    type="checkbox"
-                                    id="amp20"
-                                    checked={!!checkedState["amperage20A"]}
-                                    onChange={(e) =>
-                                        handleFilterChange("amperage20A", e.target.checked ? "20A" : null)
-                                    }
-                                />
-                                <label className="form-check-label" htmlFor="amp20">20A</label>
-                            </div>
+                            <FiltreMulti typeFiltre={"amperage"} valeur={10} unite={"A"}
+                                         handleChange={ajouterFiltre}
+                            />
+                            <FiltreMulti typeFiltre={"amperage"} valeur={20} unite={"A"}
+                                         handleChange={ajouterFiltre}
+                            />
                         </div>
                     )}
                 </div>
@@ -121,30 +95,10 @@ const Sidebar = ({ ouvert, fermeture, onApplyFilters, onClearFilters }) => {
                     </div>
                     {voltageOuvert && (
                         <div className="filter-options">
-                            <div className="form-check">
-                                <input
-                                    className="form-check-input"
-                                    type="checkbox"
-                                    id="volt220"
-                                    checked={!!checkedState["voltage220V"]}
-                                    onChange={(e) =>
-                                        handleFilterChange("voltage220V", e.target.checked ? "220V" : null)
-                                    }
-                                />
-                                <label className="form-check-label" htmlFor="volt220">220V</label>
-                            </div>
-                            <div className="form-check">
-                                <input
-                                    className="form-check-input"
-                                    type="checkbox"
-                                    id="volt380"
-                                    checked={!!checkedState["voltage380V"]}
-                                    onChange={(e) =>
-                                        handleFilterChange("voltage380V", e.target.checked ? "380V" : null)
-                                    }
-                                />
-                                <label className="form-check-label" htmlFor="volt380">380V</label>
-                            </div>
+                            <FiltreMulti typeFiltre={"voltage"} valeur={600} unite={"V"}
+                                         handleChange={ajouterFiltre}/>
+                            <FiltreMulti typeFiltre={"voltage"} valeur={380} unite={"V"}
+                                         handleChange={ajouterFiltre}/>
                         </div>
                     )}
                 </div>
@@ -160,30 +114,10 @@ const Sidebar = ({ ouvert, fermeture, onApplyFilters, onClearFilters }) => {
                     </div>
                     {marqueOuvert && (
                         <div className="filter-options">
-                            <div className="form-check">
-                                <input
-                                    className="form-check-input"
-                                    type="checkbox"
-                                    id="brandABB"
-                                    checked={!!checkedState["marqueABB"]}
-                                    onChange={(e) =>
-                                        handleFilterChange("marqueABB", e.target.checked ? "ABB" : null)
-                                    }
-                                />
-                                <label className="form-check-label" htmlFor="brandABB">ABB</label>
-                            </div>
-                            <div className="form-check">
-                                <input
-                                    className="form-check-input"
-                                    type="checkbox"
-                                    id="brandSiemens"
-                                    checked={!!checkedState["marqueSiemens"]}
-                                    onChange={(e) =>
-                                        handleFilterChange("marqueSiemens", e.target.checked ? "Siemens" : null)
-                                    }
-                                />
-                                <label className="form-check-label" htmlFor="brandSiemens">Siemens</label>
-                            </div>
+                            {marques.map((marque) => (
+                                <FiltreMulti key={marque.nom} typeFiltre={"marque"} valeur={marque.nom}
+                                             handleChange={ajouterFiltre}/>
+                            ))}
                         </div>
                     )}
                 </div>
@@ -199,30 +133,10 @@ const Sidebar = ({ ouvert, fermeture, onApplyFilters, onClearFilters }) => {
                     </div>
                     {hpOuvert && (
                         <div className="filter-options">
-                            <div className="form-check">
-                                <input
-                                    className="form-check-input"
-                                    type="checkbox"
-                                    id="hp5"
-                                    checked={!!checkedState["hp5"]}
-                                    onChange={(e) =>
-                                        handleFilterChange("hp5", e.target.checked ? "5HP" : null)
-                                    }
-                                />
-                                <label className="form-check-label" htmlFor="hp5">5 HP</label>
-                            </div>
-                            <div className="form-check">
-                                <input
-                                    className="form-check-input"
-                                    type="checkbox"
-                                    id="hp10"
-                                    checked={!!checkedState["hp10"]}
-                                    onChange={(e) =>
-                                        handleFilterChange("hp10", e.target.checked ? "10HP" : null)
-                                    }
-                                />
-                                <label className="form-check-label" htmlFor="hp10">10 HP</label>
-                            </div>
+                            <FiltreMulti typeFiltre={"hp"} valeur={5} unite={"hp"} handleChange={ajouterFiltre}
+                            />
+                            <FiltreMulti typeFiltre={"hp"} valeur={10} unite={"hp"} handleChange={ajouterFiltre}
+                            />
                         </div>
                     )}
                 </div>
@@ -238,30 +152,12 @@ const Sidebar = ({ ouvert, fermeture, onApplyFilters, onClearFilters }) => {
                     </div>
                     {disponibiliteOuvert && (
                         <div className="filter-options">
-                            <div className="form-check">
-                                <input
-                                    className="form-check-input"
-                                    type="checkbox"
-                                    id="inStock"
-                                    checked={!!checkedState["disponibiliteEnStock"]}
-                                    onChange={(e) =>
-                                        handleFilterChange("disponibiliteEnStock", e.target.checked ? "En stock" : null)
-                                    }
-                                />
-                                <label className="form-check-label" htmlFor="inStock">En stock</label>
-                            </div>
-                            <div className="form-check">
-                                <input
-                                    className="form-check-input"
-                                    type="checkbox"
-                                    id="outOfStock"
-                                    checked={!!checkedState["disponibiliteHorsStock"]}
-                                    onChange={(e) =>
-                                        handleFilterChange("disponibiliteHorsStock", e.target.checked ? "Hors stock" : null)
-                                    }
-                                />
-                                <label className="form-check-label" htmlFor="outOfStock">Hors stock</label>
-                            </div>
+                            <FiltreRadio type={"disponibilite"} valeur={true} name={"disponibilite"}
+                                         identifiant={"disponible"} motAffiche={"Disponible"}
+                                         handleChange={ajouterFiltre}/>
+                            <FiltreRadio type={"disponibilite"} valeur={false} name={"disponibilite"}
+                                         identifiant={"indisponible"} motAffiche={"Indisponible"}
+                                         handleChange={ajouterFiltre}/>
                         </div>
                     )}
                 </div>
@@ -277,42 +173,12 @@ const Sidebar = ({ ouvert, fermeture, onApplyFilters, onClearFilters }) => {
                     </div>
                     {conditionOuvert && (
                         <div className="filter-options">
-                            <div className="form-check">
-                                <input
-                                    className="form-check-input"
-                                    type="checkbox"
-                                    id="new"
-                                    checked={!!checkedState["etatNeuf"]}
-                                    onChange={(e) =>
-                                        handleFilterChange("etatNeuf", e.target.checked ? "Neuf" : null)
-                                    }
-                                />
-                                <label className="form-check-label" htmlFor="new">Neuf</label>
-                            </div>
-                            <div className="form-check">
-                                <input
-                                    className="form-check-input"
-                                    type="checkbox"
-                                    id="used"
-                                    checked={!!checkedState["etatUsage"]}
-                                    onChange={(e) =>
-                                        handleFilterChange("etatUsage", e.target.checked ? "Usagé" : null)
-                                    }
-                                />
-                                <label className="form-check-label" htmlFor="used">Usagé</label>
-                            </div>
-                            <div className="form-check">
-                                <input
-                                    className="form-check-input"
-                                    type="checkbox"
-                                    id="refurbished"
-                                    checked={!!checkedState["etatReconditionne"]}
-                                    onChange={(e) =>
-                                        handleFilterChange("etatReconditionne", e.target.checked ? "Reconditionné" : null)
-                                    }
-                                />
-                                <label className="form-check-label" htmlFor="refurbished">Reconditionné</label>
-                            </div>
+                            <FiltreMulti typeFiltre={"etat"} valeur={"Neuf"} handleChange={handleChangeFiltre}
+                            />
+                            <FiltreMulti typeFiltre={"etat"} valeur={"Reconditionné"} handleChange={handleChangeFiltre}
+                            />
+                            <FiltreMulti typeFiltre={"etat"} valeur={"Occasion"} handleChange={handleChangeFiltre}
+                            />
                         </div>
                     )}
                 </div>
@@ -336,10 +202,10 @@ const Sidebar = ({ ouvert, fermeture, onApplyFilters, onClearFilters }) => {
                                 min="0"
                                 max="5000"
                                 step="50"
-                                value={checkedState["prix"] || 0}
-                                onChange={(e) =>
-                                    handleFilterChange("prix", e.target.value)
-                                }
+                                // value={checkedState["prix"] || 0}
+                                // onChange={(e) =>
+                                //     handleFilterChange("prix", e.target.value)
+                                // }
                             />
                         </div>
                     )}
@@ -347,10 +213,10 @@ const Sidebar = ({ ouvert, fermeture, onApplyFilters, onClearFilters }) => {
             </div>
 
             <div className="sidebar-footer mt-auto d-flex justify-content-between p-3">
-                <button className="btn btn-secondary" onClick={handleClear}>
+                <button className="btn btn-secondary" onClick={() => clearFilter()}>
                     Effacer
                 </button>
-                <button className="btn btn-primary" onClick={handleApply}>
+                <button className="btn btn-primary" onClick={() => onApplyFilter()}>
                     Appliquer
                 </button>
             </div>

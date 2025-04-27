@@ -1,6 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {ajouterProduit} from "../../scripts/http.js";
-import {useProduits} from "../../assets/contexte/ProduitContext.jsx";
 
 const GestionProduit = () => {
     const etats = ["Neuf", "Usagé", "Remis à neuf"];
