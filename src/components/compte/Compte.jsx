@@ -1,18 +1,18 @@
 import CompteForm from "./Compte-form.jsx";
 import CompteAffichage from "./Compte-affichage.jsx";
-import {useState} from "react";
-import {useUtilisateur} from "../../assets/contexte/UtilisateurContext.jsx";
+import {useContext, useState} from "react";
+import {UtilisateurContext} from "../../assets/contexte/UtilisateurContext.jsx";
 import {modifierUtilisateur} from "../../scripts/http.js";
 
 const Compte = () => {
     const [modeEdition, setModeEdition] = useState(false);
-    const { utilisateur, updateUtilisateur } = useUtilisateur();
+    const { utilisateur, setUtilisateur } = useContext(UtilisateurContext);
 
     const handleSave = (nouvellesInfos) => {
-        modifierUtilisateur(utilisateur.email,nouvellesInfos)
+        modifierUtilisateur(utilisateur.mail,nouvellesInfos)
             .then((res) => {
                 alert("YIPPI !");
-                updateUtilisateur(nouvellesInfos);
+                setUtilisateur(nouvellesInfos);
                 setModeEdition(false);
             })
             .catch(err => {

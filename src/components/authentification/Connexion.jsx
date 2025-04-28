@@ -1,15 +1,15 @@
-import {redirect, useLocation, useNavigate} from "react-router-dom";
-import {useState} from "react";
+import {useLocation, useNavigate} from "react-router-dom";
+import {useContext, useState} from "react";
 import logo from "../../assets/logo/multifd-logo.svg";
 import {connexion} from "../../scripts/http.js";
-import {useUtilisateur} from "../../assets/contexte/UtilisateurContext.jsx";
+import {UtilisateurContext} from "../../assets/contexte/UtilisateurContext.jsx";
 
 export default function Connexion() {
     const location = useLocation();
     const navigate = useNavigate();
     const successMessage = location.state?.successMessage || null;
     const [error, setError] = useState({error: "", message: ""});
-    const {utilisateur} = useUtilisateur();
+    const {utilisateur,setUtilisateur} = useContext(UtilisateurContext);
 
     const [formData, setFormData] = useState({
         mail: '',
@@ -26,7 +26,10 @@ export default function Connexion() {
     async function handleSubmit(e) {
         e.preventDefault();
         if (await connexion(formData, setError)){
-            console.log(utilisateur);
+            setUtilisateur({
+                email:sessionStorage.getItem("mail"),
+                role:sessionStorage.getItem("role"),
+            })
             navigate("/")
         }
 

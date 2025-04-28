@@ -1,22 +1,29 @@
 import Navbar from "./components/navbar/Navbar.jsx";
 
 import Compte from "./components/compte/Compte.jsx";
-import AffichageProduits from "./components/catalogue/AffichageProduits.jsx";
-import {BrowserRouter, Routes, Route} from "react-router-dom";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import DevisForm from "./components/devis/Devis-form.jsx";
 import Produit from "./components/produit/Produit.jsx";
 import Inscription from "./components/authentification/Inscription.jsx";
 import GestionProduit from "./components/gestion-produits/Gestion-Produit-adm.jsx";
 import Connexion from "./components/authentification/Connexion.jsx";
-import {UtilisateurProvider} from "./assets/contexte/UtilisateurContext.jsx";
+import {UtilisateurContext} from "./assets/contexte/UtilisateurContext.jsx";
 import GestionUtilisateurAdm from "./components/gestion-comptes/Gestion-utilisateur-adm.jsx";
 import Catalogue from "./components/catalogue/Catalogue.jsx";
+import {useState} from "react";
 
 
 function App() {
+    const [utilisateur, setUtilisateur] = useState({
+        role: null,
+        mail: null,
+        prenom: null,
+        nom: null,
+    })
+
     return (
         <>
-            <UtilisateurProvider>
+            <UtilisateurContext.Provider value={{utilisateur,setUtilisateur}}>
                 <BrowserRouter>
                     <Navbar/>
 
@@ -45,7 +52,7 @@ function App() {
                     </Routes>
 
                 </BrowserRouter>
-            </UtilisateurProvider>
+            </UtilisateurContext.Provider>
 
 
         </>

@@ -1,18 +1,27 @@
 import RetourSiteBar from "./RetourSiteBar.jsx";
 import {Link, Outlet, useNavigate} from "react-router-dom";
-import {useUtilisateur} from "../../assets/contexte/UtilisateurContext.jsx";
-import {useEffect} from "react";
+import {UtilisateurContext} from "../../assets/contexte/UtilisateurContext.jsx";
+import {useContext} from "react";
 
 export default function Navbar() {
-    const {utilisateur, updateUtilisateur} = useUtilisateur();
+    const {utilisateur,setUtilisateur} = useContext(UtilisateurContext);
     const navigate = useNavigate();
+    console.log(utilisateur);
+
 
     /**
      * TEMPORAIRE SPRINT 1: permet d'effacer le session storage et de rediriger vers la page de connexion
      */
     const handleLogout = () => {
         sessionStorage.clear();
-        updateUtilisateur({role: null, email: null});
+        setUtilisateur({
+            mail: null,
+            role: null,
+            nom: '',
+            prenom: '',
+            entreprise: ''
+        })
+
         navigate("/Connexion");
     };
 
@@ -27,7 +36,7 @@ export default function Navbar() {
 
                     <div className="collapse navbar-collapse" id="navbarNav">
                         <ul className="navbar-nav ms-auto">
-                            {utilisateur.email === null ? (
+                            {utilisateur.mail === null ? (
                                     /*utilisateur non connecté*/
                                     <li className="nav-item me-4">
                                         <Link to="/Connexion"
