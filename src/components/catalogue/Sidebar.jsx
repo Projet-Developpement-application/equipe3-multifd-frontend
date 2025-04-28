@@ -37,9 +37,7 @@ const Sidebar = ({ouvert, fermeture, onApplyFilter, filtres, clearFilter}) => {
         if (isChecked) {
             filtres.current[type].push(valeur);
         }else {
-            console.log(filtres.current[type]);
             filtres.current[type] = filtres.current[type].filter(item => item !== valeur);
-            console.log(filtres.current[type]);
         }
     }
 
@@ -224,4 +222,4 @@ const Sidebar = ({ouvert, fermeture, onApplyFilter, filtres, clearFilter}) => {
     );
 };
 
-export default Sidebar;
+export default React.memo(Sidebar);

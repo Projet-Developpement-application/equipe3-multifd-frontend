@@ -16,7 +16,6 @@ import Catalogue from "./components/catalogue/Catalogue.jsx";
 function App() {
     return (
         <>
-
             <UtilisateurProvider>
                 <BrowserRouter>
                     <Navbar/>
