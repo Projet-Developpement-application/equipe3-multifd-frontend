@@ -5,9 +5,9 @@ const GestionProduit = () => {
     const etats = ["NEUF", "OCCASION", "RECONDITIONNE"];
     const marques = ["Siemens", "ABB", "Schneider", "Eaton"];
 
-    const [product, setProduct] = useState({
+    const [produit, setProduit] = useState({
         nom: '',
-        disponible: 'Disponible',
+        disponibilite: 'Disponible',
         prix: '',
         etat: etats[0],
         poids: '',
@@ -24,7 +24,7 @@ const GestionProduit = () => {
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
-        setProduct(prev => ({
+        setProduit(prev => ({
             ...prev,
             [name]: type === 'checkbox' ? checked : value
         }));
@@ -34,7 +34,7 @@ const GestionProduit = () => {
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         if (file) {
-            setProduct(prev => ({
+            setProduit(prev => ({
                 ...prev,
                 image: file,
                 imagePreview: URL.createObjectURL(file)
@@ -48,7 +48,7 @@ const GestionProduit = () => {
         const requiredFields = ['nom', 'prix', 'poids', 'voltage', 'hp', 'amperage', 'courant'];
 
         requiredFields.forEach(field => {
-            const value = product[field];
+            const value = produit[field];
             if (!value && value !== 0) {
                 newErrors[field] = 'Ce champ est requis.';
             } else if (['prix', 'poids', 'voltage', 'hp', 'amperage', 'courant'].includes(field)) {
@@ -63,7 +63,7 @@ const GestionProduit = () => {
             }
         });
 
-        if (!product.image) {
+        if (!produit.image) {
             newErrors.image = "L'image est requise.";
         }
 
@@ -74,11 +74,15 @@ const GestionProduit = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (validate()) {
-            ajouterProduit(product)
+            const produitEnvoye = {
+                ...produit,
+                disponibilite: produit.disponibilite === 'Disponible'
+            };
+            ajouterProduit(produitEnvoye)
                 .then((res) => {
                     alert("Produit enregistré !");
 
-                    setProduct({
+                    setProduit({
                         nom: '',
                         disponibilite: 'Disponible',
                         prix: '',
@@ -96,7 +100,7 @@ const GestionProduit = () => {
                 .catch(err => {
                     alert("Erreur lors de l'enregistrement du produit.");
                     console.log(err);
-                    console.log(product);
+                    console.log(produit);
 
                 });
         }
@@ -107,9 +111,9 @@ const GestionProduit = () => {
             <form onSubmit={handleSubmit} className="border p-4 bg-light rounded">
                 <div className="row">
                     <div className="col-md-4 text-center mb-3">
-                        {product.imagePreview ? (
+                        {produit.imagePreview ? (
                             <img
-                                src={product.imagePreview}
+                                src={produit.imagePreview}
                                 alt="Prévisualisation"
                                 className="img-fluid rounded mb-2"
                                 style={{
@@ -145,7 +149,7 @@ const GestionProduit = () => {
                                 <input
                                     type="text"
                                     name="nom"
-                                    value={product.nom}
+                                    value={produit.nom}
                                     onChange={handleChange}
                                     className={`form-control ${errors.nom ? 'is-invalid' : ''}`}
                                 />
@@ -157,7 +161,7 @@ const GestionProduit = () => {
                                 <input
                                     type="number"
                                     name="prix"
-                                    value={product.prix}
+                                    value={produit.prix}
                                     onChange={handleChange}
                                     className={`form-control ${errors.prix ? 'is-invalid' : ''}`}
                                 />
@@ -166,7 +170,7 @@ const GestionProduit = () => {
 
                             <div className="col-md-6 mb-3">
                                 <label className="form-label">Marque</label>
-                                <select name="marque" value={product.marque} onChange={handleChange}
+                                <select name="marque" value={produit.marque} onChange={handleChange}
                                         className="form-select">
                                     {marques.map((marque, index) => <option key={index}
                                                                             value={marque}>{marque}</option>)}
@@ -177,7 +181,7 @@ const GestionProduit = () => {
                                 <label className="form-label">Disponibilité</label>
                                 <select
                                     name="disponibilite"
-                                    value={product.disponibilite}
+                                    value={produit.disponibilite}
                                     onChange={handleChange}
                                     className="form-select"
                                 >
@@ -194,7 +198,7 @@ const GestionProduit = () => {
                                 <input
                                     type="text"
                                     name="poids"
-                                    value={product.poids}
+                                    value={produit.poids}
                                     onChange={handleChange}
                                     className={`form-control ${errors.poids ? 'is-invalid' : ''}`}
                                 />
@@ -206,7 +210,7 @@ const GestionProduit = () => {
                                 <input
                                     type="text"
                                     name="voltage"
-                                    value={product.voltage}
+                                    value={produit.voltage}
                                     onChange={handleChange}
                                     className={`form-control ${errors.voltage ? 'is-invalid' : ''}`}
                                 />
@@ -218,7 +222,7 @@ const GestionProduit = () => {
                                 <input
                                     type="text"
                                     name="hp"
-                                    value={product.hp}
+                                    value={produit.hp}
                                     onChange={handleChange}
                                     className={`form-control ${errors.hp ? 'is-invalid' : ''}`}
                                 />
@@ -230,7 +234,7 @@ const GestionProduit = () => {
                                 <input
                                     type="text"
                                     name="amperage"
-                                    value={product.amperage}
+                                    value={produit.amperage}
                                     onChange={handleChange}
                                     className={`form-control ${errors.amperage ? 'is-invalid' : ''}`}
                                 />
@@ -242,7 +246,7 @@ const GestionProduit = () => {
                                 <input
                                     type="text"
                                     name="courant"
-                                    value={product.courant}
+                                    value={produit.courant}
                                     onChange={handleChange}
                                     className={`form-control ${errors.courant ? 'is-invalid' : ''}`}
                                 />
@@ -251,7 +255,7 @@ const GestionProduit = () => {
 
                             <div className="col-md-6 mb-3">
                                 <label className="form-label">État</label>
-                                <select name="etat" value={product.etat} onChange={handleChange}
+                                <select name="etat" value={produit.etat} onChange={handleChange}
                                         className="form-select">
                                     {etats.map((etat, index) => <option key={index} value={etat}>{etat}</option>)}
                                 </select>

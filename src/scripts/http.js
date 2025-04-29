@@ -45,10 +45,9 @@ export async function fetchProduitParId(id) {
  */
 export async function ajouterProduit(produit) {
     console.log(produit);
-    produit.disponible = true;
     let nouveau = {
         nom: produit.nom,
-        disponible: true,
+        disponible: produit.disponible,
         prix: parseInt(produit.prix),
         etat: produit.etat,
         poids: parseInt(produit.poids),
@@ -58,7 +57,7 @@ export async function ajouterProduit(produit) {
         hp: parseInt(produit.hp),
         courant: parseInt(produit.courant)
     };
-    console.log(nouveau);
+    console.log("httto " + produit.disponibilite);
 
     const response = await fetch(BASE_URL + "/admin/ajouteProduit", {
         method: 'POST',
