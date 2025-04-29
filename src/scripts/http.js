@@ -57,7 +57,6 @@ export async function ajouterProduit(produit) {
         hp: parseInt(produit.hp),
         courant: parseInt(produit.courant)
     };
-    console.log("httto " + produit.disponibilite);
 
     const response = await fetch(BASE_URL + "/admin/ajouteProduit", {
         method: 'POST',
@@ -191,5 +190,15 @@ export function fetchProduitFilter(motCle) {
                 throw new Error("Erreur réseau");
             }
         });
+}
+export async function fetchAllMarque() {
+    const response = await fetch(BASE_URL + "/marques", {
+        method: "GET",
+        headers: {"Content-type": "application/json"}
+    });
+    if (!response.ok) {
+        throw new Error("Erreur lors du chargement des marques.");
+    }
+    return await response.json();
 }
 

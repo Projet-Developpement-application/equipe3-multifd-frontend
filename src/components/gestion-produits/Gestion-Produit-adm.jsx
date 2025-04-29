@@ -1,10 +1,16 @@
-import React, {useState} from 'react';
-import {ajouterProduit} from "../../scripts/http.js";
+import React, {useEffect, useState} from 'react';
+import {ajouterProduit, fetchAllMarque} from "../../scripts/http.js";
 
 const GestionProduit = () => {
     const etats = ["NEUF", "OCCASION", "RECONDITIONNE"];
-    const marques = ["Siemens", "ABB", "Schneider", "Eaton"];
-
+    const [marques, setMarques] = useState([]);
+    useEffect(() => {
+        fetchAllMarque().then(data => {
+            setMarques(data);
+        }).catch(err =>{
+            console.log("Erreur de chargement des marques: " + err);
+        });
+    }, []);
     const [produit, setProduit] = useState({
         nom: '',
         disponibilite: 'Disponible',
@@ -15,7 +21,7 @@ const GestionProduit = () => {
         hp: '',
         amperage: '',
         courant: '',
-        marque: marques[0],
+        marque: '',
         image: null,
         imagePreview: null
     });
@@ -92,7 +98,7 @@ const GestionProduit = () => {
                         hp: '',
                         amperage: '',
                         courant: '',
-                        marque: marques[0],
+                        marque: '',
                         image: null,
                         imagePreview: null
                     });
@@ -172,8 +178,8 @@ const GestionProduit = () => {
                                 <label className="form-label">Marque</label>
                                 <select name="marque" value={produit.marque} onChange={handleChange}
                                         className="form-select">
-                                    {marques.map((marque, index) => <option key={index}
-                                                                            value={marque}>{marque}</option>)}
+                                    {marques.map((marque) =>
+                                        <option key={marque.id} value={marque.nom}>{marque.nom}</option>)}
                                 </select>
                             </div>
 
