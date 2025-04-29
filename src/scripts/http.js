@@ -1,4 +1,4 @@
-// const BASE_URL = "http://172.20.46.45:8080";
+// const BASE_URL = "http://172.20.46.45:8080/backend-projet-prod";
 const BASE_URL = "http://localhost:8080";
 
 export async function fetchTexteClient() {
