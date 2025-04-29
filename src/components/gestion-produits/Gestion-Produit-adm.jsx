@@ -5,7 +5,6 @@ const GestionProduit = () => {
     const etats = ["Neuf", "Usagé", "Remis à neuf"];
     const marques = ["Siemens", "ABB", "Schneider", "Eaton"];
 
-    const { ajouterProduitLocal } = useProduits();
     const [product, setProduct] = useState({
         nom: '',
         disponible: 'Disponible',
@@ -79,7 +78,6 @@ const GestionProduit = () => {
             ajouterProduit(product)
                 .then((res) => {
                     alert("Produit enregistré !");
-                    ajouterProduitLocal({ ...product, id: res.id || Date.now() });
 
                     setProduct({
                         nom: '',
