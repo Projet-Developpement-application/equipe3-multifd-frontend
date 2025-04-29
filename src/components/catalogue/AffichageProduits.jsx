@@ -57,7 +57,10 @@ export default function AffichageProduits({filtres}) {
     return (
         <>
             {isFecthing ?
-                <div className="d-flex justify-content-center align-items-center vh-100">en train de fetch</div>
+                <div className="d-flex justify-content-center align-items-center min-vh-100">
+                    <div className="spinner-border" role="status">
+                    </div>
+                </div>
                 :
                 !error.error ?
                     produitsAffiche.length !== 0 ?
