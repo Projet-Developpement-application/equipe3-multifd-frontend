@@ -50,11 +50,13 @@ input[type="password"]::-webkit-password-reveal-button {
     transition: left 0.3s ease;
     z-index: 1050;
     padding: 20px;
+    overflow-y: auto;
 }
 
 .sidebar.open {
     left: 0;
 }
+
 
 .sidebar-header {
     display: flex;
