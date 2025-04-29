@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function FiltreRadio({name, motAffiche, identifiant, valeur, handleChange}) {
+function FiltreRadio({name, motAffiche, identifiant, valeur, handleChange}) {
 
 
     return (
@@ -21,3 +21,4 @@ export default function FiltreRadio({name, motAffiche, identifiant, valeur, hand
     )
 
 }
+export default React.memo(FiltreRadio)

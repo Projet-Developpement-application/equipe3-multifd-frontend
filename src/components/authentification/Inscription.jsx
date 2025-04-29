@@ -1,6 +1,7 @@
-import { useState } from "react";
+import {useState} from "react";
 import logo from "../../assets/logo/multifd-logo.svg";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
+import {inscription} from "../../scripts/http.js";
 
 export default function Inscription() {
     const [formData, setFormData] = useState({
@@ -33,28 +34,28 @@ export default function Inscription() {
     const navigate = useNavigate();
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
+        const {name, value} = e.target;
+        setFormData(prev => ({...prev, [name]: value}));
 
         if (name === "email") {
-            setValid(prev => ({ ...prev, email: /\S+@\S+\.\S+/.test(value) }));
+            setValid(prev => ({...prev, email: /\S+@\S+\.\S+/.test(value)}));
         }
         if (name === "password") {
-            setValid(prev => ({ ...prev, password: value.length >= 8 }));
+            setValid(prev => ({...prev, password: value.length >= 8}));
         }
         if (name === "confirmPassword") {
-            setValid(prev => ({ ...prev, confirmPassword: value === formData.password }));
+            setValid(prev => ({...prev, confirmPassword: value === formData.password}));
         }
         if (name === "firstName" || name === "lastName") {
-            setValid(prev => ({ ...prev, [name]: value.length >= 2 }));
+            setValid(prev => ({...prev, [name]: value.length >= 2}));
         }
         if (name === "company") {
-            setValid(prev => ({ ...prev, company: value.length >= 2 }));
+            setValid(prev => ({...prev, company: value.length >= 2}));
         }
     };
 
     const handleBlur = (e) => {
-        setTouched(prev => ({ ...prev, [e.target.name]: true }));
+        setTouched(prev => ({...prev, [e.target.name]: true}));
     };
 
     const getInputClass = (field) => {
@@ -65,32 +66,38 @@ export default function Inscription() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const { password, confirmPassword } = formData;
+        const {password, confirmPassword} = formData;
 
         if (password !== confirmPassword) {
             setError("Les mots de passe ne correspondent pas.");
             return;
         }
-
         setError('');
-        console.log("Formulaire soumis :", formData);
-        navigate("/connexion", {
-            state: { successMessage: "Votre compte a été créé avec succès. Veuillez vous connecter." }
-        });
+
+        inscription(formData)
+            .then(value => {
+                if (value.status === 200) {
+                    navigate("/connexion", {
+                        state: {successMessage: "Votre compte a été créé avec succès. Veuillez vous connecter."}
+                    });
+                } else {
+                    value.json().then(rep => setError(rep.erreur))
+                }
+            });
     };
 
     return (
         <div className="container-fluid min-vh-100 d-flex align-items-start justify-content-center marge-custom ">
-            <div className="row w-100 shadow-lg rounded overflow-hidden border border-2" style={{ maxWidth: '1000px' }}>
+            <div className="row w-100 shadow-lg rounded overflow-hidden border border-2" style={{maxWidth: '1000px'}}>
                 <div className="col-md-5 d-flex justify-content-center align-items-center bg-bleu-fonce1">
-                    <img src={logo} alt="Logo multifd" className="w-100 p-4" style={{ maxHeight: "90%" }} />
+                    <img src={logo} alt="Logo multifd" className="w-100 p-4" style={{maxHeight: "90%"}}/>
                 </div>
 
                 <div className="col-md-7 bg-light p-5 text-black">
                     <h3 className="text-center mb-3 texte-bleu-fonce1">
                         <strong>Formulaire d'inscription</strong>
                     </h3>
-                    <hr className="mb-5" />
+                    <hr className="mb-5"/>
 
                     <form onSubmit={handleSubmit}>
                         <div className="row mb-3">
@@ -141,7 +148,7 @@ export default function Inscription() {
                             </small>
                         </div>
 
-                        <hr />
+                        <hr/>
 
                         <div className="mb-3 mt-5">
                             <label className="form-label">Courriel <span className="text-danger">*</span></label>
@@ -174,7 +181,8 @@ export default function Inscription() {
                         </div>
 
                         <div className="mb-3">
-                            <label className="form-label">Confirmer le mot de passe <span className="text-danger">*</span></label>
+                            <label className="form-label">Confirmer le mot de passe <span
+                                className="text-danger">*</span></label>
                             <input
                                 type="password"
                                 className={getInputClass("confirmPassword")}

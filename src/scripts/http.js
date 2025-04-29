@@ -1,7 +1,8 @@
-const BASE_URL = "http://172.20.46.45:8080";
+// const BASE_URL = "http://172.20.46.45:8080";
+const BASE_URL = "http://localhost:8080";
 
 export async function fetchTexteClient() {
-    const response = await fetch(BASE_URL+"/user/produits");
+    const response = await fetch(BASE_URL + "/user/produits");
     if (!response.ok) {
         throw new Error("Erreur lors du chargement du message client.");
     }
@@ -13,9 +14,9 @@ export async function fetchTexteClient() {
  * Récupère tous les produits du backend
  */
 export async function fetchAllProduits() {
-    const response = await fetch(BASE_URL+"/toutProduits",{
-        method:"GET",
-        headers:{"Content-type":"application/json"}
+    const response = await fetch(BASE_URL + "/toutProduits", {
+        method: "GET",
+        headers: {"Content-type": "application/json"}
     });
     if (!response.ok) {
         throw new Error("Erreur lors du chargement des produits.");
@@ -28,9 +29,9 @@ export async function fetchAllProduits() {
  * @param id identifiant du produit
  */
 export async function fetchProduitParId(id) {
-    const response = await fetch(BASE_URL + "/produit/" + id,{
-        method:"GET",
-        headers:{"Content-type":"application/json"}
+    const response = await fetch(BASE_URL + "/produit/" + id, {
+        method: "GET",
+        headers: {"Content-type": "application/json"}
     });
     if (!response.ok) {
         throw new Error("Erreur lors du chargement du produit avec ID: " + id);
@@ -59,7 +60,7 @@ export async function ajouterProduit(produit) {
     };
     console.log(nouveau);
 
-    const response = await fetch(BASE_URL+"/admin/ajouteProduit", {
+    const response = await fetch(BASE_URL + "/admin/ajouteProduit", {
         method: 'POST',
         body: JSON.stringify(nouveau),
         headers: {
@@ -106,9 +107,9 @@ export async function supprimerProduit(id) {
 }
 
 export async function fetchUtilisateur(email) {
-    const response = await fetch(BASE_URL + "/client/info/"+ email,{
-        method:"GET",
-        headers:{"Content-type":"application/json"}
+    const response = await fetch(BASE_URL + "/client/info/" + email, {
+        method: "GET",
+        headers: {"Content-type": "application/json"}
     });
     if (!response.ok) {
         throw new Error("Erreur lors de la récupération de l'utilisateur " + email);
@@ -122,7 +123,7 @@ export async function fetchUtilisateur(email) {
  * @param utilisateur les nouvelles données du produit
  */
 export async function modifierUtilisateur(email, utilisateur) {
-    const response = await fetch(BASE_URL + "/client/modifier/"+ email, {
+    const response = await fetch(BASE_URL + "/client/modifier/" + email, {
         method: 'PUT',
         body: JSON.stringify(utilisateur),
         headers: {
@@ -133,6 +134,23 @@ export async function modifierUtilisateur(email, utilisateur) {
         throw new Error("Erreur lors de la modification de l'utilisateur " + email);
     }
     return await response.json();
+}
+
+export async function inscription(formData) {
+    const donnee = {
+        mail: formData.email,
+        entreprise: formData.company,
+        mdp: formData.password,
+        nom: formData.lastName,
+        prenom: formData.firstName
+    };
+    return fetch(BASE_URL + '/inscription', {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify(donnee)
+    })
 }
 
 export async function connexion(formData, setError) {

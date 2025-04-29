@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function FiltreMulti({typeFiltre, valeur, handleChange, unite}) {
+function FiltreMulti({typeFiltre, valeur, handleChange, unite}) {
 
     return (
         <div className="form-check">
@@ -18,3 +18,4 @@ export default function FiltreMulti({typeFiltre, valeur, handleChange, unite}) {
     )
 
 }
+export default React.memo(FiltreMulti);
