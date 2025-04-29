@@ -152,10 +152,13 @@ export async function connexion(formData, setError) {
     }
 
     const data = await response.json();
+    //todo mettre dans cookie ici ou dans composant connexion
     sessionStorage.setItem("token", data.bearer);
     sessionStorage.setItem("mail", data.mail);
     sessionStorage.setItem("role", data.role);
     sessionStorage.setItem("isConnected", true);
+    sessionStorage.setItem("nom", data.nom);
+    sessionStorage.setItem("prenom", data.prenom);
     return data; // Retourne les informations utilisateur
 }
 

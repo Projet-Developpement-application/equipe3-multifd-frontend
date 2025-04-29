@@ -9,7 +9,7 @@ export default function Connexion() {
     const navigate = useNavigate();
     const successMessage = location.state?.successMessage || null;
     const [error, setError] = useState({error: "", message: ""});
-    const {utilisateur,setUtilisateur} = useContext(UtilisateurContext);
+    const {utilisateur, setUtilisateur} = useContext(UtilisateurContext);
 
     const [formData, setFormData] = useState({
         mail: '',
@@ -25,14 +25,16 @@ export default function Connexion() {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        if (await connexion(formData, setError)){
+        const response = await connexion(formData, setError);
+        if (response !== null) {
             setUtilisateur({
-                email:sessionStorage.getItem("mail"),
-                role:sessionStorage.getItem("role"),
-            })
-            navigate("/")
+                mail: sessionStorage.getItem("mail"),
+                role: sessionStorage.getItem("role"),
+                nom: sessionStorage.getItem("nom"),
+                prenom: sessionStorage.getItem("prenom"),
+            });
+            navigate("/");
         }
-
     }
 
     return (
