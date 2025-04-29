@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {ajouterProduit} from "../../scripts/http.js";
 
 const GestionProduit = () => {
-    const etats = ["Neuf", "Usagé", "Remis à neuf"];
+    const etats = ["NEUF", "OCCASION", "RECONDITIONNE"];
     const marques = ["Siemens", "ABB", "Schneider", "Eaton"];
 
     const [product, setProduct] = useState({
@@ -63,7 +63,6 @@ const GestionProduit = () => {
             }
         });
 
-
         if (!product.image) {
             newErrors.image = "L'image est requise.";
         }
@@ -96,6 +95,9 @@ const GestionProduit = () => {
                 })
                 .catch(err => {
                     alert("Erreur lors de l'enregistrement du produit.");
+                    console.log(err);
+                    console.log(product);
+
                 });
         }
     };
@@ -181,7 +183,6 @@ const GestionProduit = () => {
                                 >
                                     <option value="Disponible">Disponible</option>
                                     <option value="Pas en stock">Pas en stock</option>
-                                    <option value="Sur commande">Sur commande</option>
                                 </select>
                             </div>
 

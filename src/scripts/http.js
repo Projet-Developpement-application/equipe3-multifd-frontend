@@ -49,7 +49,7 @@ export async function ajouterProduit(produit) {
         nom: produit.nom,
         disponible: true,
         prix: parseInt(produit.prix),
-        etat: 'NEUF',
+        etat: produit.etat,
         poids: parseInt(produit.poids),
         marque: {nom: produit.marque},
         voltage: parseInt(produit.voltage),
