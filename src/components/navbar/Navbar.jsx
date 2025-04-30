@@ -6,7 +6,6 @@ import {useContext} from "react";
 export default function Navbar() {
     const {utilisateur,setUtilisateur} = useContext(UtilisateurContext);
     const navigate = useNavigate();
-    console.log(utilisateur);
 
 
     /**

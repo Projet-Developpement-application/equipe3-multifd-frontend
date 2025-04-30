@@ -1,7 +1,6 @@
 import React from "react";
 
-function FiltreMulti({typeFiltre, valeur, handleChange, unite}) {
-
+function FiltreMulti({typeFiltre, valeur, toggleFiltre, unite,filtres}) {
     return (
         <div className="form-check">
             <input
@@ -9,8 +8,9 @@ function FiltreMulti({typeFiltre, valeur, handleChange, unite}) {
                 type="checkbox"
                 id={typeFiltre + valeur}
                 name={typeFiltre + valeur}
-                onChange={(e) =>
-                    handleChange(typeFiltre, valeur, e.target.checked)
+                checked={filtres[typeFiltre].includes(valeur)}
+                onChange={() =>
+                    toggleFiltre(typeFiltre, valeur)
                 }
             />
             <label className="form-check-label" htmlFor={typeFiltre + valeur}>{valeur} {unite}</label>
@@ -18,4 +18,4 @@ function FiltreMulti({typeFiltre, valeur, handleChange, unite}) {
     )
 
 }
-export default React.memo(FiltreMulti);
+export default FiltreMulti;

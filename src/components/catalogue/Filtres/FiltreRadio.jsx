@@ -21,4 +21,4 @@ function FiltreRadio({name, motAffiche, identifiant, valeur, handleChange}) {
     )
 
 }
-export default React.memo(FiltreRadio)
+export default FiltreRadio;

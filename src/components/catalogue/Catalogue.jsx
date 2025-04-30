@@ -1,38 +1,18 @@
 import Sidebar from "./Sidebar.jsx";
 import AffichageProduits from "./AffichageProduits.jsx";
 import BarreRechercheFiltre from "./Barre-recherche-filtre.jsx";
-import React, {useRef, useState} from "react";
+import React, {useState} from "react";
 
 export default function Catalogue() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
-    const [appliedFilters, setAppliedFilters] = useState({presenceFiltre: false, filtres: {}});
-    const filtres = useRef({
-        sortOptions: "",
+    const [filtres, setFiltres] = useState({
         amperage: [],
         voltage: [],
-        marque: [],
-        hp: [],
-        disponibilite: null,
-        etat: []
+        marques: [],
+        etat:[],
+        hp:[]
     });
-
-    function handleApplyFilter() {
-        setAppliedFilters({presenceFiltre: true, filtres: filtres.current}); // Met à jour les filtres appliqués
-    }
-
-    function clearFilter() {
-        filtres.current = {
-            sortOptions: "",
-            amperage: [],
-            voltage: [],
-            marque: [],
-            hp: [],
-            disponibilite: null,
-            etat: []
-        };
-        setAppliedFilters({presenceFiltre: false, filtres: {}});
-    }
 
     return (
         <>
@@ -41,10 +21,9 @@ export default function Catalogue() {
             <Sidebar ouvert={isSidebarOpen}
                      fermeture={toggleSidebar}
                      filtres={filtres}
-                     onApplyFilter={handleApplyFilter}
-                     clearFilter={clearFilter}
+                     setFiltres={setFiltres}
             />
-            <AffichageProduits filtres={appliedFilters}/>
+            <AffichageProduits filtres={filtres}/>
         </>
     );
 }

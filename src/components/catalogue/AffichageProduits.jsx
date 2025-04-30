@@ -5,7 +5,8 @@ import {fetchAllProduits} from "../../scripts/http.js";
 
 export default function AffichageProduits({filtres}) {
 
-    const [produitsAffiche, setProduitsAffiche] = useState([]);
+    const [produits, setProduits] = useState([]);
+    const [produitsFiltres, setProduitsFiltres] = useState([]);
     const [isFecthing, setIsFecthing] = useState(false);
     const [error, setError] = useState({error: undefined, message: ""});
     const [pageCourrante, setPageCourrante] = useState(1);
@@ -13,45 +14,35 @@ export default function AffichageProduits({filtres}) {
     const maxProduitPage = 20;
 
 
-    const totalPages = Math.ceil(produitsAffiche.length / maxProduitPage);
+    const totalPages = Math.ceil(produitsFiltres.length / maxProduitPage);
     const indexDernierProduit = pageCourrante * maxProduitPage;
     const indexPremierProduit = indexDernierProduit - maxProduitPage;
-    const currentProducts = produitsAffiche.slice(indexPremierProduit, indexDernierProduit);
+    const currentProducts = produitsFiltres.slice(indexPremierProduit, indexDernierProduit);
 
     const paginate = (pageNumber) => setPageCourrante(pageNumber);
 
 
     useEffect(() => {
-        fetchData();
-
-    }, [filtres]);
-
-
-    async function fetchData() {
         setIsFecthing(true);
-        try {
-            const data = await fetchAllProduits();
-            if (!filtres.presenceFiltre) {
-                setProduitsAffiche(data);
-            } else {
-                const filteredData = data.filter((product) => {
-                    return Object.entries(filtres.filtres).every(([key, value]) => {
-                        if (!value || value.length === 0) return true;
-                        if (Array.isArray(value)) return value.includes(product[key]);
-                        return product[key] === value;
-                    });
-                });
-                setProduitsAffiche(filteredData);
-            }
-
-
-        } catch (err) {
-            setError({error: true, message: "Impossible de charger les produits."});
-            console.error("Erreur chargement produits:", err);
-        } finally {
+        fetchAllProduits().then(data => {
+            setProduits(data); // Stocke les produits récupérés
             setIsFecthing(false);
-        }
-    }
+        }).catch(err => {
+            console.error("Erreur lors du fetch des produits :", err);
+            setIsFecthing(false);
+        });
+    }, []);
+
+    useEffect(() => {
+        // Applique les filtres sur les produits récupérés
+        const filtresAppliques = produits.filter(p =>
+            (filtres.amperage.length === 0 || filtres.amperage.includes(p.amperage)) &&
+            (filtres.voltage.length === 0 || filtres.voltage.includes(p.voltage)) &&
+            (filtres.marques.length === 0 || filtres.marques.includes(p.marque.nom))
+        );
+        setProduitsFiltres(filtresAppliques);
+    }, [filtres, produits]);
+
 
 
     return (
@@ -63,7 +54,7 @@ export default function AffichageProduits({filtres}) {
                 </div>
                 :
                 !error.error ?
-                    produitsAffiche.length !== 0 ?
+                    produitsFiltres.length !== 0 ?
                         <div className="d-flex flex-column min-vh-100">
                             <div className="container mt-5 pt-5 flex-grow-1">
                                 <div className="row">
