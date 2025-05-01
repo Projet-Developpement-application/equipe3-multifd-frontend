@@ -38,12 +38,16 @@ export default function AffichageProduits({filtres}) {
         const filtresAppliques = produits.filter(p =>
             (filtres.amperage.length === 0 || filtres.amperage.includes(p.amperage)) &&
             (filtres.voltage.length === 0 || filtres.voltage.includes(p.voltage)) &&
-            (filtres.marques.length === 0 || filtres.marques.includes(p.marque.nom))
+            (filtres.marques.length === 0 || filtres.marques.includes(p.marque.nom)) &&
+            (filtres.etat.length === 0 || filtres.etat.includes(p.etat)) &&
+            (filtres.hp.length === 0 || filtres.hp.includes(p.hp)) &&
+            (filtres.disponibilite.length === 0 || filtres.disponibilite.includes(p.disponible)) &&
+            (filtres.nom === undefined || p.nom.toLowerCase().includes(filtres.nom.toLowerCase()))
+        ).sort((a, b) =>
+            filtres.prixAsc ? a.prix - b.prix : b.prix - a.prix
         );
         setProduitsFiltres(filtresAppliques);
     }, [filtres, produits]);
-
-
 
     return (
         <>

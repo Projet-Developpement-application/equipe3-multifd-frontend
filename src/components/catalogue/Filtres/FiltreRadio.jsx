@@ -1,7 +1,6 @@
 import React from "react";
 
-function FiltreRadio({name, motAffiche, identifiant, valeur, handleChange}) {
-
+function FiltreRadio({name, motAffiche, identifiant, valeur, togglefiltre, filtres, type}) {
 
     return (
         <div className="form-check">
@@ -10,8 +9,9 @@ function FiltreRadio({name, motAffiche, identifiant, valeur, handleChange}) {
                 type="radio"
                 name={name}
                 id={identifiant}
+                checked={filtres[name]===type}
                 onChange={(e) =>
-                    handleChange(name, valeur, e.target.checked)
+                    togglefiltre(name, valeur)
                 }
             />
             <label className="form-check-label" htmlFor={identifiant}>

@@ -34,12 +34,19 @@ const Sidebar = ({ouvert, fermeture, filtres, setFiltres}) => {
     }, [setMarques]);
 
     const toggleFiltre = (type, valeur) => {
-        setFiltres(prev => ({
-            ...prev,
-            [type]: prev[type].includes(valeur)
-                ? prev[type].filter(v => v !== valeur)
-                : [...prev[type], valeur]
-        }));
+        if (type === "prixAsc") {
+            setFiltres(prev => ({
+                ...prev,
+                [type]: !prev[type]
+            }));
+        } else {
+            setFiltres(prev => ({
+                ...prev,
+                [type]: prev[type].includes(valeur)
+                    ? prev[type].filter(v => v !== valeur)
+                    : [...prev[type], valeur]
+            }));
+        }
     };
 
 
@@ -52,34 +59,35 @@ const Sidebar = ({ouvert, fermeture, filtres, setFiltres}) => {
             <div className="sidebar-content ps-2">
                 <div className="mb-5">
                     <h6>Trier par</h6>
-                    <FiltreRadio valeur={"asc"} name={"sortOptions"} identifiant={"sortPriceAsc"}
-                                 motAffiche={"Prix croissant"} type={true}
+                    <FiltreRadio valeur={"asc"} name={"prixAsc"} identifiant={"sortPriceAsc"}
+                                 motAffiche={"Prix croissant"} type={true} togglefiltre={toggleFiltre} filtres={filtres}
                     />
-                    <FiltreRadio valeur={"desc"} name={"sortOptions"} identifiant={"sortPriceDesc"}
-                                 motAffiche={"Prix décroissant"} type={false}
+                    <FiltreRadio valeur={"desc"} name={"prixAsc"} identifiant={"sortPriceDesc"}
+                                 motAffiche={"Prix décroissant"} type={false} togglefiltre={toggleFiltre}
+                                 filtres={filtres}
                     />
                 </div>
 
                 <h6 className="mt-4 mb-4">Filtrer</h6>
 
                 {/* Ampérage */}
-                <div className="filter-section mb-4">
-                    {/*<div*/}
-                    {/*    className="filter-header d-flex justify-content-between align-items-center"*/}
-                    {/*    onClick={() => setAmperageOuvert(!amperageOuvert)}*/}
-                    {/*>*/}
-                    <span>Ampérage</span>
-                    {/*<i className={`bi ${amperageOuvert ? "bi-chevron-up" : "bi-chevron-down"}`}></i>*/}
-                </div>
+                {/*<div className="filter-section mb-4">*/}
+                {/*    /!*<div*!/*/}
+                {/*    /!*    className="filter-header d-flex justify-content-between align-items-center"*!/*/}
+                {/*    /!*    onClick={() => setAmperageOuvert(!amperageOuvert)}*!/*/}
+                {/*    /!*>*!/*/}
+                {/*    <span>Ampérage</span>*/}
+                {/*    /!*<i className={`bi ${amperageOuvert ? "bi-chevron-up" : "bi-chevron-down"}`}></i>*!/*/}
+                {/*</div>*/}
 
-                <div className="filter-options">
-                    <FiltreMulti typeFiltre={"amperage"} valeur={10} unite={"A"}
-                                 toggleFiltre={toggleFiltre} filtres={filtres}
-                    />
-                    <FiltreMulti typeFiltre={"amperage"} valeur={20} unite={"A"}
-                                 toggleFiltre={toggleFiltre} filtres={filtres}
-                    />
-                </div>
+                {/*<div className="filter-options">*/}
+                {/*    <FiltreMulti typeFiltre={"amperage"} valeur={10} unite={"A"}*/}
+                {/*                 toggleFiltre={toggleFiltre} filtres={filtres}*/}
+                {/*    />*/}
+                {/*    <FiltreMulti typeFiltre={"amperage"} valeur={20} unite={"A"}*/}
+                {/*                 toggleFiltre={toggleFiltre} filtres={filtres}*/}
+                {/*    />*/}
+                {/*</div>*/}
 
             </div>
 
@@ -94,10 +102,10 @@ const Sidebar = ({ouvert, fermeture, filtres, setFiltres}) => {
                 {/*</div>*/}
                 {/*{voltageOuvert && (*/}
                 <div className="filter-options">
-                    <FiltreMulti typeFiltre={"voltage"} valeur={600} unite={"V"}
-                                 toggleFiltre={toggleFiltre} filtres={filtres}/>
-                    <FiltreMulti typeFiltre={"voltage"} valeur={380} unite={"V"}
-                                 toggleFiltre={toggleFiltre} filtres={filtres}/>
+                    {[600, 460, 240, 120].map((v) => (
+                        <FiltreMulti key={v} typeFiltre={"voltage"} valeur={v} unite={"V"} toggleFiltre={toggleFiltre}
+                                     filtres={filtres}/>
+                    ))}
                 </div>
                 {/*)}*/}
             </div>
@@ -132,11 +140,10 @@ const Sidebar = ({ouvert, fermeture, filtres, setFiltres}) => {
                 {/*</div>*/}
                 {/*{hpOuvert && (*/}
                 <div className="filter-options">
-                    <FiltreMulti typeFiltre={"hp"} valeur={5} unite={"hp"} toggleFiltre={toggleFiltre} filtres={filtres}
-                    />
-                    <FiltreMulti typeFiltre={"hp"} valeur={10} unite={"hp"} toggleFiltre={toggleFiltre}
-                                 filtres={filtres}
-                    />
+                    {[1, 2, 3, 5, 7.5, 10, 15, 20, 40, 50, 100].map((v) => (
+                        <FiltreMulti key={v} typeFiltre={"hp"} valeur={v} unite={"hp"} toggleFiltre={toggleFiltre}
+                                     filtres={filtres}/>
+                    ))}
                 </div>
                 {/*)}*/}
             </div>
@@ -152,12 +159,16 @@ const Sidebar = ({ouvert, fermeture, filtres, setFiltres}) => {
                 {/*</div>*/}
                 {/*{disponibiliteOuvert && (*/}
                 <div className="filter-options">
-                    <FiltreRadio type={"disponibilite"} valeur={true} name={"disponibilite"}
-                                 identifiant={"disponible"} motAffiche={"Disponible"}
-                                 toggleFiltre={toggleFiltre} filtres={filtres}/>
-                    <FiltreRadio type={"disponibilite"} valeur={false} name={"disponibilite"}
-                                 identifiant={"indisponible"} motAffiche={"Indisponible"}
-                                 toggleFiltre={toggleFiltre} filtres={filtres}/>
+                    {/*<FiltreRadio type={"disponibilite"} valeur={true} name={"disponibilite"}*/}
+                    {/*             identifiant={"disponible"} motAffiche={"Disponible"}*/}
+                    {/*             toggleFiltre={toggleFiltre} filtres={filtres}/>*/}
+                    {/*<FiltreRadio type={"disponibilite"} valeur={false} name={"disponibilite"}*/}
+                    {/*             identifiant={"indisponible"} motAffiche={"Indisponible"}*/}
+                    {/*             toggleFiltre={toggleFiltre} filtres={filtres}/>*/}
+                    <FiltreMulti typeFiltre={"disponibilite"} valeur={true} toggleFiltre={toggleFiltre}
+                                 filtres={filtres} unite={'Disponible'}/>
+                    <FiltreMulti typeFiltre={"disponibilite"} valeur={false} toggleFiltre={toggleFiltre}
+                                 filtres={filtres} unite={'Indisponible'}/>
                 </div>
                 {/*)}*/}
             </div>
@@ -173,56 +184,17 @@ const Sidebar = ({ouvert, fermeture, filtres, setFiltres}) => {
                 {/*</div>*/}
                 {/*{conditionOuvert && (*/}
                 <div className="filter-options">
-                    <FiltreMulti typeFiltre={"etat"} valeur={"Neuf"} toggleFiltre={toggleFiltre} filtres={filtres}
-                    />
-                    <FiltreMulti typeFiltre={"etat"} valeur={"Reconditionné"} toggleFiltre={toggleFiltre}
-                                 filtres={filtres}
-                    />
-                    <FiltreMulti typeFiltre={"etat"} valeur={"Occasion"} toggleFiltre={toggleFiltre} filtres={filtres}
-                    />
+                    {['NEUF', 'RECONDITIONNE', 'OCCASION'].map((v) => (
+                        <FiltreMulti key={v} typeFiltre={"etat"} valeur={v} toggleFiltre={toggleFiltre}
+                                     filtres={filtres}/>
+                    ))}
                 </div>
                 {/*)}*/}
             </div>
-
-            {/* Prix */}
-            <div className="filter-section mb-4">
-                {/*<div*/}
-                {/*    className="filter-header d-flex justify-content-between align-items-center"*/}
-                {/*    onClick={() => setPrixOuvert(!prixOuvert)}*/}
-                {/*>*/}
-                <span>Prix</span>
-                {/*<i className={`bi ${prixOuvert ? "bi-chevron-up" : "bi-chevron-down"}`}></i>*/}
-                {/*</div>*/}
-                {/*{prixOuvert && (*/}
-                <div className="filter-options">
-                    <label htmlFor="priceRange">Plage de prix :</label>
-                    <input
-                        type="range"
-                        className="form-range"
-                        id="priceRange"
-                        min="0"
-                        max="5000"
-                        step="50"
-                        // value={checkedState["prix"] || 0}
-                        // onChange={(e) =>
-                        //     handleFilterChange("prix", e.target.value)
-                        // }
-                    />
-                </div>
-                {/*)}*/}
-                {/*</div>*/}
-            </div>
-
-            {/*<div className="sidebar-footer mt-auto d-flex justify-content-between p-3">*/}
-            {/*    <button className="btn btn-secondary">*/}
-            {/*        Effacer*/}
-            {/*    </button>*/}
-            {/*    <button className="btn btn-primary">*/}
-            {/*        Appliquer*/}
-            {/*    </button>*/}
-            {/*</div>*/}
         </div>
-    );
-};
+
+
+    )
+}
 
 export default Sidebar;
