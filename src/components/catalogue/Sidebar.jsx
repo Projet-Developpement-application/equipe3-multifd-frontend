@@ -16,7 +16,7 @@ const Sidebar = ({ouvert, fermeture, filtres, setFiltres}) => {
 
     async function fetchMarques() {
         try {
-            const data = await fetch("http://localhost:8080/marques", {
+            const data = await fetch("http://172.20.46.45:8080/backend-projet-prod/marques", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
