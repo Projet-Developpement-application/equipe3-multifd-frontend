@@ -62,7 +62,8 @@ export async function ajouterProduit(produit) {
         method: 'POST',
         body: JSON.stringify(nouveau),
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + sessionStorage.getItem("token")
         }
     });
     if (!response.ok) {
@@ -82,7 +83,8 @@ export async function modifierProduit(id, produit) {
         method: 'PUT',
         body: JSON.stringify(produit),
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + sessionStorage.getItem("token")
         }
     });
     if (!response.ok) {
@@ -107,7 +109,10 @@ export async function supprimerProduit(id) {
 export async function fetchUtilisateur(email) {
     const response = await fetch(BASE_URL + "/client/info/" + email, {
         method: "GET",
-        headers: {"Content-type": "application/json"}
+        headers: {
+            "Content-type": "application/json",
+            'Authorization': 'Bearer ' + sessionStorage.getItem("token")
+        }
     });
     if (!response.ok) {
         throw new Error("Erreur lors de la récupération de l'utilisateur " + email);
@@ -125,7 +130,8 @@ export async function modifierUtilisateur(email, utilisateur) {
         method: 'PUT',
         body: JSON.stringify(utilisateur),
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + sessionStorage.getItem("token")
         }
     });
     if (!response.ok) {
@@ -162,7 +168,7 @@ export async function connexion(formData, setError) {
 
     if (!response.ok) {
         if (response.status === 400) {
-            setError({ error: "Erreur authentification", message: "le courriel ou le mot de passe ne sont pas bon" });
+            setError({error: "Erreur authentification", message: "le courriel ou le mot de passe ne sont pas bon"});
         }
         return null;
     }
@@ -179,9 +185,9 @@ export async function connexion(formData, setError) {
 }
 
 export function fetchProduitFilter(motCle) {
-    return fetch(BASE_URL + "/rechercheProduit?nomFiltre=" + motCle,{
-        method:"GET",
-        headers:{"Content-type":"application/json"}
+    return fetch(BASE_URL + "/rechercheProduit?nomFiltre=" + motCle, {
+        method: "GET",
+        headers: {"Content-type": "application/json"}
     })
         .then((r) => {
             if (r.ok) {
@@ -191,6 +197,7 @@ export function fetchProduitFilter(motCle) {
             }
         });
 }
+
 export async function fetchAllMarque() {
     const response = await fetch(BASE_URL + "/marques", {
         method: "GET",
