@@ -1,8 +1,9 @@
-import {useLocation, useNavigate} from "react-router-dom";
+import {Link, Navigate, useLocation, useNavigate} from "react-router-dom";
 import {useContext, useState} from "react";
 import logo from "../../assets/logo/multifd-logo.svg";
 import {connexion} from "../../scripts/http.js";
 import {UtilisateurContext} from "../../assets/contexte/UtilisateurContext.jsx";
+import Inscription from "./Inscription.jsx";
 
 export default function Connexion() {
     const location = useLocation();
@@ -102,6 +103,10 @@ export default function Connexion() {
                             <button type="submit" className="btn btn-dark">Se connecter</button>
                         </div>
                     </form>
+                    <div className="pt-5 d-flex align-items-start justify-content-center">
+                    <Link to={"../Inscription"} className="text-decoration-none text-dark">
+                            <i className="bi bi-person-add"></i> Créer un compte
+                    </Link></div>
                 </div>
             </div>
         </div>
