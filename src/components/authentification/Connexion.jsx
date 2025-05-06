@@ -16,6 +16,8 @@ export default function Connexion() {
         mail: '',
         mdp: '',
     });
+    const URL = "http://172.20.46.30/siteReact/equipe3-multifd-frontend";
+
 
     const [showPassword, setShowPassword] = useState(false);
 
@@ -34,7 +36,7 @@ export default function Connexion() {
                 nom: sessionStorage.getItem("nom"),
                 prenom: sessionStorage.getItem("prenom"),
             });
-            navigate("/");
+            navigate("../");
         }
     }
 
@@ -104,7 +106,7 @@ export default function Connexion() {
                         </div>
                     </form>
                     <div className="pt-5 d-flex align-items-start justify-content-center">
-                    <Link to={"../Inscription"} className="text-decoration-none text-dark">
+                    <Link to={URL+"/Inscription"} className="text-decoration-none text-dark">
                             <i className="bi bi-person-add"></i> Créer un compte
                     </Link></div>
                 </div>

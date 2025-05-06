@@ -30,6 +30,8 @@ export default function Inscription() {
         lastName: false,
         company: false,
     });
+    const URL = "http://172.20.46.30/siteReact/equipe3-multifd-frontend";
+
 
     const navigate = useNavigate();
 
@@ -77,7 +79,7 @@ export default function Inscription() {
         inscription(formData)
             .then(value => {
                 if (value.status === 200) {
-                    navigate("/connexion", {
+                    navigate(URL+"/connexion", {
                         state: {successMessage: "Votre compte a été créé avec succès. Veuillez vous connecter."}
                     });
                 } else {

@@ -22,6 +22,7 @@ function App() {
         nom: null,
     })
 
+
     return (
         <>
             <UtilisateurContext.Provider value={{utilisateur,setUtilisateur}}>
@@ -34,21 +35,20 @@ function App() {
                                 <Catalogue/>
                             </>
                         }/>
-                        <Route path="/" element={
+                        <Route path="siteReact/equipe3-multifd-frontend/" element={
                             <>
                                 <Catalogue/>
                             </>
                         }/>
 
-
-                        <Route path="compte" element={<Compte/>}/>
-                        <Route path="panier" element={<DevisForm/>}/>
-                        <Route path="/produit/:id" element={<Produit/>}/>
-                        <Route path="AjouterProduit" element={<AjouterProduit/>}/>
-                        <Route path="ModifierProduit/:id" element={<ModifierProduit/>}/>
-                        <Route path="Inscription" element={<Inscription/>}/>
-                        <Route path="Connexion" element={<Connexion/>}/>
-                        <Route path="GestionUtilisateur" element={<GestionUtilisateurAdm/>}/>
+                        <Route path="siteReact/equipe3-multifd-frontend/compte" element={<Compte/>}/>
+                        <Route path="siteReact/equipe3-multifd-frontend/panier" element={<DevisForm/>}/>
+                        <Route path="siteReact/equipe3-multifd-frontend/produit/:id" element={<Produit/>}/>
+                        <Route path="siteReact/equipe3-multifd-frontend/AjouterProduit" element={<AjouterProduit/>}/>
+                        <Route path="siteReact/equipe3-multifd-frontend/ModifierProduit/:id" element={<ModifierProduit/>}/>
+                        <Route path="siteReact/equipe3-multifd-frontend/Inscription" element={<Inscription/>}/>
+                        <Route path="siteReact/equipe3-multifd-frontend/Connexion" element={<Connexion/>}/>
+                        <Route path="siteReact/equipe3-multifd-frontend/GestionUtilisateur" element={<GestionUtilisateurAdm/>}/>
 
 
                     </Routes>

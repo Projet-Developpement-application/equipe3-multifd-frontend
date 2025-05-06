@@ -7,6 +7,7 @@ export default function Produit() {
     const [produit, setProduit] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const URL = "http://172.20.46.30/siteReact/equipe3-multifd-frontend";
 
     useEffect(() => {
         fetchProduitParId(id)
@@ -89,7 +90,7 @@ export default function Produit() {
                         </div>
 
                         <div className="d-flex justify-content-end w-100 w-lg-75 mt-5 mt-lg-5">
-                            <Link to={"/"} className="text-decoration-none">
+                            <Link to={URL+"/"} className="text-decoration-none">
                                 <button className="btn btn-outline-dark ms-2">
                                     <i className="bi bi-arrow-left"></i> Retour à la boutique
                                 </button>
