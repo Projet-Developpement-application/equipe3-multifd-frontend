@@ -1,7 +1,8 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import image from "../../assets/generique.jpg"
 import {fetchAllProduits} from "../../scripts/http.js";
+import {UtilisateurContext} from "../../assets/contexte/UtilisateurContext.jsx";
 
 export default function AffichageProduits({filtres}) {
 
@@ -10,7 +11,7 @@ export default function AffichageProduits({filtres}) {
     const [isFecthing, setIsFecthing] = useState(false);
     const [error, setError] = useState({error: undefined, message: ""});
     const [pageCourrante, setPageCourrante] = useState(1);
-
+    const {utilisateur, setUtilisateur} = useContext(UtilisateurContext);
     const maxProduitPage = 20;
 
 
@@ -74,8 +75,25 @@ export default function AffichageProduits({filtres}) {
                                                         <p className="card-text">{product.description}</p>
                                                         <div className="mt-auto">
                                                             <p className="card-text fw-bold">{product.prix} $</p>
-                                                            <button className="btn btn-dark w-100">Ajouter au panier
-                                                            </button>
+                                                            {utilisateur.role === "CLIENT" && (
+                                                                <button className="btn btn-dark w-100">Ajouter au
+                                                                    panier</button>
+                                                            )}
+                                                            {utilisateur.role === "ADMIN" && (
+                                                                <div className="container">
+                                                                    <div
+                                                                        className="d-flex justify-content-center gap-2">
+                                                                        <button className="btn btn-dark">
+                                                                            <i className="bi bi-pencil-square me-2"></i>
+                                                                            Modifier
+                                                                        </button>
+                                                                        <button className="btn btn-dark">
+                                                                            <i className="bi bi-trash me-2"></i>
+                                                                            Supprimer
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            )}
                                                         </div>
                                                     </div>
                                                 </div>
