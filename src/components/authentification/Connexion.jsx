@@ -36,7 +36,7 @@ export default function Connexion() {
                 nom: sessionStorage.getItem("nom"),
                 prenom: sessionStorage.getItem("prenom"),
             });
-            navigate(URL+"/");
+            navigate("../");
         }
     }
 

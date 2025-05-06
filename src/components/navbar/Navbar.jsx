@@ -74,13 +74,13 @@ export default function Navbar() {
 
                                         </li>
                                         <li className="nav-item me-4">
-                                            <Link to="/compte"
+                                            <Link to={URL+"/compte"}
                                                   className="text-uppercase nav-link text-white hover-underline-animation left pb-1">
                                                 <i className="bi bi-person me-2"></i> Mon Compte
                                             </Link>
                                         </li>
                                         <li className="nav-item me-4">
-                                            <Link to="/panier"
+                                            <Link to={URL+"/panier"}
                                                   className="text-uppercase nav-link text-white hover-underline-animation left pb-1">
                                                 <i className="bi bi-cart me-2"></i> Panier
                                             </Link>
