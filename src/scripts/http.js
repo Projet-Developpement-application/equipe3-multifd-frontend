@@ -1,5 +1,5 @@
- const BASE_URL = "http://172.20.46.45:8080/backend-projet-prod";
-//const BASE_URL = "http://localhost:8080";
+// const BASE_URL = "http://172.20.46.45:8080/backend-projet-prod";
+const BASE_URL = "http://localhost:8080";
 
 export async function fetchTexteClient() {
     const response = await fetch(BASE_URL + "/user/produits");
@@ -209,3 +209,18 @@ export async function fetchAllMarque() {
     return await response.json();
 }
 
+
+
+export async function fetchAllUtilisateurs() {
+    const response = await fetch(BASE_URL + "/admin/utilisateurs", {
+        method: "GET",
+        headers: {
+            "Content-type": "application/json",
+
+        }
+    });
+    if (!response.ok) {
+        throw new Error("Erreur lors du chargement des utilisateurs.");
+    }
+    return await response.json();
+}
