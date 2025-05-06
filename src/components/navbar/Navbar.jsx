@@ -6,7 +6,7 @@ import {useContext} from "react";
 export default function Navbar() {
     const {utilisateur,setUtilisateur} = useContext(UtilisateurContext);
     const navigate = useNavigate();
-
+    const URL = "http://172.20.46.30/siteReact/equipe3-multifd-frontend/";
 
     /**
      * TEMPORAIRE SPRINT 1: permet d'effacer le session storage et de rediriger vers la page de connexion
@@ -21,7 +21,7 @@ export default function Navbar() {
             entreprise: ''
         })
 
-        navigate("/Connexion");
+        navigate(URL+"/Connexion");
     };
 
     return (
@@ -29,7 +29,7 @@ export default function Navbar() {
             <RetourSiteBar/>
             <nav className="navbar w-100 z-1 navbar-expand-lg text-white bg-dark" data-bs-theme="dark">
                 <div className="container-fluid d-flex justify-content-between align-items-start">
-                    <Link className="navbar-brand navbar-logo ps-5" to={"http://172.20.46.30/siteReact/equipe3-multifd-frontend/"}>
+                    <Link className="navbar-brand navbar-logo ps-5" to={URL+"/"}>
                         MULTI-FD
                     </Link>
 
@@ -38,7 +38,7 @@ export default function Navbar() {
                             {utilisateur.mail === null ? (
                                     /*utilisateur non connecté*/
                                     <li className="nav-item me-4">
-                                        <Link to="/Connexion"
+                                        <Link to={URL+"/Connexion"}
                                               className="text-uppercase nav-link text-white hover-underline-animation left pb-1">
                                             <i className="bi bi-person me-2"></i> Connexion
                                         </Link>
@@ -48,13 +48,13 @@ export default function Navbar() {
                                     /*utilisateur connecté comme administrateur*/
                                     <>
                                         <li className="nav-item me-4">
-                                            <Link to="/GestionUtilisateur"
+                                            <Link to={URL+"/GestionUtilisateur"}
                                                   className="text-uppercase nav-link text-white hover-underline-animation left pb-1">
                                                 <i className="bi bi-people me-2"></i> Gestion Utilisateur
                                             </Link>
                                         </li>
                                         <li className="nav-item me-4">
-                                            <Link to="/AjouterProduit"
+                                            <Link to={URL+"/AjouterProduit"}
                                                   className="text-uppercase nav-link text-white hover-underline-animation left pb-1">
                                                 <i className="bi bi-plus-circle me-2"></i> Ajouter un Produit
                                             </Link>
