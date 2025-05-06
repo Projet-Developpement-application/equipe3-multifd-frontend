@@ -43,7 +43,7 @@ function App() {
 
                         <Route path="siteReact/equipe3-multifd-frontend/compte" element={<Compte/>}/>
                         <Route path="siteReact/equipe3-multifd-frontend/panier" element={<DevisForm/>}/>
-                        <Route path="siteReact/equipe3-multifd-frontend//produit/:id" element={<Produit/>}/>
+                        <Route path="siteReact/equipe3-multifd-frontend/produit/:id" element={<Produit/>}/>
                         <Route path="siteReact/equipe3-multifd-frontend/AjouterProduit" element={<GestionProduit/>}/>
                         <Route path="siteReact/equipe3-multifd-frontend/Inscription" element={<Inscription/>}/>
                         <Route path="siteReact/equipe3-multifd-frontend/Connexion" element={<Connexion/>}/>
