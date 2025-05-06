@@ -7,10 +7,10 @@ export async function fetchTexteClient() {
         throw new Error("Erreur lors du chargement du message client.");
     }
     return await response.text();
-}
 
 
 /**
+ * Ajout random pour forcer un build hihihiihih vous pouvez effacer ce message si vous le voyez
  * Récupère tous les produits du backend
  */
 export async function fetchAllProduits() {
