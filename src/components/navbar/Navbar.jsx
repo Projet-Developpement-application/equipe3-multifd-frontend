@@ -6,7 +6,7 @@ import {useContext} from "react";
 export default function Navbar() {
     const {utilisateur,setUtilisateur} = useContext(UtilisateurContext);
     const navigate = useNavigate();
-    const URL = "http://172.20.46.30/siteReact/equipe3-multifd-frontend/";
+    const URL = "http://172.20.46.30/siteReact/equipe3-multifd-frontend";
 
     /**
      * TEMPORAIRE SPRINT 1: permet d'effacer le session storage et de rediriger vers la page de connexion
