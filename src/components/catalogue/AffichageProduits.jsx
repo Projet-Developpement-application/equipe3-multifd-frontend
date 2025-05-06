@@ -65,16 +65,23 @@ export default function AffichageProduits({filtres}) {
                                 <div className="row">
                                     {currentProducts.map((product) => (
                                         <div key={product.id} className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-                                            <Link to={`/produit/${product.id}`} className="text-decoration-none">
                                                 <div
                                                     className="card h-100 border-1 rounded shadow-lg product-card-hover">
-                                                    <img src={image} className="card-img-top rounded-top"
-                                                         alt={product.nom}/>
-                                                    <div className="card-body d-flex flex-column">
-                                                        <h5 className="card-title">{product.nom}</h5>
-                                                        <p className="card-text">{product.description}</p>
-                                                        <div className="mt-auto">
+                                                    <Link to={`/produit/${product.id}`}
+                                                          className="text-decoration-none text-dark">
+                                                        <img src={image} className="card-img-top rounded-top"
+                                                             alt={product.nom}/>
+                                                        <div className="card-body d-flex flex-column">
+                                                            <h5 className="card-title">{product.nom}</h5>
+                                                            <p className="card-text">{product.description}</p>
                                                             <p className="card-text fw-bold">{product.prix} $</p>
+                                                        </div>
+                                                    </Link>
+
+                                                    {utilisateur.role === "CLIENT" || utilisateur.role === "ADMIN" && (
+                                                    <div className="card-footer d-flex flex-column">
+
+                                                        <div className="mt-auto">
                                                             {utilisateur.role === "CLIENT" && (
                                                                 <button className="btn btn-dark w-100">Ajouter au
                                                                     panier</button>
@@ -83,21 +90,22 @@ export default function AffichageProduits({filtres}) {
                                                                 <div className="container">
                                                                     <div
                                                                         className="d-flex justify-content-center gap-2">
-                                                                        <button className="btn btn-dark">
+                                                                        <Link to= {`/ModifierProduit/${product.id}`} className="btn btn-dark">
                                                                             <i className="bi bi-pencil-square me-2"></i>
                                                                             Modifier
-                                                                        </button>
-                                                                        <button className="btn btn-dark">
+                                                                    </Link>
+                                                                        <Link to="/" className="btn btn-dark">
                                                                             <i className="bi bi-trash me-2"></i>
                                                                             Supprimer
-                                                                        </button>
+                                                                        </Link>
                                                                     </div>
                                                                 </div>
                                                             )}
                                                         </div>
                                                     </div>
+                                                    )}
                                                 </div>
-                                            </Link>
+
                                         </div>
                                     ))}
                                 </div>

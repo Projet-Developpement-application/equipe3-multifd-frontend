@@ -44,7 +44,6 @@ export async function fetchProduitParId(id) {
  * @param produit les données du produit à ajouter
  */
 export async function ajouterProduit(produit) {
-    console.log(produit);
     let nouveau = {
         nom: produit.nom,
         disponible: produit.disponible,
@@ -79,9 +78,24 @@ export async function ajouterProduit(produit) {
  * @param produit les nouvelles données du produit
  */
 export async function modifierProduit(id, produit) {
-    const response = await fetch(BASE_URL + "/admin/" + id, {
+
+    let nouveau = {
+        nom: produit.nom,
+        disponible: produit.disponible,
+        prix: produit.prix,
+        etat: produit.etat,
+        poids:produit.poids,
+        marque: {nom: produit.marque},
+        voltage: produit.voltage,
+        amperage: produit.amperage,
+        hp: produit.hp,
+        courant: produit.courant
+    };
+    console.log(produit);
+    //console.log(produitModifer);
+    const response = await fetch(BASE_URL + "/admin/modifier/" + id, {
         method: 'PUT',
-        body: JSON.stringify(produit),
+        body: JSON.stringify(nouveau),
         headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + sessionStorage.getItem("token")

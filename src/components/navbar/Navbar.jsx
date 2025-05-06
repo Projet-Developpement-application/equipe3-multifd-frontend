@@ -59,12 +59,7 @@ export default function Navbar() {
                                                 <i className="bi bi-plus-circle me-2"></i> Ajouter un Produit
                                             </Link>
                                         </li>
-                                        <li className="nav-item me-4">
-                                            <Link to="/GestionProduit"
-                                                  className="text-uppercase nav-link text-white hover-underline-animation left pb-1">
-                                                <i className="bi bi-pencil-square me-2"></i> Modifier un Produit
-                                            </Link>
-                                        </li>
+
                                         <li className="nav-item me-4">
                                             <button onClick={handleLogout} className="btn text-uppercase">
                                                 <i className="bi bi-box-arrow-left"></i>

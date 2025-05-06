@@ -11,7 +11,7 @@ import {UtilisateurContext} from "./assets/contexte/UtilisateurContext.jsx";
 import GestionUtilisateurAdm from "./components/gestion-comptes/Gestion-utilisateur-adm.jsx";
 import Catalogue from "./components/catalogue/Catalogue.jsx";
 import {useState} from "react";
-import GestionProduit from "./components/gestion-produits/Gestion-Produit-adm.jsx";
+import ModifierProduit from "./components/gestion-produits/Modifier-Produit-adm.jsx";
 
 
 function App() {
@@ -45,7 +45,7 @@ function App() {
                         <Route path="panier" element={<DevisForm/>}/>
                         <Route path="/produit/:id" element={<Produit/>}/>
                         <Route path="AjouterProduit" element={<AjouterProduit/>}/>
-                        <Route path="GestionProduit" element={<GestionProduit/>}/>
+                        <Route path="ModifierProduit/:id" element={<ModifierProduit/>}/>
                         <Route path="Inscription" element={<Inscription/>}/>
                         <Route path="Connexion" element={<Connexion/>}/>
                         <Route path="GestionUtilisateur" element={<GestionUtilisateurAdm/>}/>

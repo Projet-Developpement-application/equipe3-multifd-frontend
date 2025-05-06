@@ -1,50 +1,31 @@
-import React, {useEffect, useState} from 'react';
-import {ajouterProduit, fetchAllMarque} from "../../scripts/http.js";
+import React, { useEffect, useState } from 'react';
+import { fetchAllMarque, ajouterProduit } from '../../scripts/http';
+import ProduitForm from "./Produit-Form-adm.jsx";
+
 
 const AjouterProduit = () => {
     const etats = ["NEUF", "OCCASION", "RECONDITIONNE"];
     const [marques, setMarques] = useState([]);
-    useEffect(() => {
-        fetchAllMarque().then(data => {
-            setMarques(data);
-        }).catch(err =>{
-            console.log("Erreur de chargement des marques: " + err);
-        });
-    }, []);
     const [produit, setProduit] = useState({
-        nom: '',
-        disponibilite: 'Disponible',
-        prix: '',
-        etat: etats[0],
-        poids: '',
-        voltage: '',
-        hp: '',
-        amperage: '',
-        courant: '',
-        marque: '',
-        image: null,
-        imagePreview: null
+        nom: '', disponibilite: 'Disponible', prix: '', etat: etats[0], poids: '',
+        voltage: '', hp: '', amperage: '', courant: '', marque: '', image: null, imagePreview: null
     });
-
     const [errors, setErrors] = useState({});
 
-    const handleChange = (e) => {
+    useEffect(() => {
+        fetchAllMarque().then(setMarques).catch(console.error);
+    }, []);
+
+    const handleChange = e => {
         const { name, value, type, checked } = e.target;
-        setProduit(prev => ({
-            ...prev,
-            [name]: type === 'checkbox' ? checked : value
-        }));
+        setProduit(p => ({ ...p, [name]: type === 'checkbox' ? checked : value }));
         setErrors(prev => ({ ...prev, [name]: null }));
     };
 
-    const handleImageChange = (e) => {
+    const handleImageChange = e => {
         const file = e.target.files[0];
         if (file) {
-            setProduit(prev => ({
-                ...prev,
-                image: file,
-                imagePreview: URL.createObjectURL(file)
-            }));
+            setProduit(p => ({ ...p, image: file, imagePreview: URL.createObjectURL(file) }));
             setErrors(prev => ({ ...prev, image: null }));
         }
     };
@@ -61,221 +42,39 @@ const AjouterProduit = () => {
                 const num = Number(value);
                 if (isNaN(num)) {
                     newErrors[field] = 'Doit être un nombre.';
-                } else {
-                    if (num < 0) {
-                        newErrors[field] = 'La valeur ne peut pas être négative.';
-                    }
+                } else if (num < 0) {
+                    newErrors[field] = 'La valeur ne peut pas être négative.';
                 }
             }
         });
-
-        if (!produit.image) {
-            newErrors.image = "L'image est requise.";
-        }
-
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = e => {
         e.preventDefault();
         if (validate()) {
-            const produitEnvoye = {
-                ...produit,
-                disponibilite: produit.disponibilite === 'Disponible'
-            };
-            ajouterProduit(produitEnvoye)
-                .then((res) => {
-                    alert("Produit enregistré !");
+            const toSend = { ...produit, disponibilite: produit.disponibilite === 'Disponible' };
+            ajouterProduit(toSend).then(() => alert("Produit ajouté !")).catch(err => {
+                alert("Erreur lors de l'enregistrement du produit.");
+                console.log(err);
+                console.log(produit);
 
-                    setProduit({
-                        nom: '',
-                        disponibilite: 'Disponible',
-                        prix: '',
-                        etat: etats[0],
-                        poids: '',
-                        voltage: '',
-                        hp: '',
-                        amperage: '',
-                        courant: '',
-                        marque: '',
-                        image: null,
-                        imagePreview: null
-                    });
-                })
-                .catch(err => {
-                    alert("Erreur lors de l'enregistrement du produit.");
-                    console.log(err);
-                    console.log(produit);
-
-                });
+            });
         }
     };
 
     return (
-        <div className="container my-5">
-            <form onSubmit={handleSubmit} className="border p-4 bg-light rounded">
-                <div className="row">
-                    <div className="col-md-4 text-center mb-3">
-                        {produit.imagePreview ? (
-                            <img
-                                src={produit.imagePreview}
-                                alt="Prévisualisation"
-                                className="img-fluid rounded mb-2"
-                                style={{
-                                    width: '100%',
-                                    maxWidth: '300px',
-                                    height: '300px',
-                                    objectFit: 'cover',
-                                    objectPosition: 'center',
-                                }}
-                            />
-                        ) : (
-                            <div
-                                className="bg-secondary text-white d-flex align-items-center justify-content-center rounded"
-                                style={{width: '100%', maxWidth: '300px', height: '300px'}}>
-                                <span>Prévisualisation image</span>
-                            </div>
-                        )}
-                        <input
-                            type="file"
-                            className={`form-control mt-2 ${errors.image ? 'is-invalid' : ''}`}
-                            accept="image/*"
-                            onChange={handleImageChange}
-                        />
-                        {errors.image && <div className="invalid-feedback">{errors.image}</div>}
-                    </div>
-
-
-                    <div className="col-md-8">
-                        <div className="row">
-
-                            <div className="col-md-6 mb-3">
-                                <label className="form-label">Nom du produit</label>
-                                <input
-                                    type="text"
-                                    name="nom"
-                                    value={produit.nom}
-                                    onChange={handleChange}
-                                    className={`form-control ${errors.nom ? 'is-invalid' : ''}`}
-                                />
-                                {errors.nom && <div className="invalid-feedback">{errors.nom}</div>}
-                            </div>
-
-                            <div className="col-md-6 mb-3">
-                            <label className="form-label">Prix ($)</label>
-                                <input
-                                    type="number"
-                                    name="prix"
-                                    value={produit.prix}
-                                    onChange={handleChange}
-                                    className={`form-control ${errors.prix ? 'is-invalid' : ''}`}
-                                />
-                                {errors.prix && <div className="invalid-feedback">{errors.prix}</div>}
-                            </div>
-
-                            <div className="col-md-6 mb-3">
-                                <label className="form-label">Marque</label>
-                                <select name="marque" value={produit.marque} onChange={handleChange}
-                                        className="form-select">
-                                    {marques.map((marque) =>
-                                        <option key={marque.id} value={marque.nom}>{marque.nom}</option>)}
-                                </select>
-                            </div>
-
-                            <div className="col-md-6 mb-4">
-                                <label className="form-label">Disponibilité</label>
-                                <select
-                                    name="disponibilite"
-                                    value={produit.disponibilite}
-                                    onChange={handleChange}
-                                    className="form-select"
-                                >
-                                    <option value="Disponible">Disponible</option>
-                                    <option value="Pas en stock">Pas en stock</option>
-                                </select>
-                            </div>
-
-
-                            <h3>Caractéristiques</h3>
-
-                            <div className="col-md-6 mb-3">
-                                <label className="form-label">Poids (kg)</label>
-                                <input
-                                    type="text"
-                                    name="poids"
-                                    value={produit.poids}
-                                    onChange={handleChange}
-                                    className={`form-control ${errors.poids ? 'is-invalid' : ''}`}
-                                />
-                                {errors.poids && <div className="invalid-feedback">{errors.poids}</div>}
-                            </div>
-
-                            <div className="col-md-6 mb-3">
-                                <label className="form-label">Voltage (V)</label>
-                                <input
-                                    type="text"
-                                    name="voltage"
-                                    value={produit.voltage}
-                                    onChange={handleChange}
-                                    className={`form-control ${errors.voltage ? 'is-invalid' : ''}`}
-                                />
-                                {errors.voltage && <div className="invalid-feedback">{errors.voltage}</div>}
-                            </div>
-
-                            <div className="col-md-6 mb-3">
-                                <label className="form-label">HP</label>
-                                <input
-                                    type="text"
-                                    name="hp"
-                                    value={produit.hp}
-                                    onChange={handleChange}
-                                    className={`form-control ${errors.hp ? 'is-invalid' : ''}`}
-                                />
-                                {errors.hp && <div className="invalid-feedback">{errors.hp}</div>}
-                            </div>
-
-                            <div className="col-md-6 mb-3">
-                                <label className="form-label">Ampérage (A)</label>
-                                <input
-                                    type="text"
-                                    name="amperage"
-                                    value={produit.amperage}
-                                    onChange={handleChange}
-                                    className={`form-control ${errors.amperage ? 'is-invalid' : ''}`}
-                                />
-                                {errors.amperage && <div className="invalid-feedback">{errors.amperage}</div>}
-                            </div>
-
-                            <div className="col-md-6 mb-3">
-                                <label className="form-label">Courant (Phase)</label>
-                                <input
-                                    type="text"
-                                    name="courant"
-                                    value={produit.courant}
-                                    onChange={handleChange}
-                                    className={`form-control ${errors.courant ? 'is-invalid' : ''}`}
-                                />
-                                {errors.courant && <div className="invalid-feedback">{errors.courant}</div>}
-                            </div>
-
-                            <div className="col-md-6 mb-3">
-                                <label className="form-label">État</label>
-                                <select name="etat" value={produit.etat} onChange={handleChange}
-                                        className="form-select">
-                                    {etats.map((etat, index) => <option key={index} value={etat}>{etat}</option>)}
-                                </select>
-                            </div>
-
-                            <div className="col-12 d-flex justify-content-between">
-                                <button type="submit" className="btn btn-dark"> Enregistrer</button>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
+        <ProduitForm
+            produit={produit}
+            marques={marques}
+            etats={etats}
+            errors={errors}
+            handleChange={handleChange}
+            handleImageChange={handleImageChange}
+            handleSubmit={handleSubmit}
+            isEditMode={false}
+        />
     );
 };
 
