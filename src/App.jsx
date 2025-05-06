@@ -33,20 +33,20 @@ function App() {
                                 <Catalogue/>
                             </>
                         }/>
-                        <Route path="/" element={
+                        <Route path="http://172.20.46.30/siteReact/equipe3-multifd-frontend/" element={
                             <>
                                 <Catalogue/>
                             </>
                         }/>
 
 
-                        <Route path="compte" element={<Compte/>}/>
-                        <Route path="panier" element={<DevisForm/>}/>
-                        <Route path="/produit/:id" element={<Produit/>}/>
-                        <Route path="AjouterProduit" element={<GestionProduit/>}/>
-                        <Route path="Inscription" element={<Inscription/>}/>
-                        <Route path="Connexion" element={<Connexion/>}/>
-                        <Route path="GestionUtilisateur" element={<GestionUtilisateurAdm/>}/>
+                        <Route path="http://172.20.46.30/siteReact/equipe3-multifd-frontend/compte" element={<Compte/>}/>
+                        <Route path="http://172.20.46.30/siteReact/equipe3-multifd-frontend/panier" element={<DevisForm/>}/>
+                        <Route path="http://172.20.46.30/siteReact/equipe3-multifd-frontend//produit/:id" element={<Produit/>}/>
+                        <Route path="http://172.20.46.30/siteReact/equipe3-multifd-frontend/AjouterProduit" element={<GestionProduit/>}/>
+                        <Route path="http://172.20.46.30/siteReact/equipe3-multifd-frontend/Inscription" element={<Inscription/>}/>
+                        <Route path="http://172.20.46.30/siteReact/equipe3-multifd-frontend/Connexion" element={<Connexion/>}/>
+                        <Route path="http://172.20.46.30/siteReact/equipe3-multifd-frontend/GestionUtilisateur" element={<GestionUtilisateurAdm/>}/>
 
 
                     </Routes>

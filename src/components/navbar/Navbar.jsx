@@ -29,7 +29,7 @@ export default function Navbar() {
             <RetourSiteBar/>
             <nav className="navbar w-100 z-1 navbar-expand-lg text-white bg-dark" data-bs-theme="dark">
                 <div className="container-fluid d-flex justify-content-between align-items-start">
-                    <Link className="navbar-brand navbar-logo ps-5" to={"/"}>
+                    <Link className="navbar-brand navbar-logo ps-5" to={"http://172.20.46.30/siteReact/equipe3-multifd-frontend/"}>
                         MULTI-FD
                     </Link>
 
