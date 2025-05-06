@@ -10,7 +10,6 @@ export default function AffichageProduits({filtres}) {
     const [isFecthing, setIsFecthing] = useState(false);
     const [error, setError] = useState({error: undefined, message: ""});
     const [pageCourrante, setPageCourrante] = useState(1);
-
     const maxProduitPage = 20;
 
 
@@ -64,7 +63,7 @@ export default function AffichageProduits({filtres}) {
                                 <div className="row">
                                     {currentProducts.map((product) => (
                                         <div key={product.id} className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-                                            <Link to={`/produit/${product.id}`} className="text-decoration-none">
+                                            <Link to={`http://172.20.46.30/siteReact/equipe3-multifd-frontend/produit/${product.id}`} className="text-decoration-none">
                                                 <div
                                                     className="card h-100 border-1 rounded shadow-lg product-card-hover">
                                                     <img src={image} className="card-img-top rounded-top"
