@@ -1,22 +1,15 @@
 import {redirect} from "react-router-dom";
 
-const BASE_URL = "http://localhost:8080/user/";
+const BASE_URL = "http://localhost:8080/";
 
 
-export async function fetchTexteClient() {
-    const response = await fetch("http://localhost:8080/user/produits");
-    if (!response.ok) {
-        throw new Error("Erreur lors du chargement du message client.");
-    }
-    return await response.text();
-}
 
 
 /**
  * Récupère tous les produits du backend
  */
 export async function fetchAllProduits() {
-    const response = await fetch("http://localhost:8080/user/produits");
+    const response = await fetch(BASE_URL+"toutProduits");
     if (!response.ok) {
         throw new Error("Erreur lors du chargement des produits.");
     }
@@ -28,7 +21,7 @@ export async function fetchAllProduits() {
  * @param id identifiant du produit
  */
 export async function fetchProduitParId(id) {
-    const response = await fetch(BASE_URL + "/" + id);
+    const response = await fetch(BASE_URL + "produit/" + id);
     if (!response.ok) {
         throw new Error("Erreur lors du chargement du produit avec ID: " + id);
     }
@@ -56,7 +49,7 @@ export async function ajouterProduit(produit) {
     };
     console.log(nouveau);
 
-    const response = await fetch("http://localhost:8080/admin/ajouteProduit", {
+    const response = await fetch(BASE_URL+"/admin/ajouteProduit", {
         method: 'POST',
         body: JSON.stringify(nouveau),
         headers: {
@@ -76,7 +69,7 @@ export async function ajouterProduit(produit) {
  * @param produit les nouvelles données du produit
  */
 export async function modifierProduit(id, produit) {
-    const response = await fetch(BASE_URL + "/" + id, {
+    const response = await fetch(BASE_URL + "admin/produit/" + id, {
         method: 'PUT',
         body: JSON.stringify(produit),
         headers: {
@@ -94,7 +87,7 @@ export async function modifierProduit(id, produit) {
  * @param id identifiant du produit à supprimer
  */
 export async function supprimerProduit(id) {
-    const response = await fetch(BASE_URL + "/" + id, {
+    const response = await fetch(BASE_URL + "/admin/produit/" + id, {
         method: 'DELETE'
     });
     if (!response.ok) {
@@ -104,7 +97,7 @@ export async function supprimerProduit(id) {
 
 export async function connexion(formData, setError) {
 
-    const response = await fetch('http://localhost:8080/connexion', {
+    const response = await fetch(BASE_URL+'connexion', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
