@@ -129,8 +129,7 @@ export default function AffichageProduits({filtres}) {
                             </nav>
                         </div> :
                         //si il n'y a aucuns produitsAffiche qui corrsponds aux criteres de recherche
-                        <div>aucuns produits ne réponds aux critères</div>
-                    :
+                        <div className="d-flex justify-content-center mt-5">Aucun produit ne réponds aux critères.</div>                    :
                     // en cas d'erreur de fetch avec le backend
                     <div className="alert alert-danger">{error.message}</div>
             }
