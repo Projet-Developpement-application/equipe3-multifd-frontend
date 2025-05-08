@@ -71,7 +71,7 @@ const ProduitForm = ({ produit, marques, etats, errors, handleChange, handleImag
 
                             <div className="col-md-6 mb-4">
                                 <label className="form-label">Disponibilité</label>
-                                <select name="disponibilite" value={produit.disponible} onChange={handleChange} className="form-select">
+                                <select name="disponibilite" value={produit.disponibilite} onChange={handleChange} className="form-select">
                                     <option value="Disponible">Disponible</option>
                                     <option value="Pas en stock">Pas en stock</option>
                                 </select>

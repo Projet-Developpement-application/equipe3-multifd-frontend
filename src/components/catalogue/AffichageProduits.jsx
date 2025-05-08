@@ -99,7 +99,7 @@ export default function AffichageProduits({filtres}) {
                                                                             <i className="bi bi-pencil-square me-2"></i>
                                                                             Modifier
                                                                     </Link>
-                                                                        <Link to="/" className="btn btn-dark">
+                                                                        <Link to={`/SupprimerProduit/${product.id}`} className="btn btn-dark">
                                                                             <i className="bi bi-trash me-2"></i>
                                                                             Supprimer
                                                                         </Link>

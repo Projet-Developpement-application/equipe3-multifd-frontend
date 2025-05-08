@@ -44,36 +44,36 @@ export async function fetchProduitParId(id) {
  * Ajoute un nouveau produit au backend
  * @param produit les données du produit à ajouter
  */
-export async function ajouterProduit(produit) {
-    console.log(produit);
-    let nouveau = {
-        nom: produit.nom,
-        disponible: produit.disponible,
-        prix: parseInt(produit.prix),
-        etat: produit.etat,
-        poids: parseInt(produit.poids),
-        marque: {nom: produit.marque},
-        voltage: parseInt(produit.voltage),
-        amperage: parseInt(produit.amperage),
-        hp: parseInt(produit.hp),
-        courant: parseInt(produit.courant),
-        image:null
-    };
-
-    const response = await fetch(BASE_URL + "/admin/ajouteProduit", {
-        method: 'POST',
-        body: JSON.stringify(nouveau),
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + sessionStorage.getItem("token")
-        }
-    });
-    if (!response.ok) {
-        throw new Error("Erreur lors de l'ajout du produit.");
-    }
-
-    return response;
-}
+// export async function ajouterProduit(produit) {
+//     console.log(produit);
+//     let nouveau = {
+//         nom: produit.nom,
+//         disponible: produit.disponible,
+//         prix: parseInt(produit.prix),
+//         etat: produit.etat,
+//         poids: parseInt(produit.poids),
+//         marque: {nom: produit.marque},
+//         voltage: parseInt(produit.voltage),
+//         amperage: parseInt(produit.amperage),
+//         hp: parseInt(produit.hp),
+//         courant: parseInt(produit.courant),
+//         image: null
+//     };
+//
+//     const response = await fetch(BASE_URL + "/admin/ajouteProduit", {
+//         method: 'POST',
+//         body: JSON.stringify(nouveau),
+//         headers: {
+//             'Content-Type': 'application/json',
+//             'Authorization': 'Bearer ' + sessionStorage.getItem("token")
+//         }
+//     });
+//     if (!response.ok) {
+//         throw new Error("Erreur lors de l'ajout du produit.");
+//     }
+//
+//     return response;
+// }
 
 /**
  * Modifie un produit existant par ID
@@ -85,19 +85,20 @@ export async function modifierProduit(id, produit) {
     let nouveau = {
         nom: produit.nom,
         disponible: produit.disponible,
-        prix: produit.prix,
+        prix: parseInt(produit.prix),
         etat: produit.etat,
-        poids:produit.poids,
+        poids: parseInt(produit.poids),
         marque: {nom: produit.marque},
-        voltage: produit.voltage,
-        amperage: produit.amperage,
-        hp: produit.hp,
-        courant: produit.courant
+        voltage: parseInt(produit.voltage),
+        amperage: parseInt(produit.amperage),
+        hp: parseInt(produit.hp),
+        courant: parseInt(produit.courant),
+        image: null
     };
     console.log(produit);
     const response = await fetch(BASE_URL + "/admin/modifier/" + id, {
         method: 'PUT',
-        body: JSON.stringify(nouveau),
+        body: JSON.stringify(produit),
         headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + sessionStorage.getItem("token")
@@ -107,6 +108,33 @@ export async function modifierProduit(id, produit) {
         throw new Error("Erreur lors de la modification du produit ID: " + id);
     }
     return await response.json();
+}
+
+export async function ajouterProduit(produit) {
+    const formData = new FormData();
+    let produitSansImage = {
+        nom: produit.nom,
+        disponible: produit.disponible,
+        prix: parseInt(produit.prix),
+        etat: produit.etat,
+        poids: parseInt(produit.poids),
+        marque: {nom: produit.marque},
+        voltage: parseInt(produit.voltage),
+        amperage: parseInt(produit.amperage),
+        hp: parseInt(produit.hp),
+        courant: parseInt(produit.courant)
+    };
+    formData.append("produit", new Blob([JSON.stringify(produitSansImage)], {type: "application/json"}));
+    formData.append("image", produit.image);
+    const response = await fetch(BASE_URL + "/admin/ajouteProduit", {
+        method: 'POST',
+        body: formData,
+        headers: {'Authorization': 'Bearer ' + sessionStorage.getItem("token")}
+    });
+    if (!response.ok) {
+        throw new Error("Erreur lors de l'ajout du produit.");
+    }
+    return response;
 }
 
 /**
@@ -211,7 +239,6 @@ export async function fetchAllMarque() {
     }
     return await response.json();
 }
-
 
 
 export async function fetchAllUtilisateurs() {

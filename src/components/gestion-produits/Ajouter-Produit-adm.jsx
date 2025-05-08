@@ -58,8 +58,6 @@ const AjouterProduit = () => {
             ajouterProduit(toSend).then(() => alert("Produit ajouté !")).catch(err => {
                 alert("Erreur lors de l'enregistrement du produit.");
                 console.log(err);
-                console.log(produit);
-
             });
         }
     };

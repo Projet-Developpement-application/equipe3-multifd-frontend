@@ -12,6 +12,8 @@ import GestionUtilisateurAdm from "./components/gestion-comptes/Gestion-utilisat
 import Catalogue from "./components/catalogue/Catalogue.jsx";
 import {useState} from "react";
 import ModifierProduit from "./components/gestion-produits/Modifier-Produit-adm.jsx";
+import SupprimerProduitAdm from "./components/gestion-produits/Supprimer-Produit-adm.jsx";
+import SupprimerProduit from "./components/gestion-produits/Supprimer-Produit-adm.jsx";
 // const URL = "/siteReact/equipe3-multifd-frontend";
 export const URL_BACKEND = "http://localhost:8080";
 
@@ -48,6 +50,7 @@ function App() {
                         <Route path="produit/:id" element={<Produit/>}/>
                         <Route path="AjouterProduit" element={<AjouterProduit/>}/>
                         <Route path="ModifierProduit/:id" element={<ModifierProduit/>}/>
+                        <Route path="SupprimerProduit/:id" element={<SupprimerProduit/>}/>
                         <Route path="Inscription" element={<Inscription/>}/>
                         <Route path="Connexion" element={<Connexion/>}/>
                         <Route path="GestionUtilisateur" element={<GestionUtilisateurAdm/>}/>
