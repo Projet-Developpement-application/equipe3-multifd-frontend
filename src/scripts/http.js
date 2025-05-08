@@ -32,16 +32,56 @@ export async function fetchProduitParId(id) {
  * Ajoute un nouveau produit au backend
  * @param produit les données du produit à ajouter
  */
+<<<<<<< Updated upstream
 export async function ajouterProduit(produit) {
     console.log(produit);
     produit.disponible = true;
     let nouveau = {
+=======
+// export async function ajouterProduit(produit) {
+//     console.log(produit);
+//     let nouveau = {
+//         nom: produit.nom,
+//         disponible: produit.disponible,
+//         prix: parseInt(produit.prix),
+//         etat: produit.etat,
+//         poids: parseInt(produit.poids),
+//         marque: {nom: produit.marque},
+//         voltage: parseInt(produit.voltage),
+//         amperage: parseInt(produit.amperage),
+//         hp: parseInt(produit.hp),
+//         courant: parseInt(produit.courant),
+//         image: null
+//     };
+//
+//     const response = await fetch(BASE_URL + "/admin/ajouteProduit", {
+//         method: 'POST',
+//         body: JSON.stringify(nouveau),
+//         headers: {
+//             'Content-Type': 'application/json',
+//             'Authorization': 'Bearer ' + sessionStorage.getItem("token")
+//         }
+//     });
+//     if (!response.ok) {
+//         throw new Error("Erreur lors de l'ajout du produit.");
+//     }
+//
+//     return response;
+// }
+function construiForm(produit) {
+    const formData = new FormData();
+    let produitSansImage = {
+>>>>>>> Stashed changes
         nom: produit.nom,
         disponible: true,
         prix: parseInt(produit.prix),
         etat: 'NEUF',
         poids: parseInt(produit.poids),
+<<<<<<< Updated upstream
         marque: {nom: produit.marque},
+=======
+        marque: {id: produit.marque.id, nom: produit.marque.nom},
+>>>>>>> Stashed changes
         voltage: parseInt(produit.voltage),
         amperage: parseInt(produit.amperage),
         hp: parseInt(produit.hp),
@@ -113,8 +153,63 @@ export async function connexion(formData, setError) {
     }
 
     const data = await response.json();
+<<<<<<< Updated upstream
     sessionStorage.setItem("token", data)
     return true;
 
 }
 
+=======
+    sessionStorage.setItem("token", data.bearer);
+    sessionStorage.setItem("mail", data.mail);
+    sessionStorage.setItem("role", data.role);
+    sessionStorage.setItem("isConnected", true);
+    sessionStorage.setItem("nom", data.nom);
+    sessionStorage.setItem("prenom", data.prenom);
+    return data;
+}
+
+
+export async function fetchAllMarque() {
+    const response = await fetch(BASE_URL + "/marques", {
+        method: "GET",
+        headers: {"Content-type": "application/json"}
+    });
+    if (!response.ok) {
+        throw new Error("Erreur lors du chargement des marques.");
+    }
+    return await response.json();
+}
+
+
+export async function fetchAllUtilisateurs() {
+    const response = await fetch(BASE_URL + "/admin/utilisateurs", {
+        method: "GET",
+        headers: {
+            "Content-type": "application/json",
+
+        }
+    });
+    if (!response.ok) {
+        throw new Error("Erreur lors du chargement des utilisateurs.");
+    }
+    return await response.json();
+}
+
+
+export async function AjouteProduitPanier(produit) {
+    const response = await fetch(BASE_URL + "/ajouterProduitPanier", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + sessionStorage.getItem("token")
+        },
+        body: JSON.stringify(produit)
+    });
+
+    if (!response.ok) {
+        throw new Error("Erreur lors de l'ajout au panier.");
+    }
+}
+
+>>>>>>> Stashed changes

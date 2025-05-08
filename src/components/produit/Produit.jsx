@@ -1,4 +1,10 @@
+<<<<<<< Updated upstream
 import {Link} from "react-router-dom";
+=======
+import { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
+import {AjouteProduitPanier, fetchProduitParId} from "../../scripts/http.js";
+>>>>>>> Stashed changes
 
 export default function Produit() {
     return (
@@ -69,11 +75,20 @@ export default function Produit() {
                                 <button className="btn  btn-dark ms-2">
                                     <i className="bi bi-cart"></i> Ajouter au panier
                                 </button>
+<<<<<<< Updated upstream
                                 {/* Quand le produit est ajouté au Panier faire apparaître un pop-up,
                                 ou un moyen de confirmation que l'ajout au panier*/}
 
 
                             </div>
+=======
+                            </Link>
+                            <button onClick={()=>
+                                AjouteProduitPanier(produit)
+                            } className="btn btn-dark ms-2">
+                                <i className="bi bi-cart"></i> Ajouter au panier
+                            </button>
+>>>>>>> Stashed changes
                         </div>
                     </div>
                 </div>

@@ -9,7 +9,18 @@ import Inscription from "./components/authentification/Inscription.jsx";
 import GestionProduit from "./components/gestion-produits/Gestion-Produit-adm.jsx";
 import {ProduitProvider} from "./assets/contexte/ProduitContext.jsx";
 import Connexion from "./components/authentification/Connexion.jsx";
+<<<<<<< Updated upstream
 
+=======
+import {UtilisateurContext} from "./assets/contexte/UtilisateurContext.jsx";
+import GestionUtilisateurAdm from "./components/gestion-comptes/Gestion-utilisateur-adm.jsx";
+import Catalogue from "./components/catalogue/Catalogue.jsx";
+import {useState} from "react";
+import ModifierProduit from "./components/gestion-produits/Modifier-Produit-adm.jsx";
+import SupprimerProduit from "./components/gestion-produits/Supprimer-Produit-adm.jsx";
+// const URL = "/siteReact/equipe3-multifd-frontend";
+export const URL_BACKEND = "http://localhost:8080";
+>>>>>>> Stashed changes
 
 function App() {
     return (
@@ -24,11 +35,14 @@ function App() {
                                 <Catalogue/>
                             </>
                         }/>
+<<<<<<< Updated upstream
                         <Route path="/" element={
                             <>
                                 <Catalogue/>
                             </>
                         }/>
+=======
+>>>>>>> Stashed changes
 
 
                     <Route path="compte" element={<Compte />} />
