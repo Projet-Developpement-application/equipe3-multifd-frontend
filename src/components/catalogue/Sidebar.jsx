@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import FiltreMulti from "./Filtres/FiltreMulti.jsx";
 import FiltreRadio from "./Filtres/FiltreRadio.jsx";
+import {fetchAllMarque} from "../../scripts/http.js";
 
 const Sidebar = ({ouvert, fermeture, filtres, setFiltres}) => {
     // const [amperageOuvert, setAmperageOuvert] = useState(false);
@@ -16,13 +17,8 @@ const Sidebar = ({ouvert, fermeture, filtres, setFiltres}) => {
 
     async function fetchMarques() {
         try {
-            const data = await fetch("http://172.20.46.45:8080/backend-projet-prod/marques", {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            });
-            const json = await data.json();
+
+            const json = await fetchAllMarque();
             setMarques(json);
         } catch (err) {
             console.error("Erreur filtrage:", err);

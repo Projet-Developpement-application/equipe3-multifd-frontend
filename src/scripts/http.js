@@ -1,5 +1,5 @@
-const BASE_URL = "http://172.20.46.45:8080/backend-projet-prod";
-//const BASE_URL = "http://localhost:8080";
+// const BASE_URL = "http://172.20.46.45:8080/backend-projet-prod";
+const BASE_URL = "http://localhost:8080";
 
 export async function fetchTexteClient() {
     const response = await fetch(BASE_URL + "/user/produits");
@@ -199,19 +199,6 @@ export async function connexion(formData, setError) {
     return data; // Retourne les informations utilisateur
 }
 
-export function fetchProduitFilter(motCle) {
-    return fetch(BASE_URL + "/rechercheProduit?nomFiltre=" + motCle, {
-        method: "GET",
-        headers: {"Content-type": "application/json"}
-    })
-        .then((r) => {
-            if (r.ok) {
-                return r.json();
-            } else {
-                throw new Error("Erreur réseau");
-            }
-        });
-}
 
 export async function fetchAllMarque() {
     const response = await fetch(BASE_URL + "/marques", {

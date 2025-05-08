@@ -1,5 +1,4 @@
-import React, {useState} from "react";
-import {fetchProduitFilter} from "../../scripts/http.js";
+import React from "react";
 
 export default function ZoneRecherhe({onFilterClick,filtres, setFiltres}) {
 

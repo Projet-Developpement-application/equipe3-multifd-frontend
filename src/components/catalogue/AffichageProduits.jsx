@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import image from "../../assets/generique.jpg"
 import {fetchAllProduits} from "../../scripts/http.js";
 import {UtilisateurContext} from "../../assets/contexte/UtilisateurContext.jsx";
+import {URL_BACKEND} from "../../App.jsx";
 
 export default function AffichageProduits({filtres}) {
 
@@ -68,10 +69,14 @@ export default function AffichageProduits({filtres}) {
                                         <div key={product.id} className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
                                                 <div
                                                     className="card h-100 border-1 rounded shadow-lg product-card-hover">
-                                                    <Link to={`http://172.20.46.30/siteReact/equipe3-multifd-frontend/produit/${product.id}`}
+                                                    <Link to={`produit/${product.id}`}
                                                           className="text-decoration-none text-dark">
-                                                        <img src={image} className="card-img-top rounded-top"
-                                                             alt={product.nom}/>
+                                                        {product.imagePath != null ? (
+                                                            <img src={`${URL_BACKEND}/uploads/images/${product.imagePath}`} className="card-img-top rounded-top"
+                                                                 alt={product.nom}/>
+                                                        ):<img src={image} className="card-img-top rounded-top"
+                                                               alt={product.nom}/>}
+
                                                         <div className="card-body d-flex flex-column">
                                                             <h5 className="card-title">{product.nom}</h5>
                                                             <p className="card-text">{product.description}</p>

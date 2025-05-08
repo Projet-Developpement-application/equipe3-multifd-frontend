@@ -12,7 +12,8 @@ import GestionUtilisateurAdm from "./components/gestion-comptes/Gestion-utilisat
 import Catalogue from "./components/catalogue/Catalogue.jsx";
 import {useState} from "react";
 import ModifierProduit from "./components/gestion-produits/Modifier-Produit-adm.jsx";
-
+// const URL = "/siteReact/equipe3-multifd-frontend";
+export const URL_BACKEND = "http://localhost:8080";
 
 function App() {
     const [utilisateur, setUtilisateur] = useState({
@@ -21,6 +22,7 @@ function App() {
         prenom: null,
         nom: null,
     })
+
 
 
     return (
@@ -35,20 +37,20 @@ function App() {
                                 <Catalogue/>
                             </>
                         }/>
-                        <Route path="siteReact/equipe3-multifd-frontend/" element={
-                            <>
-                                <Catalogue/>
-                            </>
-                        }/>
+                        {/*<Route path="/" element={*/}
+                        {/*    <>*/}
+                        {/*        <Catalogue/>*/}
+                        {/*    </>*/}
+                        {/*}/>*/}
 
-                        <Route path="siteReact/equipe3-multifd-frontend/compte" element={<Compte/>}/>
-                        <Route path="siteReact/equipe3-multifd-frontend/panier" element={<DevisForm/>}/>
-                        <Route path="siteReact/equipe3-multifd-frontend/produit/:id" element={<Produit/>}/>
-                        <Route path="siteReact/equipe3-multifd-frontend/AjouterProduit" element={<AjouterProduit/>}/>
-                        <Route path="siteReact/equipe3-multifd-frontend/ModifierProduit/:id" element={<ModifierProduit/>}/>
-                        <Route path="siteReact/equipe3-multifd-frontend/Inscription" element={<Inscription/>}/>
-                        <Route path="siteReact/equipe3-multifd-frontend/Connexion" element={<Connexion/>}/>
-                        <Route path="siteReact/equipe3-multifd-frontend/GestionUtilisateur" element={<GestionUtilisateurAdm/>}/>
+                        <Route path="compte" element={<Compte/>}/>
+                        <Route path="panier" element={<DevisForm/>}/>
+                        <Route path="produit/:id" element={<Produit/>}/>
+                        <Route path="AjouterProduit" element={<AjouterProduit/>}/>
+                        <Route path="ModifierProduit/:id" element={<ModifierProduit/>}/>
+                        <Route path="Inscription" element={<Inscription/>}/>
+                        <Route path="Connexion" element={<Connexion/>}/>
+                        <Route path="GestionUtilisateur" element={<GestionUtilisateurAdm/>}/>
 
 
                     </Routes>

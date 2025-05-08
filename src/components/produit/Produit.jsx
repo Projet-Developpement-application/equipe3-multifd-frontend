@@ -90,7 +90,7 @@ export default function Produit() {
                         </div>
 
                         <div className="d-flex justify-content-end w-100 w-lg-75 mt-5 mt-lg-5">
-                            <Link to={URL+"/"} className="text-decoration-none">
+                            <Link to={"/"} className="text-decoration-none">
                                 <button className="btn btn-outline-dark ms-2">
                                     <i className="bi bi-arrow-left"></i> Retour à la boutique
                                 </button>
