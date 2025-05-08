@@ -7,7 +7,7 @@ const AjouterProduit = () => {
     const etats = ["NEUF", "OCCASION", "RECONDITIONNE"];
     const [marques, setMarques] = useState([]);
     const [produit, setProduit] = useState({
-        nom: '', disponibilite: 'Disponible', prix: '', etat: etats[0], poids: '',
+        nom: '', disponible: 'Disponible', prix: '', etat: etats[0], poids: '',
         voltage: '', hp: '', amperage: '', courant: '', marque: '', image: null, imagePreview: null
     });
     const [errors, setErrors] = useState({});
@@ -54,7 +54,7 @@ const AjouterProduit = () => {
     const handleSubmit = e => {
         e.preventDefault();
         if (validate()) {
-            const toSend = { ...produit, disponibilite: produit.disponibilite === 'Disponible' };
+            const toSend = { ...produit, disponible: produit.disponibilite === 'Disponible' };
             ajouterProduit(toSend).then(() => alert("Produit ajouté !")).catch(err => {
                 alert("Erreur lors de l'enregistrement du produit.");
                 console.log(err);

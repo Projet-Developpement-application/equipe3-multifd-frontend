@@ -95,7 +95,6 @@ export async function modifierProduit(id, produit) {
         courant: produit.courant
     };
     console.log(produit);
-    //console.log(produitModifer);
     const response = await fetch(BASE_URL + "/admin/modifier/" + id, {
         method: 'PUT',
         body: JSON.stringify(nouveau),

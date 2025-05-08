@@ -19,7 +19,7 @@ const ModifierProduit = () => {
                 ...data,
                 image: null,
                 imagePreview: data.imageUrl,
-                disponibilite: data.disponibilite ? 'Disponible' : 'Pas en stock'
+                disponible: data.disponibilite ? 'Disponible' : 'Pas en stock'
             });
         });
     }, [id]);
@@ -62,7 +62,7 @@ const ModifierProduit = () => {
     const handleSubmit = e => {
         e.preventDefault();
         if (validate()) {
-            const toSend = { ...produit, disponibilite: produit.disponibilite === 'Disponible' };
+            const toSend = { ...produit, disponible: produit.disponibilite === 'Disponible' };
             modifierProduit(id, toSend).then(() => alert("Produit modifié !")).catch(err => {
                 alert("Erreur lors de l'enregistrement du produit.");
                 console.log(err);
