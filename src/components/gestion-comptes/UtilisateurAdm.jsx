@@ -15,7 +15,7 @@ export default function UtilisateurAdm() {
         fetchUtilisateur(mail)
             .then(data => {
                 setFormData(data);
-                setInitialData(data); // Stocke les données initiales
+                setInitialData(data);
             })
             .catch(err => {
                 console.error("Erreur lors de la récupération de l'utilisateur :", err);
@@ -31,7 +31,7 @@ export default function UtilisateurAdm() {
             ];
             setDevis(fakeDevis);
             setIsFetchingDevis(false);
-        }, 1000);
+        }, 3000); //hihihihihih
     }, [mail]);
 
     const handleChange = (e) => {
@@ -43,7 +43,7 @@ export default function UtilisateurAdm() {
         modifierUtilisateur(mail, formData)
             .then(() => {
                 alert("Modifications sauvegardées avec succès !");
-                setInitialData(formData); // Met à jour les données initiales
+                setInitialData(formData);
             })
             .catch(err => {
                 console.error("Erreur lors de la sauvegarde :", err);
@@ -52,13 +52,13 @@ export default function UtilisateurAdm() {
     };
 
     const handleCancel = () => {
-        setFormData(initialData); // Réinitialise les données du formulaire
+        setFormData(initialData);
     };
 
     const handleBack = () => {
         if (JSON.stringify(formData) !== JSON.stringify(initialData)) {
-            if (window.confirm("Les modifications ne sont pas enregistrées. Voulez-vous vraiment quitter ?")) {
-                navigate(-1); // Retourne à la page précédente
+            if (window.confirm("Les modifications ne sont pas enregistrées. Voulez-vous vraiment quitter :( ?")) {
+                navigate(-1);
             }
         } else {
             navigate(-1);
@@ -66,6 +66,7 @@ export default function UtilisateurAdm() {
     };
 
     const handleViewDevis = (id) => {
+        //Page n'existe pas encore: voir sprint 3
         navigate(`/devis/${id}`);
     };
 
