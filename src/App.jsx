@@ -14,6 +14,7 @@ import {useState} from "react";
 import ModifierProduit from "./components/gestion-produits/Modifier-Produit-adm.jsx";
 import SupprimerProduitAdm from "./components/gestion-produits/Supprimer-Produit-adm.jsx";
 import SupprimerProduit from "./components/gestion-produits/Supprimer-Produit-adm.jsx";
+import UtilisateurAdm from "./components/gestion-comptes/UtilisateurAdm.jsx";
 // const URL = "/siteReact/equipe3-multifd-frontend";
 export const URL_BACKEND = "http://localhost:8080";
 
@@ -54,7 +55,7 @@ function App() {
                         <Route path="Inscription" element={<Inscription/>}/>
                         <Route path="Connexion" element={<Connexion/>}/>
                         <Route path="GestionUtilisateur" element={<GestionUtilisateurAdm/>}/>
-
+                        <Route path="utilisateur/:mail" element={<UtilisateurAdm />} />
 
                     </Routes>
 
