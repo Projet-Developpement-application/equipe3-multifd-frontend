@@ -1,5 +1,6 @@
 // ProduitForm.jsx
 import React from 'react';
+import {Link} from "react-router-dom";
 
 const ProduitForm = ({ produitImage, produit, marques, etats, errors, handleChange,handleChangeMarque, handleImageChange, handleSubmit, isEditMode }) => {
     return (
@@ -64,14 +65,16 @@ const ProduitForm = ({ produitImage, produit, marques, etats, errors, handleChan
 
                             <div className="col-md-6 mb-3">
                                 <label className="form-label">Marque</label>
-                                <select name="marque" value={produit.marque.nom} onChange={handleChangeMarque} className="form-select">
+                                <select name="marque" value={produit.marque.nom} onChange={handleChangeMarque}
+                                        className="form-select">
                                     {marques.map(m => <option key={m.id} value={m.nom}>{m.nom}</option>)}
                                 </select>
                             </div>
 
                             <div className="col-md-6 mb-4">
                                 <label className="form-label">Disponibilité</label>
-                                <select name="disponibilite" value={produit.disponibilite} onChange={handleChange} className="form-select">
+                                <select name="disponibilite" value={produit.disponibilite} onChange={handleChange}
+                                        className="form-select">
                                     <option value="Disponible">Disponible</option>
                                     <option value="Pas en stock">Pas en stock</option>
                                 </select>
@@ -94,12 +97,17 @@ const ProduitForm = ({ produitImage, produit, marques, etats, errors, handleChan
 
                             <div className="col-md-6 mb-3">
                                 <label className="form-label">État</label>
-                                <select name="etat" value={produit.etat} onChange={handleChange} className="form-select">
+                                <select name="etat" value={produit.etat} onChange={handleChange}
+                                        className="form-select">
                                     {etats.map((etat, idx) => <option key={idx} value={etat}>{etat}</option>)}
                                 </select>
                             </div>
 
-                            <div className="col-12 d-flex justify-content-end">
+                            <div className="col-12 d-flex justify-content-between">
+                                {/* Bouton Retour aligné à gauche et bouton Modifier aligné à droite */}
+                                <Link to="/" className="btn btn-dark">
+                                    Retour
+                                </Link>
                                 <button type="submit" className="btn btn-dark">
                                     {isEditMode ? 'Modifier' : 'Enregistrer'}
                                 </button>
