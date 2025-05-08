@@ -56,10 +56,7 @@ export default function GestionUtilisateursAdm() {
 
     const handleChange = (e, mail) => {
         const {name, value} = e.target;
-        if (name === "role" && value === "ADMIN") {
-            const confirmation = window.confirm("Êtes-vous sûr de vouloir rendre cet utilisateur administrateur ?");
-            if (!confirmation) return;
-        }
+
         setUsers(users.map(user => user.mail === mail ? {...user, [name]: value} : user));
     };
 
@@ -76,73 +73,69 @@ export default function GestionUtilisateursAdm() {
             {currentUsers.map(user => (<div key={user.mail}
                                             className="row border border-dark p-3 m-4 bg-light rounded">
                 {editingUser === user.mail ? (<>
-                    <h5 className="mb-4 mt-1">Modification des informations</h5>
-                    <div className="col-12">
-                        <div className="row mb-3">
-                            <div className="col-md-6">
-                                <label><strong>Courriel</strong></label>
-                                <input type="email"
-                                       name="mail"
-                                       className="form-control"
-                                       value={user.mail}
-                                       disabled/></div>
-                            <div className="col-md-6">
-                                <label><strong>Rôle</strong></label>
-                                <select name="role"
-                                        className="form-control"
-                                        value={user.role}
-                                        onChange={(e) => handleChange(e, user.mail)}>
-                                    <option value="CLIENT">Client</option>
-                                    <option value="ADMIN">Admin</option>
-                                </select></div>
-                        </div>
-                        <div className="row">
-                            <div className="col-md-6 mb-3">
-                                <label><strong>Prénom</strong></label>
-                                <input type="text"
-                                       name="prenom"
-                                       className="form-control"
-                                       value={user.prenom}
-                                       onChange={(e) => handleChange(e, user.mail)}/>
+                        <h5 className="mb-4 mt-1">Modification des informations</h5>
+                        <div className="col-12">
+                            <div className="row mb-3">
+                                <div className="col-md-6">
+                                    <label><strong>Courriel</strong></label>
+                                    <input type="email"
+                                           name="mail"
+                                           className="form-control"
+                                           value={user.mail}
+                                           disabled/>
+                                </div>
+                                <div className="col-md-6 mb-3">
+                                    <label><strong>Entreprise</strong></label>
+                                    <input type="text"
+                                           name="entreprise"
+                                           className="form-control"
+                                           value={user.entreprise}
+                                           onChange={(e) => handleChange(e, user.mail)}/>
+                                </div>
                             </div>
-                            <div className="col-md-6 mb-3">
-                                <label><strong>Nom</strong></label>
-                                <input type="text" name="nom"
-                                       className="form-control"
-                                       value={user.nom}
-                                       onChange={(e) => handleChange(e, user.mail)}/>
+                            <div className="row mb-3">
+                                <div className="col-md-6 mb-3">
+                                    <label><strong>Prénom</strong></label>
+                                    <input type="text"
+                                           name="prenom"
+                                           className="form-control"
+                                           value={user.prenom}
+                                           onChange={(e) => handleChange(e, user.mail)}/>
+                                </div>
+                                <div className="col-md-6 mb-3">
+                                    <label><strong>Nom</strong></label>
+                                    <input type="text" name="nom"
+                                           className="form-control"
+                                           value={user.nom}
+                                           onChange={(e) => handleChange(e, user.mail)}/>
+                                </div>
                             </div>
+
                         </div>
-                        <div className="row">
-                            <div className="col-md-6 mb-3">
-                                <label><strong>Entreprise</strong></label>
-                                <input type="text"
-                                       name="entreprise"
-                                       className="form-control"
-                                       value={user.entreprise}
-                                       onChange={(e) => handleChange(e, user.mail)}/>
-                            </div>
+                        <div className="col-12 d-flex justify-content-end">
+
+                            <button className="btn btn-secondary mx-2" onClick={handleCancel}> Annuler</button>
+                            <button className="btn btn-dark mx-2" onClick={() => handleSave(user.mail)}> Sauvegarder
+                            </button>
                         </div>
-                    </div>
-                    <div className="col-12 d-flex justify-content-end">
-                        <button className="btn btn-secondary mx-2" onClick={handleCancel}> Annuler
-                        </button>
-                        <button className="btn btn-dark mx-2"
-                                onClick={() => handleSave(user.mail)}> Sauvegarder
-                        </button>
-                    </div>
-                </>) : (<>
-                    <div className="col-12"><h5 className="mb-3">{user.prenom} {user.nom}</h5>
-                        <h6 className="mb-3">{user.mail}</h6></div>
-                    <div className="col-12 d-flex justify-content-end">
-                        <button className="btn btn-dark mx-2" onClick={() => handleEdit(user)}> Modifier
-                        </button>
-                        {user.mail === utilisateur.mail ? (
-                            <button className="btn btn-danger mx-2" disabled> Supprimer </button>) : (
-                            <button className="btn btn-danger mx-2"
-                                    onClick={() => alert("Supprimer utilisateur avec mail : " + user.mail)}> Supprimer </button>)}
-                    </div>
-                </>)}                        </div>))}
+
+                    </>) :
+                    (<>
+                        <div className="col-12"><h5 className="mb-3">{user.prenom} {user.nom}</h5>
+                            <h6 className="mb-3">{user.mail}</h6></div>
+
+                        <div className="col-12 d-flex justify-content-end">
+                            <button className="btn btn-dark mx-2" onClick={() => handleEdit(user)}> Modifier</button>
+
+                            {user.mail === utilisateur.mail ? (
+                                <button className="btn btn-danger mx-2" disabled> Supprimer </button>) : (
+                                <button className="btn btn-danger mx-2"
+                                        onClick={() => alert("Supprimer utilisateur avec mail : " + user.mail)}> Supprimer
+                                </button>
+                            )}
+                        </div>
+                    </>)}
+            </div>))}
 
 
             {/* Pagination */}
@@ -155,14 +148,15 @@ export default function GestionUtilisateursAdm() {
                         {[...Array(totalPages)].map((_, index) => (
                             <li key={index} className={`page-item ${currentPage === index + 1 && "active"}`}>
                                 <button className="page-link"
-                                        onClick={() => setCurrentPage(index + 1)}>                                            {index + 1}                                        </button>
+                                        onClick={() => setCurrentPage(index + 1)}>{index + 1}</button>
                             </li>))}
+
                         <li className={`page-item ${currentPage === totalPages && "disabled"}`}>
-                            <button className="page-link"
-                                    onClick={() => setCurrentPage(totalPages)}>&raquo;</button>
+                            <button className="page-link" onClick={() => setCurrentPage(totalPages)}>&raquo;</button>
                         </li>
                     </ul>
                 </nav>
             </div>
-        </>)}        </div>);
+        </>)}
+    </div>);
 }
