@@ -21,6 +21,11 @@ const AjouterProduit = () => {
         setProduit(p => ({ ...p, [name]: type === 'checkbox' ? checked : value }));
         setErrors(prev => ({ ...prev, [name]: null }));
     };
+    const handleChangeMarque = e => {
+        const { value } = e.target;
+        setProduit(p => ({ ...p, marque: { nom: value } }));
+        setErrors(prev => ({ ...prev, marque: null }));
+    };
 
     const handleImageChange = e => {
         const file = e.target.files[0];
@@ -69,6 +74,7 @@ const AjouterProduit = () => {
             etats={etats}
             errors={errors}
             handleChange={handleChange}
+            handleChangeMarque={handleChangeMarque}
             handleImageChange={handleImageChange}
             handleSubmit={handleSubmit}
             isEditMode={false}

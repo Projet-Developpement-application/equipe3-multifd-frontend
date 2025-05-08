@@ -29,6 +29,11 @@ const ModifierProduit = () => {
         setProduit(p => ({ ...p, [name]: value }));
         setErrors(prev => ({ ...prev, [name]: null }));
     };
+    const handleChangeMarque = e => {
+        const { value } = e.target;
+        setProduit(p => ({ ...p, marque: { nom: value } }));
+        setErrors(prev => ({ ...prev, marque: null }));
+    };
 
     const handleImageChange = e => {
         const file = e.target.files[0];
@@ -62,7 +67,8 @@ const ModifierProduit = () => {
     const handleSubmit = e => {
         e.preventDefault();
         if (validate()) {
-            const toSend = { ...produit, disponible: produit.disponibilite === 'Disponible' };
+            console.log(produit.marque);
+            const toSend = { ...produit, disponible: produit.disponibilite === 'Disponible'};
             modifierProduit(id, toSend).then(() => alert("Produit modifié !")).catch(err => {
                 alert("Erreur lors de l'enregistrement du produit.");
                 console.log(err);
@@ -81,6 +87,7 @@ const ModifierProduit = () => {
                 etats={etats}
                 errors={errors}
                 handleChange={handleChange}
+                handleChangeMarque={handleChangeMarque}
                 handleImageChange={handleImageChange}
                 handleSubmit={handleSubmit}
                 isEditMode={true}

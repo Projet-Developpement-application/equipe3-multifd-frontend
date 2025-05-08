@@ -1,7 +1,7 @@
 // ProduitForm.jsx
 import React from 'react';
 
-const ProduitForm = ({ produit, marques, etats, errors, handleChange, handleImageChange, handleSubmit, isEditMode }) => {
+const ProduitForm = ({ produit, marques, etats, errors, handleChange,handleChangeMarque, handleImageChange, handleSubmit, isEditMode }) => {
     return (
         <div className="container my-5">
             <form onSubmit={handleSubmit} className="border p-4 bg-light rounded">
@@ -64,7 +64,7 @@ const ProduitForm = ({ produit, marques, etats, errors, handleChange, handleImag
 
                             <div className="col-md-6 mb-3">
                                 <label className="form-label">Marque</label>
-                                <select name="marque" value={produit.marque} onChange={handleChange} className="form-select">
+                                <select name="marque" value={produit.marque.nom} onChange={handleChangeMarque} className="form-select">
                                     {marques.map(m => <option key={m.id} value={m.nom}>{m.nom}</option>)}
                                 </select>
                             </div>
