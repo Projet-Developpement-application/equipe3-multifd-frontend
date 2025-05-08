@@ -45,6 +45,7 @@ export async function fetchProduitParId(id) {
  * @param produit les données du produit à ajouter
  */
 export async function ajouterProduit(produit) {
+    console.log(produit);
     let nouveau = {
         nom: produit.nom,
         disponible: produit.disponible,
@@ -55,7 +56,8 @@ export async function ajouterProduit(produit) {
         voltage: parseInt(produit.voltage),
         amperage: parseInt(produit.amperage),
         hp: parseInt(produit.hp),
-        courant: parseInt(produit.courant)
+        courant: parseInt(produit.courant),
+        image:null
     };
 
     const response = await fetch(BASE_URL + "/admin/ajouteProduit", {

@@ -86,7 +86,6 @@ export default function AffichageProduits({filtres}) {
 
                                                     {utilisateur.role === "CLIENT" || utilisateur.role === "ADMIN" && (
                                                     <div className="card-footer d-flex flex-column">
-
                                                         <div className="mt-auto">
                                                             {utilisateur.role === "CLIENT" && (
                                                                 <button className="btn btn-dark w-100">Ajouter au
@@ -135,7 +134,6 @@ export default function AffichageProduits({filtres}) {
                     // en cas d'erreur de fetch avec le backend
                     <div className="alert alert-danger">{error.message}</div>
             }
-
         </>
     );
 };
