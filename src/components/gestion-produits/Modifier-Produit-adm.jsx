@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import ProduitForm from "./Produit-Form-adm.jsx";
 import {fetchAllMarque,fetchProduitParId, modifierProduit} from "../../scripts/http.js";
+import {URL_BACKEND} from "../../App.jsx";
 
 
 const ModifierProduit = () => {
@@ -68,7 +69,11 @@ const ModifierProduit = () => {
         e.preventDefault();
         if (validate()) {
             console.log(produit.marque);
+            console.log(produit.image);
+            console.log(produit.imagePreview);
             const toSend = { ...produit, disponible: produit.disponibilite === 'Disponible'};
+
+
             modifierProduit(id, toSend).then(() => alert("Produit modifié !")).catch(err => {
                 alert("Erreur lors de l'enregistrement du produit.");
                 console.log(err);
@@ -82,6 +87,7 @@ const ModifierProduit = () => {
         <div>
             <h1 className={"text-center"}>Modifier {produit.nom}</h1>
             <ProduitForm
+                produitImage={produit.imagePath ?`${URL_BACKEND}/uploads/images/${produit.imagePath}`:null}
                 produit={produit}
                 marques={marques}
                 etats={etats}
