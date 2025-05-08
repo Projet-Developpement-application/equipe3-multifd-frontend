@@ -56,10 +56,7 @@ export default function GestionUtilisateursAdm() {
 
     const handleChange = (e, mail) => {
         const {name, value} = e.target;
-        if (name === "role" && value === "ADMIN") {
-            const confirmation = window.confirm("Êtes-vous sûr de vouloir rendre cet utilisateur administrateur ?");
-            if (!confirmation) return;
-        }
+
         setUsers(users.map(user => user.mail === mail ? {...user, [name]: value} : user));
     };
 
