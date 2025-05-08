@@ -74,6 +74,26 @@ export async function fetchProduitParId(id) {
 //
 //     return response;
 // }
+function construiForm(produit){
+    const formData = new FormData();
+    let produitSansImage = {
+        nom: produit.nom,
+        disponible: produit.disponible,
+        prix: parseInt(produit.prix),
+        etat: produit.etat,
+        poids: parseInt(produit.poids),
+        marque: {id:produit.marque.id, nom: produit.marque.nom},
+        voltage: parseInt(produit.voltage),
+        amperage: parseInt(produit.amperage),
+        hp: parseInt(produit.hp),
+        courant: parseInt(produit.courant)
+    };
+    console.log(produitSansImage);
+    formData.append("produit", new Blob([JSON.stringify(produitSansImage)], {type: "application/json"}));
+    formData.append("image", produit.image);
+    console.log(formData.get("produit"))
+    return formData;
+}
 
 /**
  * Modifie un produit existant par ID
@@ -81,26 +101,12 @@ export async function fetchProduitParId(id) {
  * @param produit les nouvelles données du produit
  */
 export async function modifierProduit(id, produit) {
-
-    let nouveau = {
-        nom: produit.nom,
-        disponible: produit.disponible,
-        prix: parseInt(produit.prix),
-        etat: produit.etat,
-        poids: parseInt(produit.poids),
-        marque: {nom: produit.marque},
-        voltage: parseInt(produit.voltage),
-        amperage: parseInt(produit.amperage),
-        hp: parseInt(produit.hp),
-        courant: parseInt(produit.courant),
-        image: null
-    };
-    console.log(produit);
+    const data = construiForm(produit);
+    console.log(data);
     const response = await fetch(BASE_URL + "/admin/modifier/" + id, {
-        method: 'PUT',
-        body: JSON.stringify(produit),
+        method: 'POST',
+        body: data,
         headers: {
-            'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + sessionStorage.getItem("token")
         }
     });
@@ -111,24 +117,10 @@ export async function modifierProduit(id, produit) {
 }
 
 export async function ajouterProduit(produit) {
-    const formData = new FormData();
-    let produitSansImage = {
-        nom: produit.nom,
-        disponible: produit.disponible,
-        prix: parseInt(produit.prix),
-        etat: produit.etat,
-        poids: parseInt(produit.poids),
-        marque: {nom: produit.marque},
-        voltage: parseInt(produit.voltage),
-        amperage: parseInt(produit.amperage),
-        hp: parseInt(produit.hp),
-        courant: parseInt(produit.courant)
-    };
-    formData.append("produit", new Blob([JSON.stringify(produitSansImage)], {type: "application/json"}));
-    formData.append("image", produit.image);
+    const data = construiForm(produit);
     const response = await fetch(BASE_URL + "/admin/ajouteProduit", {
         method: 'POST',
-        body: formData,
+        body: data,
         headers: {'Authorization': 'Bearer ' + sessionStorage.getItem("token")}
     });
     if (!response.ok) {
