@@ -1,15 +1,15 @@
 // ProduitForm.jsx
 import React from 'react';
 
-const ProduitForm = ({ produit, marques, etats, errors, handleChange,handleChangeMarque, handleImageChange, handleSubmit, isEditMode }) => {
+const ProduitForm = ({ produitImage, produit, marques, etats, errors, handleChange,handleChangeMarque, handleImageChange, handleSubmit, isEditMode }) => {
     return (
         <div className="container my-5">
             <form onSubmit={handleSubmit} className="border p-4 bg-light rounded">
                 <div className="row">
                     <div className="col-md-4 text-center mb-3">
-                        {produit.imagePreview ? (
+                        {produit.imagePreview || produitImage ? (
                             <img
-                                src={produit.imagePreview}
+                                src={produit.imagePreview || produitImage}
                                 alt="Prévisualisation"
                                 className="img-fluid rounded mb-2"
                                 style={{
