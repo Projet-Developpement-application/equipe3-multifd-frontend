@@ -10,7 +10,7 @@ import Connexion from "./components/authentification/Connexion.jsx";
 import {UtilisateurContext} from "./assets/contexte/UtilisateurContext.jsx";
 import GestionUtilisateurAdm from "./components/gestion-comptes/Gestion-utilisateur-adm.jsx";
 import Catalogue from "./components/catalogue/Catalogue.jsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import ModifierProduit from "./components/gestion-produits/Modifier-Produit-adm.jsx";
 import SupprimerProduitAdm from "./components/gestion-produits/Supprimer-Produit-adm.jsx";
 import SupprimerProduit from "./components/gestion-produits/Supprimer-Produit-adm.jsx";
@@ -24,9 +24,18 @@ function App() {
         mail: null,
         prenom: null,
         nom: null,
-    })
+    });
 
-
+    useEffect(()=>{
+        if(sessionStorage.getItem("isConnected") === "true"){
+            setUtilisateur({
+                role: sessionStorage.getItem("role"),
+                mail: sessionStorage.getItem("mail"),
+                prenom: sessionStorage.getItem("prenom"),
+                nom: sessionStorage.getItem("nom")
+            })
+        }
+    },[setUtilisateur])
 
     return (
         <>
@@ -40,11 +49,6 @@ function App() {
                                 <Catalogue/>
                             </>
                         }/>
-                        {/*<Route path="/" element={*/}
-                        {/*    <>*/}
-                        {/*        <Catalogue/>*/}
-                        {/*    </>*/}
-                        {/*}/>*/}
 
                         <Route path="compte" element={<Compte/>}/>
                         <Route path="panier" element={<DevisForm/>}/>
