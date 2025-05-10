@@ -69,6 +69,8 @@ const ProduitForm = ({ produitImage, produit, marques, etats, errors, handleChan
                                         className="form-select">
                                     {marques.map(m => <option key={m.id} value={m.nom}>{m.nom}</option>)}
                                 </select>
+                                {/*todo rajouter un truc ici pour la marque est vide*/}
+                                {errors.marque && <div className="invalid-feedback">{errors.marque}</div>}
                             </div>
 
                             <div className="col-md-6 mb-4">

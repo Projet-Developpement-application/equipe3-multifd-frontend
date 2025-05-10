@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { fetchAllMarque, ajouterProduit } from '../../scripts/http';
+import React, {useEffect, useState} from 'react';
+import {fetchAllMarque, ajouterProduit} from '../../scripts/http';
 import ProduitForm from "./Produit-Form-adm.jsx";
 
 
@@ -8,30 +8,36 @@ const AjouterProduit = () => {
     const [marques, setMarques] = useState([]);
     const [produit, setProduit] = useState({
         nom: '', disponible: 'Disponible', prix: '', etat: etats[0], poids: '',
-        voltage: '', hp: '', amperage: '', courant: '', marque: '', image: null, imagePreview: null
+        voltage: '', hp: '', amperage: '', courant: '', marque: {nom: ' '}, image: null, imagePreview: null
     });
     const [errors, setErrors] = useState({});
 
     useEffect(() => {
-        fetchAllMarque().then(setMarques).catch(console.error);
+        fetchAllMarque().then(
+            tabMarque => {
+                const tableau = [{id: 0, nom: ' '}, ...tabMarque];
+                setMarques(tableau);
+            }
+        ).catch(console.error);
     }, []);
 
     const handleChange = e => {
-        const { name, value, type, checked } = e.target;
-        setProduit(p => ({ ...p, [name]: type === 'checkbox' ? checked : value }));
-        setErrors(prev => ({ ...prev, [name]: null }));
+        const {name, value, type, checked} = e.target;
+        setProduit(p => ({...p, [name]: type === 'checkbox' ? checked : value}));
+        setErrors(prev => ({...prev, [name]: null}));
     };
     const handleChangeMarque = e => {
-        const { value } = e.target;
-        setProduit(p => ({ ...p, marque: { nom: value } }));
-        setErrors(prev => ({ ...prev, marque: null }));
+        console.log(produit.marque);
+        const {value} = e.target;
+        setProduit(p => ({...p, marque: {nom: value}}));
+        setErrors(prev => ({...prev, marque: null}));
     };
 
     const handleImageChange = e => {
         const file = e.target.files[0];
         if (file) {
-            setProduit(p => ({ ...p, image: file, imagePreview: URL.createObjectURL(file) }));
-            setErrors(prev => ({ ...prev, image: null }));
+            setProduit(p => ({...p, image: file, imagePreview: URL.createObjectURL(file)}));
+            setErrors(prev => ({...prev, image: null}));
         }
     };
 
@@ -50,6 +56,9 @@ const AjouterProduit = () => {
                 } else if (num < 0) {
                     newErrors[field] = 'La valeur ne peut pas être négative.';
                 }
+            }
+            if (produit.marque.nom === ' ') {
+                newErrors.marque = 'La marque est requise.';
             }
         });
         setErrors(newErrors);
