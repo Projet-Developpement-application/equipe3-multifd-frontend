@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { fetchUtilisateur, modifierUtilisateur } from "../../scripts/http.js";
+import React, {useState, useEffect} from "react";
+import {useParams, useNavigate} from "react-router-dom";
+import {fetchUtilisateur, modifierUtilisateur} from "../../scripts/httpClient.js";
 
 export default function UtilisateurAdm() {
-    const { mail } = useParams();
+    const {mail} = useParams();
     const [formData, setFormData] = useState(null);
     const [initialData, setInitialData] = useState(null);
     const [error, setError] = useState(null);
@@ -25,9 +25,9 @@ export default function UtilisateurAdm() {
         setIsFetchingDevis(true);
         setTimeout(() => {
             const fakeDevis = [
-                { id: 1, date: "2023-10-01", montant: 150.0 },
-                { id: 2, date: "2023-09-15", montant: 200.5 },
-                { id: 3, date: "2023-08-30", montant: 99.99 },
+                {id: 1, date: "2023-10-01", montant: 150.0},
+                {id: 2, date: "2023-09-15", montant: 200.5},
+                {id: 3, date: "2023-08-30", montant: 99.99},
             ];
             setDevis(fakeDevis);
             setIsFetchingDevis(false);
@@ -35,8 +35,8 @@ export default function UtilisateurAdm() {
     }, [mail]);
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
+        const {name, value} = e.target;
+        setFormData(prev => ({...prev, [name]: value}));
     };
 
     const handleSave = () => {

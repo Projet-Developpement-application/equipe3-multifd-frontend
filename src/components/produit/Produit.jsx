@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { fetchProduitParId } from "../../scripts/http.js";
+import {ajouteProduitPanier} from "../../scripts/httpClient.js";
 
 export default function Produit() {
     const { id } = useParams();
@@ -27,8 +28,15 @@ export default function Produit() {
     }
 
     if (error) {
-        console.log(produit);
         return <div className="alert alert-danger">{error}</div>;
+    }
+
+    function ajouteProduit(){
+        ajouteProduitPanier(produit.id).then(data=>{
+            if (data === 201){
+                alert("Le produit a été ajouté au panier");
+            }
+        });
     }
 
     return (
@@ -95,7 +103,9 @@ export default function Produit() {
                                     <i className="bi bi-arrow-left"></i> Retour à la boutique
                                 </button>
                             </Link>
-                            <button className="btn btn-dark ms-2">
+                            <button className="btn btn-dark ms-2" onClick={()=>{
+                                    ajouteProduit();
+                            }}>
                                 <i className="bi bi-cart"></i> Ajouter au panier
                             </button>
                         </div>

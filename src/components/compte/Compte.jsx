@@ -2,7 +2,7 @@ import CompteForm from "./Compte-form.jsx";
 import CompteAffichage from "./Compte-affichage.jsx";
 import {useContext, useState} from "react";
 import {UtilisateurContext} from "../../assets/contexte/UtilisateurContext.jsx";
-import {modifierUtilisateur} from "../../scripts/http.js";
+import {modifierUtilisateur} from "../../scripts/httpClient.js";
 
 const Compte = () => {
     const [modeEdition, setModeEdition] = useState(false);

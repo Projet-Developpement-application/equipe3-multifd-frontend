@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import ProduitForm from "./Produit-Form-adm.jsx";
-import {fetchAllMarque,fetchProduitParId, modifierProduit} from "../../scripts/http.js";
+import {fetchAllMarque,fetchProduitParId} from "../../scripts/http.js";
+import {modifierProduit} from "../../scripts/httpAdmin.js";
 import {URL_BACKEND} from "../../App.jsx";
 
 

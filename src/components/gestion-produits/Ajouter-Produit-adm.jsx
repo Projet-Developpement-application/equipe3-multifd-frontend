@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {fetchAllMarque, ajouterProduit} from '../../scripts/http';
+import {fetchAllMarque} from '../../scripts/http';
+import {ajouterProduit} from '../../scripts/httpAdmin.js';
 import ProduitForm from "./Produit-Form-adm.jsx";
+
 
 
 const AjouterProduit = () => {

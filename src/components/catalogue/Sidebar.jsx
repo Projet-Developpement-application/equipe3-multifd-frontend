@@ -4,13 +4,6 @@ import FiltreRadio from "./Filtres/FiltreRadio.jsx";
 import {fetchAllMarque} from "../../scripts/http.js";
 
 const Sidebar = ({ouvert, fermeture, filtres, setFiltres}) => {
-    // const [amperageOuvert, setAmperageOuvert] = useState(false);
-    // const [voltageOuvert, setVoltageOuvert] = useState(false);
-    // const [marqueOuvert, setMarqueOuvert] = useState(false);
-    // const [hpOuvert, setHpOuvert] = useState(false);
-    // const [disponibiliteOuvert, setDisponibiliteOuvert] = useState(false);
-    // const [conditionOuvert, setConditionOuvert] = useState(false);
-    // const [prixOuvert, setPrixOuvert] = useState(false);
 
     const [marques, setMarques] = useState([]);
 
@@ -89,103 +82,62 @@ const Sidebar = ({ouvert, fermeture, filtres, setFiltres}) => {
 
             {/* Voltage */}
             <div className="filter-section mb-4">
-                {/*<div*/}
-                {/*    className="filter-header d-flex justify-content-between align-items-center"*/}
-                {/*    onClick={() => setVoltageOuvert(!voltageOuvert)}*/}
-                {/*>*/}
                 <span>Voltage</span>
-                {/*<i className={`bi ${voltageOuvert ? "bi-chevron-up" : "bi-chevron-down"}`}></i>*/}
-                {/*</div>*/}
-                {/*{voltageOuvert && (*/}
                 <div className="filter-options">
                     {[600, 460, 240, 120].map((v) => (
                         <FiltreMulti key={v} typeFiltre={"voltage"} valeur={v} unite={"V"} toggleFiltre={toggleFiltre}
                                      filtres={filtres}/>
                     ))}
                 </div>
-                {/*)}*/}
+
             </div>
 
             {/* Marque */}
             <div className="filter-section mb-4">
-                {/*<div*/}
-                {/*    className="filter-header d-flex justify-content-between align-items-center"*/}
-                {/*    onClick={() => setMarqueOuvert(!marqueOuvert)}*/}
-                {/*>*/}
                 <span>Marque</span>
-                {/*<i className={`bi ${marqueOuvert ? "bi-chevron-up" : "bi-chevron-down"}`}></i>*/}
-                {/*</div>*/}
-                {/*{marqueOuvert && (*/}
                 <div className="filter-options">
                     {marques.map((marque) => (
                         <FiltreMulti key={marque.nom} typeFiltre={"marques"} valeur={marque.nom}
                                      toggleFiltre={toggleFiltre} filtres={filtres}/>
                     ))}
                 </div>
-                {/*)}*/}
             </div>
 
             {/* HP */}
             <div className="filter-section mb-4">
-                {/*<div*/}
-                {/*    className="filter-header d-flex justify-content-between align-items-center"*/}
-                {/*    onClick={() => setHpOuvert(!hpOuvert)}*/}
-                {/*>*/}
+
                 <span>HP</span>
-                {/*<i className={`bi ${hpOuvert ? "bi-chevron-up" : "bi-chevron-down"}`}></i>*/}
-                {/*</div>*/}
-                {/*{hpOuvert && (*/}
+
                 <div className="filter-options">
                     {[1, 2, 3, 5, 7.5, 10, 15, 20, 40, 50, 100].map((v) => (
                         <FiltreMulti key={v} typeFiltre={"hp"} valeur={v} unite={"hp"} toggleFiltre={toggleFiltre}
                                      filtres={filtres}/>
                     ))}
                 </div>
-                {/*)}*/}
             </div>
 
             {/* Disponibilité */}
             <div className="filter-section mb-4">
-                {/*<div*/}
-                {/*    className="filter-header d-flex justify-content-between align-items-center"*/}
-                {/*    onClick={() => setDisponibiliteOuvert(!disponibiliteOuvert)}*/}
-                {/*>*/}
+
                 <span>Disponibilité</span>
-                {/*<i className={`bi ${disponibiliteOuvert ? "bi-chevron-up" : "bi-chevron-down"}`}></i>*/}
-                {/*</div>*/}
-                {/*{disponibiliteOuvert && (*/}
+
                 <div className="filter-options">
-                    {/*<FiltreRadio type={"disponibilite"} valeur={true} name={"disponibilite"}*/}
-                    {/*             identifiant={"disponible"} motAffiche={"Disponible"}*/}
-                    {/*             toggleFiltre={toggleFiltre} filtres={filtres}/>*/}
-                    {/*<FiltreRadio type={"disponibilite"} valeur={false} name={"disponibilite"}*/}
-                    {/*             identifiant={"indisponible"} motAffiche={"Indisponible"}*/}
-                    {/*             toggleFiltre={toggleFiltre} filtres={filtres}/>*/}
                     <FiltreMulti typeFiltre={"disponibilite"} valeur={true} toggleFiltre={toggleFiltre}
                                  filtres={filtres} unite={'Disponible'}/>
                     <FiltreMulti typeFiltre={"disponibilite"} valeur={false} toggleFiltre={toggleFiltre}
                                  filtres={filtres} unite={'Indisponible'}/>
                 </div>
-                {/*)}*/}
             </div>
 
             {/* État */}
             <div className="filter-section mb-4">
-                {/*<div*/}
-                {/*    className="filter-header d-flex justify-content-between align-items-center"*/}
-                {/*    onClick={() => setConditionOuvert(!conditionOuvert)}*/}
-                {/*>*/}
                 <span>État</span>
-                {/*<i className={`bi ${conditionOuvert ? "bi-chevron-up" : "bi-chevron-down"}`}></i>*/}
-                {/*</div>*/}
-                {/*{conditionOuvert && (*/}
                 <div className="filter-options">
                     {['NEUF', 'RECONDITIONNE', 'OCCASION'].map((v) => (
                         <FiltreMulti key={v} typeFiltre={"etat"} valeur={v} toggleFiltre={toggleFiltre}
                                      filtres={filtres}/>
                     ))}
                 </div>
-                {/*)}*/}
             </div>
         </div>
 
