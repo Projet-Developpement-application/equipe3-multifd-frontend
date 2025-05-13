@@ -1,6 +1,28 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import {fetchUtilisateur, getPanierEnCours} from "../../scripts/httpClient.js";
 
 function DevisForm() {
+    const [utilisateurInfo, setUtilisateurInfo] = useState({})
+    const [panier, setPanier] = useState([])
+
+    async function obentirDonneeUtilisateur() {
+        return fetchUtilisateur(sessionStorage.getItem("mail"))
+    }
+
+    useEffect(() => {
+        obentirDonneeUtilisateur().then(r => {
+            setUtilisateurInfo({
+                nom: r.nom + " " + r.prenom,
+                entreprise: r.entreprise,
+                mail: r.username
+            })
+        })
+        getPanierEnCours().then(response => {
+            setPanier(response)
+        })
+    }, [])
+
+
     return (
         <div className="container">
             <h1 className="my-5">Demande de devis</h1>
@@ -10,35 +32,39 @@ function DevisForm() {
                     <form>
                         <div className="mb-3">
                             <label htmlFor="contactName" className="form-label">Contact:</label>
-                            <input type="text" className="form-control" id="contactName" defaultValue="Joannie Roy" />
+                            <input type="text" className="form-control" id="contactName"
+                                   defaultValue={utilisateurInfo.nom}/>
                         </div>
                         <div className="mb-3">
                             <label htmlFor="company" className="form-label">Entreprise:</label>
-                            <input type="text" className="form-control" id="company" />
+                            <input type="text" className="form-control" id="company"
+                                   defaultValue={utilisateurInfo.entreprise}/>
                         </div>
-                        <div className="mb-3">
-                            <label htmlFor="address" className="form-label">Adresse:</label>
-                            <input type="text" className="form-control" id="address" />
-                        </div>
-                        <div className="mb-3">
-                            <label htmlFor="city" className="form-label">Ville:</label>
-                            <input type="text" className="form-control" id="city" />
-                        </div>
+                        {/*<div className="mb-3">*/}
+                        {/*    <label htmlFor="address" className="form-label">Adresse:</label>*/}
+                        {/*    <input type="text" className="form-control" id="address"/>*/}
+                        {/*</div>*/}
+                        {/*<div className="mb-3">*/}
+                        {/*    <label htmlFor="city" className="form-label">Ville:</label>*/}
+                        {/*    <input type="text" className="form-control" id="city"/>*/}
+                        {/*</div>*/}
                     </form>
                 </div>
                 <div className="col-md-6">
                     <h4>Veuillez choisir par quel moyen vous souhaitez être contacté:</h4>
                     <form>
                         <div className="form-check">
-                            <input type="radio" className="form-check-input" name="contactMethod" id="contactPhone" />
+                            <input type="radio" className="form-check-input" name="contactMethod" id="contactPhone"/>
                             <label className="form-check-label" htmlFor="contactPhone">Téléphone</label>
                         </div>
                         <div className="form-check">
-                            <input type="radio" className="form-check-input" name="contactMethod" id="contactEmail" defaultChecked />
+                            <input type="radio" className="form-check-input" name="contactMethod" id="contactEmail"
+                                   defaultChecked/>
                             <label className="form-check-label" htmlFor="contactEmail">Courriel</label>
                         </div>
                         <div className="mb-3">
-                            <input type="email" className="form-control" id="emailAddress" defaultValue="joebloe@entreprise.com" />
+                            <input type="email" className="form-control" id="emailAddress"
+                                   defaultValue={utilisateurInfo.mail}/>
                         </div>
                     </form>
                 </div>
@@ -54,38 +80,50 @@ function DevisForm() {
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>ABB - ACSM1-04AM-012A-4</td>
-                    <td>
-                        <input type="number" className="form-control" defaultValue={1} min={0} />
-                    </td>
-                    <td>1850.00 $</td>
-                    <td>1850.00 $</td>
-                </tr>
-                <tr>
-                    <td>ABB - ACSM1-04AM-012A-4</td>
-                    <td>
-                        <input type="number" className="form-control" defaultValue={2} min={0} />
-                    </td>
-                    <td>1850.00 $</td>
-                    <td>3700.00 $</td>
-                </tr>
-                <tr>
-                    <td>ABB - ACSM1-04AM-012A-4</td>
-                    <td>
-                        <input type="number" className="form-control" defaultValue={1} min={0} />
-                    </td>
-                    <td>1850.00 $</td>
-                    <td>1850.00 $</td>
-                </tr>
-                <tr>
-                    <td>ABB - ACSM1-04AM-012A-4</td>
-                    <td>
-                        <input type="number" className="form-control w-50" defaultValue={1} min={0} />
-                    </td>
-                    <td>1850.00 $</td>
-                    <td>1850.00 $</td>
-                </tr>
+                {panier.map(value =>
+                        // console.log(value.quantite)
+                    <tr>
+                        <td>{value.produit.nom}</td>
+                        <td>
+                            <input type="number" className="form-control" defaultValue={parseInt(value.quantite)} min={0}/>
+                        </td>
+                        <td>1850.00 $</td>
+                        <td>1850.00 $</td>
+                    </tr>
+
+                )}
+                {/*<tr>*/}
+                {/*    <td>ABB - ACSM1-04AM-012A-4</td>*/}
+                {/*    <td>*/}
+                {/*        <input type="number" className="form-control" defaultValue={1} min={0}/>*/}
+                {/*    </td>*/}
+                {/*    <td>1850.00 $</td>*/}
+                {/*    <td>1850.00 $</td>*/}
+                {/*</tr>*/}
+                {/*<tr>*/}
+                {/*    <td>ABB - ACSM1-04AM-012A-4</td>*/}
+                {/*    <td>*/}
+                {/*        <input type="number" className="form-control" defaultValue={2} min={0}/>*/}
+                {/*    </td>*/}
+                {/*    <td>1850.00 $</td>*/}
+                {/*    <td>3700.00 $</td>*/}
+                {/*</tr>*/}
+                {/*<tr>*/}
+                {/*    <td>ABB - ACSM1-04AM-012A-4</td>*/}
+                {/*    <td>*/}
+                {/*        <input type="number" className="form-control" defaultValue={1} min={0}/>*/}
+                {/*    </td>*/}
+                {/*    <td>1850.00 $</td>*/}
+                {/*    <td>1850.00 $</td>*/}
+                {/*</tr>*/}
+                {/*<tr>*/}
+                {/*    <td>ABB - ACSM1-04AM-012A-4</td>*/}
+                {/*    <td>*/}
+                {/*        <input type="number" className="form-control w-50" defaultValue={1} min={0}/>*/}
+                {/*    </td>*/}
+                {/*    <td>1850.00 $</td>*/}
+                {/*    <td>1850.00 $</td>*/}
+                {/*</tr>*/}
                 </tbody>
                 <tfoot>
                 <tr>

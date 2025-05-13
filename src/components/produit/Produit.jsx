@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import {useParams, Link, redirect, useNavigate} from "react-router-dom";
 import { fetchProduitParId } from "../../scripts/http.js";
 import {ajouteProduitPanier} from "../../scripts/httpClient.js";
 
@@ -8,7 +8,7 @@ export default function Produit() {
     const [produit, setProduit] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const URL = "http://172.20.46.30/siteReact/equipe3-multifd-frontend";
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetchProduitParId(id)
@@ -33,6 +33,10 @@ export default function Produit() {
 
     function ajouteProduit(){
         ajouteProduitPanier(produit.id).then(data=>{
+            if (data==="non connecté"){
+                navigate("/Connexion")
+                return
+            }
             if (data === 201){
                 alert("Le produit a été ajouté au panier");
             }

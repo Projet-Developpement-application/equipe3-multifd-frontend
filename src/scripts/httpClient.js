@@ -37,9 +37,10 @@ export async function fetchUtilisateur(email) {
 }
 
 export async function ajouteProduitPanier(idProduit) {
-        const response = await fetch(BASE_URL_CLIENT + "/ajouterProduitPanier?idProduit="+idProduit, {
-            method:'POST',
-            headers:{
+    if (sessionStorage.getItem("isConnected")) {
+        const response = await fetch(BASE_URL_CLIENT + "/ajouterProduitPanier?idProduit=" + idProduit, {
+            method: 'POST',
+            headers: {
                 "content-type": "application/json",
                 'Authorization': 'Bearer ' + sessionStorage.getItem("token")
             }
@@ -48,6 +49,18 @@ export async function ajouteProduitPanier(idProduit) {
             throw new Error("Erreur lors de l'ajout du produit " + idProduit);
         }
         return response.status;
+    } else return "non connecté"
+}
+
+export async function getPanierEnCours() {
+    const response = await fetch(BASE_URL_CLIENT + "/getMonPanierEnCours", {
+        method: 'GET',
+        headers: {
+            'Content-type': 'Application/json',
+            'Authorization': 'Bearer ' + sessionStorage.getItem("token")
+        }
+    })
+    return await response.json()
 }
 
 
