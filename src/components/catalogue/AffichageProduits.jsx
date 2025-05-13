@@ -4,6 +4,7 @@ import image from "../../assets/generique.jpg"
 import {fetchAllProduits} from "../../scripts/http.js";
 import {UtilisateurContext} from "../../assets/contexte/UtilisateurContext.jsx";
 import {URL_BACKEND} from "../../App.jsx";
+import {supprimerProduit} from "../../scripts/httpAdmin.js";
 
 export default function AffichageProduits({filtres}) {
 
@@ -51,7 +52,19 @@ export default function AffichageProduits({filtres}) {
         );
         setProduitsFiltres(filtresAppliques);
     }, [filtres, produits]);
+    const handleDelete = async (id) => {
+        const confirmed = window.confirm("Êtes-vous sûr de vouloir supprimer ce produit ?");
+        if (!confirmed) return;
 
+        try {
+            await supprimerProduit(id);
+            // On retire le produit supprimé du state local
+            setProduits(prev => prev.filter(p => p.id !== id));
+        } catch (err) {
+            console.error("Erreur lors de la suppression :", err);
+            setError({ error: true, message: "La suppression du produit a échoué." });
+        }
+    };
     return (
         <>
             {isFecthing ?
@@ -99,7 +112,7 @@ export default function AffichageProduits({filtres}) {
                                                                             <i className="bi bi-pencil-square me-2"></i>
                                                                             Modifier
                                                                     </Link>
-                                                                        <Link to={`/SupprimerProduit/${product.id}`} className="btn btn-dark">
+                                                                        <Link to="#" onClick={() => handleDelete(product.id)} className="btn btn-dark">
                                                                             <i className="bi bi-trash me-2"></i>
                                                                             Supprimer
                                                                         </Link>

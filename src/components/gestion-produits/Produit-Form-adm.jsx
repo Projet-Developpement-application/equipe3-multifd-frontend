@@ -106,7 +106,6 @@ const ProduitForm = ({ produitImage, produit, marques, etats, errors, handleChan
                             </div>
 
                             <div className="col-12 d-flex justify-content-between">
-                                {/* Bouton Retour aligné à gauche et bouton Modifier aligné à droite */}
                                 <Link to="/" className="btn btn-dark">
                                     Retour
                                 </Link>
