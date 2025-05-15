@@ -40,14 +40,18 @@ function DevisForm() {
     const totalTVA = totalHT * 0.15;
     const totalTTC = totalHT + totalTVA;
 
+    function envoyerDemandeDevis() {
+
+    }
+
     return (
         <div className="container">
             <h1 className="my-5">Demande de devis</h1>
 
-            <div className="mb-4">
+            <div className="mb-5">
                 <h4>Veuillez choisir par quel moyen vous souhaitez être contacté:</h4>
                 <form>
-                    <div className="form-check">
+                    <div className="form-check mb-4">
                         <input
                             type="radio"
                             className="form-check-input"
@@ -88,12 +92,28 @@ function DevisForm() {
                             onChange={(e) => setContactValue(e.target.value)}
                         />
                     </div>
+                    <div className="mb-3 mt-2">
+                        <h6> Ajouter des spécifications à votre devis:</h6>
+                        <textarea
+                            className="form-control"
+                            id="message"
+                            rows="3"
+                            placeholder="Message (facultatif)"
+                        ></textarea>
+                        <div className="text-end mt-2">
+                            <button className="btn btn-dark">
+                                Sauvegarder
+                            </button>
+                        </div>
+                    </div>
+
                 </form>
             </div>
 
             {panier.length > 0 ? (
                 <>
-                    <table className="table table-bordered table-light" style={{ backgroundColor: '#c1d1ed' }}>
+                    <h2> Résumé de votre devis</h2>
+                    <table className="table table-bordered table-light">
                         <thead>
                         <tr>
                             <th className="text-center">Description</th>
@@ -152,7 +172,8 @@ function DevisForm() {
                     <div style={{ clear: 'both' }}></div>
 
                     <div className="d-flex justify-content-end mt-5">
-                        <button type="button" className="btn btn-dark">
+                        <button type="button" className="btn btn-dark"
+                        onClick={envoyerDemandeDevis}>
                             Envoyer la demande
                         </button>
                     </div>
