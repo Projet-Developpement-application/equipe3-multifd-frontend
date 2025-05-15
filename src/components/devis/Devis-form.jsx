@@ -9,6 +9,7 @@ function DevisForm() {
     const [panier, setPanier] = useState([]);
     const [contactMethod, setContactMethod] = useState('Courriel');
     const [contactValue, setContactValue] = useState('');
+    const PRIX_UNITAIRE = 1850;
 
     useEffect(() => {
         fetchUtilisateur(sessionStorage.getItem("mail")).then(r => {
@@ -24,7 +25,6 @@ function DevisForm() {
         const nouveauProduit = { ...produitPanier, quantite: parseInt(e.target.value) };
         if (isNaN(nouveauProduit.quantite)) return;
         changeQuantity(nouveauProduit);
-        // Mettre à jour localement pour feedback immédiat
         setPanier(panier.map(p => p.id === nouveauProduit.id ? nouveauProduit : p));
     }
 
@@ -33,16 +33,15 @@ function DevisForm() {
         // API suppression côté serveur si nécessaire
     }
 
-    // Calculs des totaux
-    const totalHT = panier.reduce((acc, item) => acc + item.quantite * 1850, 0);
-    const totalTVA = totalHT * 0.2; // Exemple 20% TVA
+    // Calculs totaux avec 15% de taxes
+    const totalHT = panier.reduce((acc, item) => acc + item.quantite * PRIX_UNITAIRE, 0);
+    const totalTVA = totalHT * 0.15;
     const totalTTC = totalHT + totalTVA;
 
     return (
         <div className="container">
             <h1 className="my-5">Demande de devis</h1>
 
-            {/* Section contact */}
             <div className="mb-4">
                 <h4>Veuillez choisir par quel moyen vous souhaitez être contacté:</h4>
                 <form>
@@ -92,8 +91,7 @@ function DevisForm() {
 
             {panier.length > 0 ? (
                 <>
-                    {/* Tableau principal */}
-                    <table className="table table-bordered" style={{ backgroundColor: '#c1d1ed' }}>
+                    <table className="table table-bordered table-light" style={{ backgroundColor: '#c1d1ed' }}>
                         <thead>
                         <tr>
                             <th className="text-center">Description</th>
@@ -116,9 +114,14 @@ function DevisForm() {
                                         style={{ maxWidth: '80px', margin: '0 auto' }}
                                     />
                                 </td>
-                                <td className="text-center">{1850.00.toFixed(2)} €</td>
+                                <td className="text-center">{PRIX_UNITAIRE.toFixed(2)}</td>
                                 <td className="text-center">
-                                    <button>
+                                    <button
+                                        type="button"
+                                        className="btn btn-danger"
+                                        onClick={() => supprimerDuPanier(value.id)}
+                                        title="Supprimer"
+                                    >
                                         <i className="bi-trash bi"></i>
                                     </button>
                                 </td>
@@ -127,20 +130,19 @@ function DevisForm() {
                         </tbody>
                     </table>
 
-                    {/* Bloc totaux à droite */}
                     <table className="table table-bordered text-center" style={{ width: '30%', float: 'right' }}>
                         <tbody>
                         <tr>
                             <td><strong>Sous-total :</strong></td>
-                            <td>{totalHT.toFixed(2)} €</td>
+                            <td>{totalHT.toFixed(2)} $</td>
                         </tr>
                         <tr>
-                            <td><strong>Taxes :</strong></td>
-                            <td>{totalTVA.toFixed(2)} €</td>
+                            <td><strong>Taxes (15%) :</strong></td>
+                            <td>{totalTVA.toFixed(2)} $</td>
                         </tr>
                         <tr>
                             <td><strong>Total :</strong></td>
-                            <td>{totalTTC.toFixed(2)} €</td>
+                            <td>{totalTTC.toFixed(2)} $</td>
                         </tr>
                         </tbody>
                     </table>
@@ -148,7 +150,7 @@ function DevisForm() {
                     <div style={{ clear: 'both' }}></div>
 
                     <div className="d-flex justify-content-end mt-5">
-                        <button type="button" className="btn btn-dark" onClick={() => supprimerDuPanier(value.id)}>
+                        <button type="button" className="btn btn-dark">
                             Envoyer la demande
                         </button>
                     </div>
