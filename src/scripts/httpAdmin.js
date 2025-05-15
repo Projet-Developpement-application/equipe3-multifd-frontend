@@ -70,3 +70,34 @@ export async function supprimerProduit(id) {
         throw new Error("Erreur lors de la suppression du produit ID: " + id);
     }
 }
+
+
+export async function deleteUtilisateurByEmail(email) {
+    const response = await fetch(BASE_URL_ADMIN + "/supprimer/" + email, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + sessionStorage.getItem("token")
+        }
+    });
+
+    if (!response.ok) {
+        throw new Error("Erreur lors de la suppression de l'utilisateur : " + email);
+    }
+}
+
+export async function fetchAllUtilisateurs() {
+    const response = await fetch(BASE_URL_ADMIN + "/utilisateurs", {
+        method: "GET",
+        headers: {
+            "Content-type": "application/json",
+            "Authorization": "Bearer " + sessionStorage.getItem("token")
+
+
+        }
+    });
+    if (!response.ok) {
+        throw new Error("Erreur lors du chargement des utilisateurs.");
+    }
+    return await response.json();
+}

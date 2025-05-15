@@ -96,17 +96,3 @@ export async function fetchAllMarque() {
     return await response.json();
 }
 
-
-export async function fetchAllUtilisateurs() {
-    const response = await fetch(BASE_URL_ENDPOINT + "/admin/utilisateurs", {
-        method: "GET",
-        headers: {
-            "Content-type": "application/json",
-
-        }
-    });
-    if (!response.ok) {
-        throw new Error("Erreur lors du chargement des utilisateurs.");
-    }
-    return await response.json();
-}

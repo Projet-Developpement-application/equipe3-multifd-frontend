@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { fetchAllUtilisateurs } from '../../scripts/http.js';
+import { fetchAllUtilisateurs } from '../../scripts/httpAdmin.js';
 import { useNavigate } from 'react-router-dom';
 import { UtilisateurContext } from '../../assets/contexte/UtilisateurContext.jsx';
+import {deleteUtilisateurByEmail} from "../../scripts/httpAdmin.js";
 
 const USERS_PER_PAGE = 8;
 
@@ -35,6 +36,22 @@ export default function GestionUtilisateursAdm() {
         navigate(`/utilisateur/${encodeURIComponent(email)}`);
     };
 
+
+    function handleDeleteAccount(email) {
+        const confirmed = window.confirm("Êtes-vous sûr de vouloir supprimer cet utilisateur ?");
+        if (!confirmed) return;
+
+        deleteUtilisateurByEmail(email)
+            .then(() => {
+                alert("Utilisateur supprimé avec succès !");
+                setUsers(prevUsers => prevUsers.filter(user => user.mail !== email));
+            })
+            .catch(err => {
+                console.error("Erreur lors de la suppression de l'utilisateur :", err);
+                alert("Erreur lors de la suppression de l'utilisateur.");
+            });
+    }
+
     return (
         <div className="container mt-4 position-relative" style={{ minHeight: "100vh" }}>
             <h2 className="mt-5 mx-4">Gestion des utilisateurs</h2>
@@ -61,8 +78,11 @@ export default function GestionUtilisateursAdm() {
                                     Voir le compte
                                 </button>
                                 {user.mail !== utilisateur.mail && (
-                                    <button className="btn btn-danger mx-2">
+                                    <button className="btn btn-danger mx-2"
+                                            onClick={() => handleDeleteAccount(user.mail)}
+                                    >
                                         Supprimer
+
                                     </button>
                                 )}
                             </div>
