@@ -69,15 +69,23 @@ export async function getPanierEnCours() {
 }
 
 export async function changeQuantity(produitPanier) {
-    console.log(produitPanier)
-
-    const response = await fetch(BASE_URL_CLIENT + "/changerQuantite", {
+    await fetch(BASE_URL_CLIENT + "/changerQuantite", {
         method: 'PATCH',
         headers: {
             'Content-type': 'Application/json',
             'Authorization': 'Bearer ' + sessionStorage.getItem("token")
         },
         body: JSON.stringify(produitPanier)
+    })
+}
+
+export async function supprimerProduitFromPanier(idProduitPanier) {
+    await fetch(BASE_URL_CLIENT + "/supprimerProduitPanier/" + idProduitPanier, {
+        method:'DELETE',
+        headers:{
+            'Content-type': 'Application/json',
+            'Authorization': 'Bearer ' + sessionStorage.getItem("token")
+        }
     })
 }
 

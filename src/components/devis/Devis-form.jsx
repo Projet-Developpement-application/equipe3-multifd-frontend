@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     changeQuantity,
     fetchUtilisateur,
-    getPanierEnCours
+    getPanierEnCours, supprimerProduitFromPanier
 } from "../../scripts/httpClient.js";
 
 function DevisForm() {
@@ -22,15 +22,17 @@ function DevisForm() {
     }, []);
 
     function handleChangeQuantite(e, produitPanier) {
-        const nouveauProduit = { ...produitPanier, quantite: parseInt(e.target.value) };
-        if (isNaN(nouveauProduit.quantite)) return;
+        const nouveauProduit = {...produitPanier, quantite: parseInt(e.target.value)};
+        if (isNaN(nouveauProduit.quantite) || nouveauProduit.quantite <= 0) return;
         changeQuantity(nouveauProduit);
         setPanier(panier.map(p => p.id === nouveauProduit.id ? nouveauProduit : p));
     }
 
-    function supprimerDuPanier(idProduit) {
-        setPanier(panier.filter(item => item.id !== idProduit));
-        // API suppression côté serveur si nécessaire
+    function supprimerDuPanier(idProduitPanier) {
+        const message = confirm("Voulez vous vraiment supprimer ce produit ?");
+        if (!message) return;
+        setPanier(panier.filter(item => item.id !== idProduitPanier));
+        supprimerProduitFromPanier(idProduitPanier)
     }
 
     // Calculs totaux avec 15% de taxes
