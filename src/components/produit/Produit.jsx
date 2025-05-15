@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {useParams, Link, redirect, useNavigate} from "react-router-dom";
 import { fetchProduitParId } from "../../scripts/http.js";
 import {ajouteProduitPanier} from "../../scripts/httpClient.js";
+import {URL_BACKEND} from "../../App.jsx";
+import image from "../../assets/generique.jpg";
 
 export default function Produit() {
     const { id } = useParams();
@@ -52,11 +54,11 @@ export default function Produit() {
                         <div
                             className="bg-light d-flex justify-content-center align-items-center mb-3 w-100"
                             style={{ height: "400px" }}
-                        >
-                            <img
-                                src={produit && produit.image ? produit.image : "https://www.multifd.com/wp-content/uploads/2019/07/image-generique-600x600.jpg"}
-                                alt="image du produit" className="object-fit-contain h-100 w-100"
-                            />
+                        >{produit.imagePath != null ? (
+                            <img src={`${URL_BACKEND}/uploads/images/${produit.imagePath}`} className="object-fit-contain h-100 w-100"
+                                 alt={produit.nom}/>
+                        ):<img src={image} className="object-fit-contain h-100 w-100"
+                               alt={produit.nom}/>}
                         </div>
                     </div>
 
