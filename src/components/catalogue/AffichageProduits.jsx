@@ -85,9 +85,9 @@ export default function AffichageProduits({filtres}) {
                                                     <Link to={`produit/${product.id}`}
                                                           className="text-decoration-none text-dark">
                                                         {product.imagePath != null ? (
-                                                            <img src={`${URL_BACKEND}/uploads/images/${product.imagePath}`} className="card-img-top rounded-top"
+                                                            <img src={`${URL_BACKEND}/uploads/images/${product.imagePath}`} className="card-img-top rounded-top img-produit-fixe"
                                                                  alt={product.nom}/>
-                                                        ):<img src={image} className="card-img-top rounded-top"
+                                                        ):<img src={image} className="card-img-top rounded-top img-produit-fixe"
                                                                alt={product.nom}/>}
 
                                                         <div className="card-body d-flex flex-column">
@@ -108,13 +108,13 @@ export default function AffichageProduits({filtres}) {
                                                                 <div className="container">
                                                                     <div
                                                                         className="d-flex justify-content-center gap-2">
-                                                                        <Link to= {`/ModifierProduit/${product.id}`} className="btn btn-dark">
-                                                                            <i className="bi bi-pencil-square me-2"></i>
-                                                                            Modifier
-                                                                    </Link>
-                                                                        <Link to="#" onClick={() => handleDelete(product.id)} className="btn btn-dark">
-                                                                            <i className="bi bi-trash me-2"></i>
-                                                                            Supprimer
+                                                                        <Link to={`/ModifierProduit/${product.id}`} className="btn btn-sm btn-dark d-flex align-items-center justify-content-center gap-2">
+                                                                            <i className="bi bi-pencil-square"></i>
+                                                                            <span>Modifier</span>
+                                                                        </Link>
+                                                                        <Link to="#" onClick={() => handleDelete(product.id)} className="btn btn-sm btn-dark d-flex align-items-center justify-content-center gap-2">
+                                                                            <i className="bi bi-trash"></i>
+                                                                            <span>Supprimer</span>
                                                                         </Link>
                                                                     </div>
                                                                 </div>

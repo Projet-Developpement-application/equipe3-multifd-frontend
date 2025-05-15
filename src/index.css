@@ -29,7 +29,11 @@ input[type="password"]::-webkit-password-reveal-button {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Ombre pour donner de la profondeur */
 }
 
-
+.img-produit-fixe {
+    height: 200px;
+    object-fit: cover;
+    object-position: center;
+}
 /* Les cartes sur le catalogue */
 
 .carte-arrondie {
