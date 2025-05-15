@@ -60,7 +60,25 @@ export async function getPanierEnCours() {
             'Authorization': 'Bearer ' + sessionStorage.getItem("token")
         }
     })
-    return await response.json()
+    if (!response.ok) {
+        if (response.status === 401) {
+            throw new Error("aucun panier en cours")
+        }
+    }
+    return await response.json();
+}
+
+export async function changeQuantity(produitPanier) {
+    console.log(produitPanier)
+
+    const response = await fetch(BASE_URL_CLIENT + "/changerQuantite", {
+        method: 'PATCH',
+        headers: {
+            'Content-type': 'Application/json',
+            'Authorization': 'Bearer ' + sessionStorage.getItem("token")
+        },
+        body: JSON.stringify(produitPanier)
+    })
 }
 
 
