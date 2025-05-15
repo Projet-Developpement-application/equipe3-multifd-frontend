@@ -24,18 +24,25 @@ function DevisForm() {
         const nouveauProduit = { ...produitPanier, quantite: parseInt(e.target.value) };
         if (isNaN(nouveauProduit.quantite)) return;
         changeQuantity(nouveauProduit);
+        // Mettre à jour localement pour feedback immédiat
+        setPanier(panier.map(p => p.id === nouveauProduit.id ? nouveauProduit : p));
     }
 
     function supprimerDuPanier(idProduit) {
         setPanier(panier.filter(item => item.id !== idProduit));
-        // si tu veux aussi appeler une API pour supprimer côté serveur,
-        // tu peux mettre ça ici genre: await deleteFromPanier(idProduit)
+        // API suppression côté serveur si nécessaire
     }
+
+    // Calculs des totaux
+    const totalHT = panier.reduce((acc, item) => acc + item.quantite * 1850, 0);
+    const totalTVA = totalHT * 0.2; // Exemple 20% TVA
+    const totalTTC = totalHT + totalTVA;
 
     return (
         <div className="container">
             <h1 className="my-5">Demande de devis</h1>
 
+            {/* Section contact */}
             <div className="mb-4">
                 <h4>Veuillez choisir par quel moyen vous souhaitez être contacté:</h4>
                 <form>
@@ -85,69 +92,63 @@ function DevisForm() {
 
             {panier.length > 0 ? (
                 <>
-                    <table className="table table-bordered table-striped">
-                        <thead className="table-light">
+                    {/* Tableau principal */}
+                    <table className="table table-bordered" style={{ backgroundColor: '#c1d1ed' }}>
+                        <thead>
                         <tr>
-                            <th>Description</th>
-                            <th style={{ width: '100px' }}>Quantité</th>
-                            <th>Prix Unitaire</th>
-                            <th>Coût</th>
-                            <th>Taxes</th>
-                            <th>Total</th>
-                            <th style={{ width: '60px' }}>Action</th>
+                            <th className="text-center">Description</th>
+                            <th className="text-center">Qté</th>
+                            <th className="text-center">Prix unitaire</th>
+                            <th className="text-center">Action</th>
                         </tr>
                         </thead>
                         <tbody>
                         {panier.map(value => (
                             <tr key={value.id}>
-                                <td>{value.produit.nom}</td>
-                                <td style={{ width: '100px' }}>
+                                <td className="text-center">{value.produit.nom}</td>
+                                <td className="text-center">
                                     <input
                                         type="number"
                                         onChange={(e) => handleChangeQuantite(e, value)}
-                                        className="form-control"
-                                        defaultValue={parseInt(value.quantite)}
+                                        className="form-control text-center"
+                                        value={value.quantite}
                                         min={0}
-                                        style={{ maxWidth: '80px' }}
+                                        style={{ maxWidth: '80px', margin: '0 auto' }}
                                     />
                                 </td>
-                                <td>1850.00 $</td>
-                                <td>{(value.quantite * 1850).toFixed(2)} $</td>
-                                <td>2 000.00 $</td>
-                                <td>187 000.00 $</td>
-                                <td>
-                                    <button
-                                        className="btn btn-sm "
-                                        onClick={() => supprimerDuPanier(value.id)}
-                                        title="Supprimer ce produit"
-                                    >
-                                        <i className="bi bi-trash"></i>
+                                <td className="text-center">{1850.00.toFixed(2)} €</td>
+                                <td className="text-center">
+                                    <button>
+                                        <i className="bi-trash bi"></i>
                                     </button>
                                 </td>
                             </tr>
                         ))}
                         </tbody>
-                        <tfoot>
-                        <tr>
-                            <td colSpan={5} className="text-end">Sous-total:</td>
-                            <td>185 000.00 $</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td colSpan={5} className="text-end">Taxes:</td>
-                            <td>2 000.00 $</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td colSpan={5} className="text-end">Total:</td>
-                            <td>187 000.00 $</td>
-                            <td></td>
-                        </tr>
-                        </tfoot>
                     </table>
 
+                    {/* Bloc totaux à droite */}
+                    <table className="table table-bordered text-center" style={{ width: '30%', float: 'right' }}>
+                        <tbody>
+                        <tr>
+                            <td><strong>Sous-total :</strong></td>
+                            <td>{totalHT.toFixed(2)} €</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Taxes :</strong></td>
+                            <td>{totalTVA.toFixed(2)} €</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Total :</strong></td>
+                            <td>{totalTTC.toFixed(2)} €</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <div style={{ clear: 'both' }}></div>
+
                     <div className="d-flex justify-content-end mt-5">
-                        <button type="button" className="btn btn-dark">
+                        <button type="button" className="btn btn-dark" onClick={() => supprimerDuPanier(value.id)}>
                             Envoyer la demande
                         </button>
                     </div>
