@@ -21,7 +21,7 @@ const ModifierProduit = () => {
                 ...data,
                 image: null,
                 imagePreview: data.imageUrl,
-                disponible: data.disponibilite ? 'Disponible' : 'Pas en stock'
+                disponibilite: data.disponibilite ? 'Disponible' : 'Pas en stock'
             });
         });
     }, [id]);
@@ -69,9 +69,7 @@ const ModifierProduit = () => {
     const handleSubmit = e => {
         e.preventDefault();
         if (validate()) {
-            console.log(produit.marque);
-            console.log(produit.image);
-            console.log(produit.imagePreview);
+            console.log(produit.disponibilite);
             const toSend = { ...produit, disponible: produit.disponibilite === 'Disponible'};
 
 

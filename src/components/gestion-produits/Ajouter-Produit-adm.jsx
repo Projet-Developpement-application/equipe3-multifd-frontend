@@ -9,7 +9,7 @@ const AjouterProduit = () => {
     const etats = ["NEUF", "OCCASION", "RECONDITIONNE"];
     const [marques, setMarques] = useState([]);
     const [produit, setProduit] = useState({
-        nom: '', disponible: 'Disponible', prix: '', etat: etats[0], poids: '',
+        nom: '', disponibilite: 'Disponible', prix: '', etat: etats[0], poids: '',
         voltage: '', hp: '', amperage: '', courant: '', marque: {nom: ' '}, image: null, imagePreview: null
     });
     const [errors, setErrors] = useState({});
