@@ -63,7 +63,8 @@ export async function ajouterProduit(produit) {
  */
 export async function supprimerProduit(id) {
     const response = await fetch(BASE_URL_ADMIN + "/supprimerProduit/" + id, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: {'Authorization': 'Bearer ' + sessionStorage.getItem("token")}
     });
     if (!response.ok) {
         throw new Error("Erreur lors de la suppression du produit ID: " + id);
