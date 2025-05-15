@@ -61,7 +61,7 @@ export async function getPanierEnCours() {
         }
     })
     if (!response.ok) {
-        if (response.status === 401) {
+        if (response.status === 404) {
             throw new Error("aucun panier en cours")
         }
     }
