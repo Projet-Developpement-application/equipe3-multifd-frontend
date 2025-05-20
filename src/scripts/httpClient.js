@@ -81,13 +81,22 @@ export async function changeQuantity(produitPanier) {
 
 export async function supprimerProduitFromPanier(idProduitPanier) {
     await fetch(BASE_URL_CLIENT + "/supprimerProduitPanier/" + idProduitPanier, {
-        method:'DELETE',
-        headers:{
+        method: 'DELETE',
+        headers: {
             'Content-type': 'Application/json',
             'Authorization': 'Bearer ' + sessionStorage.getItem("token")
         }
     })
 }
 
-
+export async function ajouteSpecificationPanier(message) {
+    await fetch(BASE_URL_CLIENT + "/ajouterSpecificationPanier", {
+        method: 'PATCH',
+        headers: {
+            'Content-type': 'Application/json',
+            'Authorization': 'Bearer ' + sessionStorage.getItem("token")
+        },
+        body: JSON.stringify(message)
+    })
+}
 

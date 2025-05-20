@@ -19,7 +19,6 @@ function construitForm(produit){
     console.log(produitSansImage);
     formData.append("produit", new Blob([JSON.stringify(produitSansImage)], {type: "application/json"}));
     formData.append("image", produit.image);
-    console.log(formData.get("produit"))
     return formData;
 }
 

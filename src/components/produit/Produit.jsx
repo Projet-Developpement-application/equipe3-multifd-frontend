@@ -46,7 +46,6 @@ export default function Produit() {
     }
 
     return (
-
         <div className="container-fluid p-0">
             <div className="container py-5 mt-5">
                 <div className="row mx-3">
