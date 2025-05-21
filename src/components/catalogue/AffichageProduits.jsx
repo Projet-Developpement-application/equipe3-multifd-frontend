@@ -76,12 +76,12 @@ export default function AffichageProduits({filtres}) {
                 !error.error ?
                     produitsFiltres.length !== 0 ?
                         <div className="d-flex flex-column min-vh-100">
-                            <div className="container mt-5 pt-5 flex-grow-1">
-                                <div className="row">
+                            <div className="container mt-4 pt-4 flex-grow-1 ">
+                                <div className="row g-4">
                                     {currentProducts.map((product) => (
-                                        <div key={product.id} className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-                                                <div
-                                                    className="card h-100 border-1 rounded shadow-lg product-card-hover">
+                                        <div key={product.id} className="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
+                                            <div
+                                                    className="card  h-100 border-1 rounded-top shadow-lg product-card-hover">
                                                     <Link to={`produit/${product.id}`}
                                                           className="text-decoration-none text-dark">
                                                         {product.imagePath != null ? (
@@ -98,24 +98,31 @@ export default function AffichageProduits({filtres}) {
                                                     </Link>
 
                                                     {utilisateur.role === "CLIENT" || utilisateur.role === "ADMIN" && (
-                                                    <div className="card-footer d-flex flex-column">
+                                                    <div className=" d-flex flex-column mb-1">
                                                         <div className="mt-auto">
-                                                            {utilisateur.role === "CLIENT" && (
-                                                                <button className="btn btn-dark w-100">Ajouter au
-                                                                    panier</button>
-                                                            )}
+
                                                             {utilisateur.role === "ADMIN" && (
-                                                                <div className="container">
-                                                                    <div
-                                                                        className="d-flex justify-content-center gap-2">
-                                                                        <Link to={`/ModifierProduit/${product.id}`} className="btn btn-sm btn-dark d-flex align-items-center justify-content-center gap-2">
-                                                                            <i className="bi bi-pencil-square"></i>
-                                                                            <span>Modifier</span>
-                                                                        </Link>
-                                                                        <Link to="#" onClick={() => handleDelete(product.id)} className="btn btn-sm btn-dark d-flex align-items-center justify-content-center gap-2">
-                                                                            <i className="bi bi-trash"></i>
-                                                                            <span>Supprimer</span>
-                                                                        </Link>
+                                                                <div className="card-footer p-2">
+                                                                    <div className="row g-2">
+                                                                        <div className="col-12 col-md-6">
+                                                                            <Link
+                                                                                to={`/ModifierProduit/${product.id}`}
+                                                                                className="btn btn-dark w-100 d-flex align-items-center justify-content-center gap-2"
+                                                                            >
+                                                                                <i className="bi bi-pencil-square"></i>
+                                                                                <span>Modifier</span>
+                                                                            </Link>
+                                                                        </div>
+                                                                        <div className="col-12 col-md-6">
+                                                                            <button
+                                                                                type="button"
+                                                                                onClick={() => handleDelete(product.id)}
+                                                                                className="btn btn-dark w-100 d-flex align-items-center justify-content-center gap-2"
+                                                                            >
+                                                                                <i className="bi bi-trash"></i>
+                                                                                <span>Supprimer</span>
+                                                                            </button>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             )}

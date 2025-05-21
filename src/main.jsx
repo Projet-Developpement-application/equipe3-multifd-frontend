@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import "bootswatch/dist/cosmo/bootstrap.min.css";
+import 'bootstrap/dist/js/bootstrap.js'
 import './index.css'
 import './style-couleur.css'
 import "bootstrap-icons/font/bootstrap-icons.css";
