@@ -29,7 +29,7 @@ export default function Navbar() {
             <RetourSiteBar/>
             <nav className="navbar w-100 z-1 navbar-expand-lg text-white bg-dark" data-bs-theme="dark">
                 <div className="container-fluid d-flex justify-content-between align-items-start">
-                    <Link className="navbar-brand navbar-logo ps-5" to={"/"}>
+                    <Link className="navbar-brand navbar-logo ps-5" to={URL_ROUTE_FRONTEND+"/"}>
                         MULTI-FD
                     </Link>
 
@@ -38,7 +38,7 @@ export default function Navbar() {
                             {utilisateur.mail === null ? (
                                     /*utilisateur non connecté*/
                                     <li className="nav-item me-4">
-                                        <Link to={"/Connexion"}
+                                        <Link to={URL_ROUTE_FRONTEND+"/Connexion"}
                                               className="text-uppercase nav-link text-white hover-underline-animation left pb-1">
                                             <i className="bi bi-person me-2"></i> Connexion
                                         </Link>
@@ -48,13 +48,13 @@ export default function Navbar() {
                                     /*utilisateur connecté comme administrateur*/
                                     <>
                                         <li className="nav-item me-4">
-                                            <Link to={"/GestionUtilisateur"}
+                                            <Link to={URL_ROUTE_FRONTEND+"/GestionUtilisateur"}
                                                   className="text-uppercase nav-link text-white hover-underline-animation left pb-1">
                                                 <i className="bi bi-people me-2"></i> Gestion Utilisateur
                                             </Link>
                                         </li>
                                         <li className="nav-item me-4">
-                                            <Link to={"/AjouterProduit"}
+                                            <Link to={URL_ROUTE_FRONTEND+"/AjouterProduit"}
                                                   className="text-uppercase nav-link text-white hover-underline-animation left pb-1">
                                                 <i className="bi bi-plus-circle me-2"></i> Ajouter un Produit
                                             </Link>
@@ -75,13 +75,13 @@ export default function Navbar() {
 
                                         </li>
                                         <li className="nav-item me-4">
-                                            <Link to={"/compte"}
+                                            <Link to={URL_ROUTE_FRONTEND+"/compte"}
                                                   className="text-uppercase nav-link text-white hover-underline-animation left pb-1">
                                                 <i className="bi bi-person me-2"></i> Mon Compte
                                             </Link>
                                         </li>
                                         <li className="nav-item me-4">
-                                            <Link to={"/panier"}
+                                            <Link to={URL_ROUTE_FRONTEND+"/panier"}
                                                   className="text-uppercase nav-link text-white hover-underline-animation left pb-1">
                                                 <i className="bi bi-cart me-2"></i> Panier
                                             </Link>

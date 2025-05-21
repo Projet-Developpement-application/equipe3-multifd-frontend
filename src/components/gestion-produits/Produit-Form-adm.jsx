@@ -1,6 +1,7 @@
 // ProduitForm.jsx
 import React from 'react';
 import {Link} from "react-router-dom";
+import {URL_ROUTE_FRONTEND} from "../../App.jsx";
 
 const ProduitForm = ({ produitImage, produit, marques, etats, errors, handleChange,handleChangeMarque, handleImageChange, handleSubmit, isEditMode }) => {
     return (
@@ -106,7 +107,7 @@ const ProduitForm = ({ produitImage, produit, marques, etats, errors, handleChan
                             </div>
 
                             <div className="col-12 d-flex justify-content-between">
-                                <Link to="/" className="btn btn-dark">
+                                <Link to={URL_ROUTE_FRONTEND+"/"} className="btn btn-dark">
                                     Retour
                                 </Link>
                                 <button type="submit" className="btn btn-dark">
