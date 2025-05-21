@@ -45,7 +45,7 @@ const AjouterProduit = () => {
 
     const validate = () => {
         const newErrors = {};
-        const requiredFields = ['nom', 'prix', 'poids', 'voltage', 'hp', 'amperage', 'courant'];
+        const requiredFields = ['nom', 'prix', 'courant'];
 
         requiredFields.forEach(field => {
             const value = produit[field];
