@@ -89,6 +89,10 @@ export async function supprimerProduitFromPanier(idProduitPanier) {
     })
 }
 
+/**
+ * Envoie à l'API le message de specification de la commande
+ * @param message message à envoyer
+ * */
 export async function ajouteSpecificationPanier(message) {
     await fetch(BASE_URL_CLIENT + "/ajouterSpecificationPanier", {
         method: 'PATCH',
@@ -100,3 +104,17 @@ export async function ajouteSpecificationPanier(message) {
     })
 }
 
+//TODO finir d'implementer ca
+export async function getHistorique() {
+    const response = await fetch(BASE_URL_CLIENT + "/historiquePanier", {
+        method: 'GET',
+        headers: {
+            'Content-type': 'Application/json',
+            'Authorization': 'Bearer ' + sessionStorage.getItem("token")
+        }
+    });
+    if (!response.ok) {
+        throw new Error("Erreur lors du chargement des commandes")
+    }
+    return await response.json();
+}
