@@ -12,10 +12,10 @@ import GestionUtilisateurAdm from "./components/gestion-comptes/Gestion-utilisat
 import Catalogue from "./components/catalogue/Catalogue.jsx";
 import {useEffect, useState} from "react";
 import ModifierProduit from "./components/gestion-produits/Modifier-Produit-adm.jsx";
-import SupprimerProduitAdm from "./components/gestion-produits/Supprimer-Produit-adm.jsx";
 import SupprimerProduit from "./components/gestion-produits/Supprimer-Produit-adm.jsx";
 import UtilisateurAdm from "./components/gestion-comptes/UtilisateurAdm.jsx";
-// const URL = "/siteReact/equipe3-multifd-frontend";
+// export const URL_ROUTE_FRONTEND = "/siteReact/equipe3-multifd-frontend";
+export const URL_ROUTE_FRONTEND = "";
 export const URL_BACKEND = "http://localhost:8080";
 
 function App() {
@@ -50,16 +50,16 @@ function App() {
                             </>
                         }/>
 
-                        <Route path="compte" element={<Compte/>}/>
-                        <Route path="panier" element={<DevisForm/>}/>
-                        <Route path="produit/:id" element={<Produit/>}/>
-                        <Route path="AjouterProduit" element={<AjouterProduit/>}/>
-                        <Route path="ModifierProduit/:id" element={<ModifierProduit/>}/>
-                        <Route path="SupprimerProduit/:id" element={<SupprimerProduit/>}/>
-                        <Route path="Inscription" element={<Inscription/>}/>
-                        <Route path="Connexion" element={<Connexion/>}/>
-                        <Route path="GestionUtilisateur" element={<GestionUtilisateurAdm/>}/>
-                        <Route path="utilisateur/:mail" element={<UtilisateurAdm />} />
+                        <Route path={URL_ROUTE_FRONTEND+"compte"} element={<Compte/>}/>
+                        <Route path={URL_ROUTE_FRONTEND+"panier"} element={<DevisForm/>}/>
+                        <Route path={URL_ROUTE_FRONTEND+"produit/:id"} element={<Produit/>}/>
+                        <Route path={URL_ROUTE_FRONTEND+"AjouterProduit"} element={<AjouterProduit/>}/>
+                        <Route path={URL_ROUTE_FRONTEND+"ModifierProduit/:id"} element={<ModifierProduit/>}/>
+                        <Route path={URL_ROUTE_FRONTEND+"SupprimerProduit/:id"} element={<SupprimerProduit/>}/>
+                        <Route path={URL_ROUTE_FRONTEND+"Inscription"} element={<Inscription/>}/>
+                        <Route path={URL_ROUTE_FRONTEND+"Connexion"} element={<Connexion/>}/>
+                        <Route path={URL_ROUTE_FRONTEND+"GestionUtilisateur"} element={<GestionUtilisateurAdm/>}/>
+                        <Route path={URL_ROUTE_FRONTEND+"utilisateur/:mail"} element={<UtilisateurAdm />} />
 
                     </Routes>
 

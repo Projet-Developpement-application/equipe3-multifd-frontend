@@ -3,6 +3,7 @@ import { fetchAllUtilisateurs } from '../../scripts/httpAdmin.js';
 import { useNavigate } from 'react-router-dom';
 import { UtilisateurContext } from '../../assets/contexte/UtilisateurContext.jsx';
 import {deleteUtilisateurByEmail, activerUtilisateurByEmail} from "../../scripts/httpAdmin.js";
+import {URL_ROUTE_FRONTEND} from "../../App.jsx";
 
 const USERS_PER_PAGE = 8;
 
@@ -33,7 +34,7 @@ export default function GestionUtilisateursAdm() {
     const currentUsers = users.slice(startIndex, startIndex + USERS_PER_PAGE);
 
     const handleViewAccount = (email) => {
-        navigate(`/utilisateur/${encodeURIComponent(email)}`);
+        navigate(URL_ROUTE_FRONTEND+`/utilisateur/${encodeURIComponent(email)}`);
     };
 
 

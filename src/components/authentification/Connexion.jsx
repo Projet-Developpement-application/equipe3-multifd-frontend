@@ -4,6 +4,7 @@ import logo from "../../assets/logo/multifd-logo.svg";
 import {connexion} from "../../scripts/http.js";
 import {UtilisateurContext} from "../../assets/contexte/UtilisateurContext.jsx";
 import Inscription from "./Inscription.jsx";
+import {URL_ROUTE_FRONTEND} from "../../App.jsx";
 
 export default function Connexion() {
     const location = useLocation();
@@ -36,7 +37,7 @@ export default function Connexion() {
                 nom: sessionStorage.getItem("nom"),
                 prenom: sessionStorage.getItem("prenom"),
             });
-            navigate("../");
+            navigate(URL_ROUTE_FRONTEND+"../");
         }
     }
 

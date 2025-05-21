@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import {useParams, Link, redirect, useNavigate} from "react-router-dom";
 import { fetchProduitParId } from "../../scripts/http.js";
 import {ajouteProduitPanier} from "../../scripts/httpClient.js";
-import {URL_BACKEND} from "../../App.jsx";
+import {URL_BACKEND, URL_ROUTE_FRONTEND} from "../../App.jsx";
 import image from "../../assets/generique.jpg";
 
 export default function Produit() {
@@ -36,7 +36,7 @@ export default function Produit() {
     function ajouteProduit(){
         ajouteProduitPanier(produit.id).then(data=>{
             if (data==="non connecté"){
-                navigate("/Connexion")
+                navigate(URL_ROUTE_FRONTEND+"/Connexion")
                 return
             }
             if (data === 201){

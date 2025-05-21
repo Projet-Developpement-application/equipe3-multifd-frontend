@@ -2,6 +2,7 @@ import {useState} from "react";
 import logo from "../../assets/logo/multifd-logo.svg";
 import {useNavigate} from "react-router-dom";
 import {inscription} from "../../scripts/http.js";
+import {URL_ROUTE_FRONTEND} from "../../App.jsx";
 
 export default function Inscription() {
     const [formData, setFormData] = useState({
@@ -79,7 +80,7 @@ export default function Inscription() {
         inscription(formData)
             .then(value => {
                 if (value.status === 200) {
-                    navigate("/connexion", {
+                    navigate(URL_ROUTE_FRONTEND+"/connexion", {
                         state: {successMessage: "Votre compte a été créé avec succès. Veuillez vous connecter."}
                     });
                 } else {

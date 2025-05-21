@@ -2,6 +2,7 @@ import RetourSiteBar from "./RetourSiteBar.jsx";
 import {Link, Outlet, useNavigate} from "react-router-dom";
 import {UtilisateurContext} from "../../assets/contexte/UtilisateurContext.jsx";
 import {useContext} from "react";
+import {URL_ROUTE_FRONTEND} from "../../App.jsx";
 
 export default function Navbar() {
     const {utilisateur,setUtilisateur} = useContext(UtilisateurContext);
@@ -20,7 +21,7 @@ export default function Navbar() {
             entreprise: ''
         })
 
-        navigate("/Connexion");
+        navigate(URL_ROUTE_FRONTEND+"/Connexion");
     };
 
     return (

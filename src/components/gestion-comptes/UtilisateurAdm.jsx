@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import {useParams, useNavigate} from "react-router-dom";
 import {fetchUtilisateur, modifierUtilisateur} from "../../scripts/httpAdmin.js";
+import {URL_ROUTE_FRONTEND} from "../../App.jsx";
 
 export default function UtilisateurAdm() {
     const {mail} = useParams();
@@ -58,7 +59,7 @@ export default function UtilisateurAdm() {
 
     const handleViewDevis = (id) => {
         //Page n'existe pas encore: voir sprint 3
-        navigate(`/devis/${id}`);
+        navigate(URL_ROUTE_FRONTEND+`/devis/${id}`);
     };
 
     if (error) {
