@@ -2,13 +2,14 @@ import React, {useEffect, useRef, useState} from 'react';
 import {
     ajouteSpecificationPanier,
     changeQuantity,
-    fetchUtilisateur,
+    fetchUtilisateur, finirCommmande,
     getPanierEnCours,
     supprimerProduitFromPanier
 } from "../../scripts/httpClient.js";
 
 function DevisForm() {
     const [panier, setPanier] = useState({
+        id:0,
         status: null,
         date: null,
         specification: null,
@@ -29,6 +30,7 @@ function DevisForm() {
 
         getPanierEnCours()
             .then(value => {
+                console.log(value);
                 setPanier(value);
                 setIsFetching(false)
             })
@@ -39,7 +41,7 @@ function DevisForm() {
 
     function handleChangeQuantite(e, produitPanier) {
         const nouveauProduit = {...produitPanier, quantite: parseInt(e.target.value)};
-        console.log(nouveauProduit);
+
         if (isNaN(nouveauProduit.quantite) || nouveauProduit.quantite <= 0) return;
         changeQuantity(nouveauProduit);
         setPanier((ancienPanier) => ({
@@ -61,7 +63,7 @@ function DevisForm() {
     }
 
     function envoyerDemandeDevis() {
-        
+        finirCommmande(panier)
     }
 
     // Calculs totaux avec 15% de taxes

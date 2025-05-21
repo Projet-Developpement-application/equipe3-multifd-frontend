@@ -118,3 +118,18 @@ export async function getHistorique() {
     }
     return await response.json();
 }
+
+export async function finirCommmande(panierCourant) {
+    const response = await fetch(BASE_URL_CLIENT + "/terminerPanier", {
+        method: 'POST',
+        headers: {
+            'Content-type': 'Application/json',
+            'Authorization': 'Bearer ' + sessionStorage.getItem("token")
+        },
+        body:JSON.stringify(panierCourant)
+    });
+    if (!response.ok) {
+        throw new Error("Erreur lors du chargement des commandes")
+    }
+
+}

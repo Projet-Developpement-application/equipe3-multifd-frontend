@@ -1,25 +1,13 @@
 import CompteForm from "./Compte-form.jsx";
 import CompteAffichage from "./Compte-affichage.jsx";
-import {useContext, useEffect, useState} from "react";
+import {useContext, useState} from "react";
 import {UtilisateurContext} from "../../assets/contexte/UtilisateurContext.jsx";
-import {getHistorique, modifierUtilisateur} from "../../scripts/httpClient.js";
+import {modifierUtilisateur} from "../../scripts/httpClient.js";
+import Historique from "./Historique.jsx";
 
 const Compte = () => {
     const [modeEdition, setModeEdition] = useState(false);
     const {utilisateur, setUtilisateur} = useContext(UtilisateurContext);
-    const [listeCommande, setListeCommande] = useState([])
-    const [isFetching, setIsFetching] = useState(false);
-
-    useEffect(() => {
-        setIsFetching(true);
-        getHistorique().then(value => {
-            setListeCommande(value);
-            setIsFetching(false);
-        }).catch(reason => {
-            setIsFetching(false);
-            console.log(reason);
-        })
-    }, [])
 
     const handleSave = (nouvellesInfos) => {
         modifierUtilisateur(utilisateur.mail, nouvellesInfos)
@@ -51,24 +39,7 @@ const Compte = () => {
                     />
                 )}
             </div>
-            <div className="container pt-5">
-                {isFetching ?
-                    (<div className="spinner-border" role="status">
-                        <span className="sr-only">Loading...</span>
-                    </div>) :
-                    //TODO finir d'implementer ici
-                    listeCommande.length > 0 ?
-                        (listeCommande.map((value) => {
-                            <div key={value.id}>
-                                {console.log(value)}
-                            </div>
-                        })) : (
-                            <div>
-                                aucun historique
-                            </div>
-                        )
-                }
-            </div>
+            <Historique/>
         </>
     );
 };
