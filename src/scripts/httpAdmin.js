@@ -100,3 +100,46 @@ export async function fetchAllUtilisateurs() {
     }
     return await response.json();
 }
+
+export async function fetchUtilisateur(email) {
+    const response = await fetch(BASE_URL_ADMIN + "/utilisateur/" + email, {
+        method: "GET",
+        headers: {
+            "Content-type": "application/json",
+            "Authorization": "Bearer " + sessionStorage.getItem("token")
+        }
+    });
+    if (!response.ok) {
+        throw new Error("Erreur lors de la récupération de l'utilisateur " + email);
+    }
+    return await response.json();
+}
+
+
+export async function modifierUtilisateur(email, utilisateur) {
+    const response = await fetch(BASE_URL_ADMIN + "/modifier/" + email, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + sessionStorage.getItem("token")
+        },
+        body: JSON.stringify(utilisateur)
+    });
+    if (!response.ok) {
+        throw new Error("Erreur lors de la modification de l'utilisateur " + email);
+    }
+}
+
+export async function activerUtilisateurByEmail(email) {
+    const response = await fetch(BASE_URL_ADMIN + "/activer/" + email, {
+        method: "PUT",
+        headers: {
+            "Authorization": "Bearer " + sessionStorage.getItem("token")
+        }
+    });
+    if (!response.ok) {
+        throw new Error("Erreur lors de l'activation de l'utilisateur : " + email);
+    }
+
+
+}

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { fetchAllUtilisateurs } from '../../scripts/httpAdmin.js';
 import { useNavigate } from 'react-router-dom';
 import { UtilisateurContext } from '../../assets/contexte/UtilisateurContext.jsx';
-import {deleteUtilisateurByEmail} from "../../scripts/httpAdmin.js";
+import {deleteUtilisateurByEmail, activerUtilisateurByEmail} from "../../scripts/httpAdmin.js";
 
 const USERS_PER_PAGE = 8;
 
@@ -38,17 +38,38 @@ export default function GestionUtilisateursAdm() {
 
 
     function handleDeleteAccount(email) {
-        const confirmed = window.confirm("Êtes-vous sûr de vouloir supprimer cet utilisateur ?");
+        const confirmed = window.confirm("Êtes-vous sûr de vouloir désactiver cet utilisateur ?");
         if (!confirmed) return;
 
         deleteUtilisateurByEmail(email)
             .then(() => {
-                alert("Utilisateur supprimé avec succès !");
+                alert("Utilisateur désactivé avec succès !");
                 setUsers(prevUsers => prevUsers.filter(user => user.mail !== email));
             })
             .catch(err => {
-                console.error("Erreur lors de la suppression de l'utilisateur :", err);
-                alert("Erreur lors de la suppression de l'utilisateur.");
+                console.error("Erreur lors de la désactivation de l'utilisateur :", err);
+                alert("Erreur lors de la désactivation de l'utilisateur.");
+            });
+    }
+
+
+    function handleToggleAccount(email, actif) {
+        const action = actif ? "désactiver" : "activer";
+        const confirmed = window.confirm(`Êtes-vous sûr de vouloir ${action} ce compte ?`);
+        if (!confirmed) return;
+
+        const apiCall = actif ? deleteUtilisateurByEmail : activerUtilisateurByEmail;
+        apiCall(email)
+            .then(() => {
+                setUsers(prevUsers =>
+                    prevUsers.map(user =>
+                        user.mail === email ? { ...user, actif: !actif } : user
+                    )
+                );
+            })
+            .catch(err => {
+                console.error(`Erreur lors de la modification du compte :`, err);
+                alert(`Erreur lors de la modification du compte.`);
             });
     }
 
@@ -71,18 +92,19 @@ export default function GestionUtilisateursAdm() {
                                 <h6 className="mb-3">{user.mail}</h6>
                             </div>
                             <div className="col-12 d-flex justify-content-end">
+
                                 <button
                                     className="btn btn-dark mx-2"
                                     onClick={() => handleViewAccount(user.mail)}
                                 >
                                     Voir le compte
                                 </button>
-                                {user.mail !== utilisateur.mail && (
-                                    <button className="btn btn-danger mx-2"
-                                            onClick={() => handleDeleteAccount(user.mail)}
+                                {user.role !== "ADMIN" && (
+                                    <button
+                                        className={`btn ${user.actif ? "btn-danger" : "btn-success"} mx-2`}
+                                        onClick={() => handleToggleAccount(user.mail, user.actif)}
                                     >
-                                        Supprimer
-
+                                        {user.actif ? "Désactiver le compte" : "Activer le compte"}
                                     </button>
                                 )}
                             </div>

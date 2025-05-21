@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {useParams, useNavigate} from "react-router-dom";
-import {fetchUtilisateur, modifierUtilisateur} from "../../scripts/httpClient.js";
+import {fetchUtilisateur, modifierUtilisateur} from "../../scripts/httpAdmin.js";
 
 export default function UtilisateurAdm() {
     const {mail} = useParams();
@@ -22,16 +22,7 @@ export default function UtilisateurAdm() {
                 setError("Impossible de charger les informations de l'utilisateur.");
             });
 
-        setIsFetchingDevis(true);
-        setTimeout(() => {
-            const fakeDevis = [
-                {id: 1, date: "2023-10-01", montant: 150.0},
-                {id: 2, date: "2023-09-15", montant: 200.5},
-                {id: 3, date: "2023-08-30", montant: 99.99},
-            ];
-            setDevis(fakeDevis);
-            setIsFetchingDevis(false);
-        }, 3000); //hihihihihih
+    
     }, [mail]);
 
     const handleChange = (e) => {
