@@ -131,5 +131,8 @@ export async function finirCommmande(panierCourant) {
     if (!response.ok) {
         throw new Error("Erreur lors du chargement des commandes")
     }
+    if (response.ok){
+        return response;
+    }
 
 }

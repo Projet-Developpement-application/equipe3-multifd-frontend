@@ -9,7 +9,7 @@ import {
 
 function DevisForm() {
     const [panier, setPanier] = useState({
-        id:0,
+        id: 0,
         status: null,
         date: null,
         specification: null,
@@ -30,7 +30,6 @@ function DevisForm() {
 
         getPanierEnCours()
             .then(value => {
-                console.log(value);
                 setPanier(value);
                 setIsFetching(false)
             })
@@ -63,10 +62,24 @@ function DevisForm() {
     }
 
     function envoyerDemandeDevis() {
-        finirCommmande(panier)
+        finirCommmande(panier).then(value => {
+            value.status === 202 ? (alert("Panier validé avec succés"), setPanier(
+                    {
+                        id: 0,
+                        status: null,
+                        date: null,
+                        specification: null,
+                        utilisateur: null,
+                        listeProduitPanier: []
+
+                    }))
+                :
+                alert("erreur lors de la validation du panier")
+        })
+
     }
 
-    // Calculs totaux avec 15% de taxes
+// Calculs totaux avec 15% de taxes
     if (panier.listeProduitPanier !== undefined && !isFetching) {
         totalHT = panier.listeProduitPanier.reduce((acc, item) => acc + item.quantite * item.prix, 0);
         totalTVA = totalHT * 0.15;
