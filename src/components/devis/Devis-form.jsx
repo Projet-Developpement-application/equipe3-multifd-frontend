@@ -61,7 +61,7 @@ function DevisForm() {
     }
 
     function envoyerDemandeDevis() {
-
+        
     }
 
     // Calculs totaux avec 15% de taxes
