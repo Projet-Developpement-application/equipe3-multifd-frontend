@@ -2,7 +2,7 @@ import RetourSiteBar from "./RetourSiteBar.jsx";
 import {Link, Outlet, useNavigate} from "react-router-dom";
 import {UtilisateurContext} from "../../assets/contexte/UtilisateurContext.jsx";
 import {useContext} from "react";
-import {URL_ROUTE_FRONTEND} from "../../App.jsx";
+//import {URL_ROUTE_FRONTEND} from "../../App.jsx";
 
 export default function Navbar() {
     const {utilisateur,setUtilisateur} = useContext(UtilisateurContext);
@@ -21,7 +21,7 @@ export default function Navbar() {
             entreprise: ''
         })
 
-        navigate(URL_ROUTE_FRONTEND+"/Connexion");
+        navigate("Connexion");
     };
 
     return (
@@ -29,7 +29,7 @@ export default function Navbar() {
             <RetourSiteBar/>
             <nav className="navbar w-100 z-1 navbar-expand-lg text-white bg-dark" data-bs-theme="dark">
                 <div className="container-fluid d-flex justify-content-between align-items-start">
-                    <Link className="navbar-brand navbar-logo ps-5" to={URL_ROUTE_FRONTEND+"/"}>
+                    <Link className="navbar-brand navbar-logo ps-5" to={"/"}>
                         MULTI-FD
                     </Link>
 

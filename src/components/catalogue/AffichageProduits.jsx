@@ -82,7 +82,7 @@ export default function AffichageProduits({filtres}) {
                                         <div key={product.id} className="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
                                             <div
                                                     className="card  h-100 border-1 rounded-top shadow-lg product-card-hover">
-                                                    <Link to={URL_ROUTE_FRONTEND+`produit/${product.id}`}
+                                                    <Link to={`produit/${product.id}`}
                                                           className="text-decoration-none text-dark">
                                                         {product.imagePath != null ? (
                                                             <img src={`${URL_BACKEND}/uploads/images/${product.imagePath}`} className="card-img-top rounded-top img-produit-fixe"
@@ -106,7 +106,7 @@ export default function AffichageProduits({filtres}) {
                                                                     <div className="row g-2">
                                                                         <div className="col-12 col-md-6">
                                                                             <Link
-                                                                                to={URL_ROUTE_FRONTEND+`/ModifierProduit/${product.id}`}
+                                                                                to={`/ModifierProduit/${product.id}`}
                                                                                 className="btn btn-dark w-100 d-flex align-items-center justify-content-center gap-2"
                                                                             >
                                                                                 <i className="bi bi-pencil-square"></i>
