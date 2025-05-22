@@ -14,7 +14,7 @@ import {useEffect, useState} from "react";
 import ModifierProduit from "./components/gestion-produits/Modifier-Produit-adm.jsx";
 import SupprimerProduit from "./components/gestion-produits/Supprimer-Produit-adm.jsx";
 import UtilisateurAdm from "./components/gestion-comptes/UtilisateurAdm.jsx";
- export const URL_ROUTE_FRONTEND = "/siteReact/equipe3-multifd-frontend/";
+ export const URL_ROUTE_FRONTEND = "/siteReact/equipe3-multifd-frontend";
 //export const URL_ROUTE_FRONTEND = "";
 export const URL_BACKEND = "http://localhost:8080";
 
