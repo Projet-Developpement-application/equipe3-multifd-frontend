@@ -59,7 +59,7 @@ export default function UtilisateurAdm() {
 
     const handleViewDevis = (id) => {
         //Page n'existe pas encore: voir sprint 3
-        navigate(URL_ROUTE_FRONTEND+`/devis/${id}`);
+        navigate(`/devis/${id}`);
     };
 
     if (error) {

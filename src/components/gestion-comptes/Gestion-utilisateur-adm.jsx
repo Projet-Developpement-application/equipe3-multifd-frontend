@@ -34,7 +34,7 @@ export default function GestionUtilisateursAdm() {
     const currentUsers = users.slice(startIndex, startIndex + USERS_PER_PAGE);
 
     const handleViewAccount = (email) => {
-        navigate(URL_ROUTE_FRONTEND+`/utilisateur/${encodeURIComponent(email)}`);
+        navigate(`utilisateur/${encodeURIComponent(email)}`);
     };
 
 

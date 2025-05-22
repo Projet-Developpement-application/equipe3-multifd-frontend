@@ -37,7 +37,7 @@ export default function Connexion() {
                 nom: sessionStorage.getItem("nom"),
                 prenom: sessionStorage.getItem("prenom"),
             });
-            navigate(URL_ROUTE_FRONTEND+"../");
+            navigate("../");
         }
     }
 
@@ -107,7 +107,7 @@ export default function Connexion() {
                         </div>
                     </form>
                     <div className="pt-5 d-flex align-items-start justify-content-center">
-                    <Link to={URL_ROUTE_FRONTEND+"/Inscription"} className="text-decoration-none text-dark">
+                    <Link to={"Inscription"} className="text-decoration-none text-dark">
                             <i className="bi bi-person-add"></i> Créer un compte
                     </Link></div>
                 </div>
