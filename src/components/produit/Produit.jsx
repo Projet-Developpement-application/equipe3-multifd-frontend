@@ -36,7 +36,7 @@ export default function Produit() {
     function ajouteProduit(){
         ajouteProduitPanier(produit.id).then(data=>{
             if (data==="non connecté"){
-                navigate("Connexion");
+                navigate(URL_ROUTE_FRONTEND+"/Connexion")
                 return
             }
             if (data === 201){

@@ -107,7 +107,7 @@ const ProduitForm = ({ produitImage, produit, marques, etats, errors, handleChan
                             </div>
 
                             <div className="col-12 d-flex justify-content-between">
-                                <Link to={"/"} className="btn btn-dark">
+                                <Link to={URL_ROUTE_FRONTEND+"/"} className="btn btn-dark">
                                     Retour
                                 </Link>
                                 <button type="submit" className="btn btn-dark">

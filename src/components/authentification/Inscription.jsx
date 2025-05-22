@@ -80,7 +80,7 @@ export default function Inscription() {
         inscription(formData)
             .then(value => {
                 if (value.status === 200) {
-                    navigate("connexion", {
+                    navigate(URL_ROUTE_FRONTEND+"/connexion", {
                         state: {successMessage: "Votre compte a été créé avec succès. Veuillez vous connecter."}
                     });
                 } else {
