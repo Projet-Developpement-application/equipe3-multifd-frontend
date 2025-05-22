@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 import ModifierProduit from "./components/gestion-produits/Modifier-Produit-adm.jsx";
 import SupprimerProduit from "./components/gestion-produits/Supprimer-Produit-adm.jsx";
 import UtilisateurAdm from "./components/gestion-comptes/UtilisateurAdm.jsx";
-export const URL_BACKEND = "http://localhost:8080";
+export const URL_BACKEND = "http://172.20.46.45:8080/backend-projet-prod";
 export const URL_ROUTE_FRONTEND = "";
 function App() {
     const [utilisateur, setUtilisateur] = useState({
