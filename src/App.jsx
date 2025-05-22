@@ -14,7 +14,7 @@ import ModifierProduit from "./components/gestion-produits/Modifier-Produit-adm.
 import SupprimerProduit from "./components/gestion-produits/Supprimer-Produit-adm.jsx";
 import UtilisateurAdm from "./components/gestion-comptes/UtilisateurAdm.jsx";
 export const URL_BACKEND = "http://localhost:8080";
-export const URL_ROUTE_FRONTEND = "http://localhost:3000/siteReact/equipe3-multifd-frontend";
+export const URL_ROUTE_FRONTEND = "";
 function App() {
     const [utilisateur, setUtilisateur] = useState({
         role: null,
