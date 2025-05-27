@@ -103,11 +103,11 @@ function DevisForm() {
                     <h1 className="my-5">Demande de devis</h1>
 
                     <div className="mb-5">
-                        <h4>Veuillez choisir par quel moyen vous souhaitez être contacté:</h4>
+                        <h4 className="pb-3">Veuillez choisir par quel moyen vous souhaitez être contacté:</h4>
                         <div className="form-check mb-4">
                             <input
                                 type="radio"
-                                className="form-check-input"
+                                className="form-check-input radio"
                                 name="contactMethod"
                                 id="contactPhone"
                                 value="Téléphone"

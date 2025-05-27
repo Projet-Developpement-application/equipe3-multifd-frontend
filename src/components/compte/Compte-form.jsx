@@ -62,7 +62,7 @@ const CompteForm = ({ informations, onSave, onCancel }) => {
                     </div>
                 </div>
 
-                <div className="row mb-2">
+                <div className="row mb-4">
                     <div className="col-md-6">
                         <label htmlFor="entreprise" className="form-label"><strong>Entreprise</strong></label>
                         <input
