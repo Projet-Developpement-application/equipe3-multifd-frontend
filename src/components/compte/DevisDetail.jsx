@@ -35,14 +35,9 @@ export default function DevisDetail() {
 
     return (
         <div className="container py-4">
-            <h3>Détails de la commande #{id}</h3>
+            <h3 className="my-5">Détails de la commande #{id}</h3>
 
-            <button
-                className="btn btn-secondary mb-3"
-                onClick={() => navigate("/compte")}
-            >
-                ← Retour à l'historique
-            </button>
+
 
             {isFetching ? (
                 <p>Chargement...</p>
@@ -57,8 +52,8 @@ export default function DevisDetail() {
                         <tr>
                             <th>Nom du produit</th>
                             <th>Quantité</th>
-                            <th>Prix unitaire (CAD)</th>
-                            <th>Sous-total (CAD)</th>
+                            <th>Prix unitaire</th>
+                            <th>Sous-total</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -90,6 +85,12 @@ export default function DevisDetail() {
                             <strong>Total TTC :</strong> {calculTotalTTC(commande.listeProduitPanier).toFixed(2)} $ CAD
                         </h5>
                     </div>
+                    <button
+                        className="btn btn-secondary mb-3"
+                        onClick={() => navigate("/compte")}
+                    >
+                        ← Retour à l'historique
+                    </button>
                 </>
             )}
         </div>

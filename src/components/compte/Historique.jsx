@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getHistorique } from "../../scripts/httpClient.js";
 import { useNavigate } from "react-router-dom";
 
@@ -36,11 +36,10 @@ export default function Historique() {
     };
 
     return (
-        <div className="container py-4">
-            <div className="row justify-content-center">
+            <div className="row  mt-5 w-100 bg-light ">
                 <div className="col-12 col-md-10 col-lg-8">
-                    <div className="bg-white border rounded shadow-sm p-4 mb-5">
-                        <h5 className="fw-bold mb-4">Historique de devis</h5>
+                    <div className="bg-white border border-2 rounded p-4 mb-5 ">
+                        <h3 className="mb-3">Historique de devis</h3>
                         {isFetching ? (
                             <div className="spinner-border" role="status">
                                 <span className="sr-only">Chargement...</span>
@@ -49,8 +48,8 @@ export default function Historique() {
                             <div>Aucun historique</div>
                         ) : (
                             <div className="table-responsive">
-                                <table className="table table-bordered table-hover align-middle mb-0">
-                                    <thead className="table-light">
+                                <table className="table table-bordered  table-hover align-middle mb-0">
+                                    <thead className="table-primary border-1">
                                     <tr>
                                         <th scope="col">Date</th>
                                         <th scope="col">Total (TTC)</th>
@@ -84,6 +83,5 @@ export default function Historique() {
                     </div>
                 </div>
             </div>
-        </div>
     );
 }

@@ -38,8 +38,9 @@ const Compte = () => {
                         onEdit={() => setModeEdition(true)}
                     />
                 )}
+                <Historique/>
+
             </div>
-            <Historique/>
         </>
     );
 };
