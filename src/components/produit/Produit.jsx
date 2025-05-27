@@ -63,7 +63,8 @@ export default function Produit() {
 
                     <div className="col-12 col-lg-7 d-flex flex-column justify-content-between" style={{ minHeight: "400px" }}>
                         <div>
-                            <h2><strong>{produit && produit.nom ? produit.nom : "Nom du produit indisponible"}</strong></h2>
+                            <h2 className="m-0 p-0"><strong>{produit && produit.nom + produit.marque.nom ? produit.marque.nom +" - "+ produit.nom  : "Nom du produit indisponible"}</strong></h2>
+
                             <h4 className="text-dark">
                                 <strong>{produit && produit.prix ? produit.prix + " $" : "Prix non disponible"} –</strong>{" "}
                                 <span className={produit && produit.disponible ? "text-success" : "text-danger"}>
