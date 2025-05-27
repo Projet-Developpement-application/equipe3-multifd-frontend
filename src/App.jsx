@@ -14,6 +14,7 @@ import ModifierProduit from "./components/gestion-produits/Modifier-Produit-adm.
 import SupprimerProduit from "./components/gestion-produits/Supprimer-Produit-adm.jsx";
 import UtilisateurAdm from "./components/gestion-comptes/UtilisateurAdm.jsx";
 import ConfirmationDevis from "./components/devis/Confirmation-devis.jsx";
+import FooterSection from "./components/footer/FooterSection.jsx";
 export const URL_BACKEND = "http://localhost:8080";
 export const URL_ROUTE_FRONTEND = "";
 function App() {
@@ -54,9 +55,10 @@ function App() {
                     <Route path="confirmation" element={<ConfirmationDevis />} />
 
                 </Routes>
+                <FooterSection />
             </BrowserRouter>
         </UtilisateurContext.Provider>
-    );
+    )
 }
 
 export default App;
