@@ -24,6 +24,17 @@ export default function Historique() {
         navigate(`/commande/${id}`);
     };
 
+    const calculTotalTTC = (listeProduitPanier) => {
+        if (!Array.isArray(listeProduitPanier)) return "N/A";
+        const sousTotal = listeProduitPanier.reduce(
+            (acc, item) => acc + item.produit.prix * item.quantite,
+            0
+        );
+        const tps = sousTotal * 0.05;
+        const tvq = sousTotal * 0.09975;
+        return (sousTotal + tps + tvq).toFixed(2);
+    };
+
     return (
         <div className="container py-4">
             <div className="row justify-content-center">
@@ -42,7 +53,7 @@ export default function Historique() {
                                     <thead className="table-light">
                                     <tr>
                                         <th scope="col">Date</th>
-                                        <th scope="col">Commande</th>
+                                        <th scope="col">Total (TTC)</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -62,7 +73,7 @@ export default function Historique() {
                                                 style={{ cursor: "pointer" }}
                                             >
                                                 <td>{dateLisible}</td>
-                                                <td>{`Commande #${item.id}`}</td>
+                                                <td>{calculTotalTTC(item.listeProduitPanier)} $ CAD</td>
                                             </tr>
                                         );
                                     })}
