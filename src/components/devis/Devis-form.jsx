@@ -6,6 +6,7 @@ import {
     getPanierEnCours,
     supprimerProduitFromPanier
 } from "../../scripts/httpClient.js";
+import {useNavigate} from "react-router-dom";
 
 function DevisForm() {
     const [panier, setPanier] = useState({
@@ -19,6 +20,8 @@ function DevisForm() {
     const [contactMethod, setContactMethod] = useState('Courriel');
     const [contactValue, setContactValue] = useState('');
     const [isFetching, setIsFetching] = useState(true);
+    const navigate = useNavigate();
+
     let specification;
     let totalHT, totalTVA, totalTTC;
 
@@ -61,22 +64,23 @@ function DevisForm() {
         supprimerProduitFromPanier(idProduitPanier)
     }
 
+
     function envoyerDemandeDevis() {
         finirCommmande(panier).then(value => {
-            value.status === 202 ? (alert("Panier validé avec succés"), setPanier(
-                    {
-                        id: 0,
-                        status: null,
-                        date: null,
-                        specification: null,
-                        utilisateur: null,
-                        listeProduitPanier: []
-
-                    }))
-                :
-                alert("erreur lors de la validation du panier")
-        })
-
+            if (value.status === 202) {
+                setPanier({
+                    id: 0,
+                    status: null,
+                    date: null,
+                    specification: null,
+                    utilisateur: null,
+                    listeProduitPanier: []
+                });
+                navigate('/confirmation');
+            } else {
+                alert("erreur lors de la validation du panier");
+            }
+        });
     }
 
 // Calculs totaux avec 15% de taxes

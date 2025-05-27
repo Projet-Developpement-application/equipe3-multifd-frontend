@@ -13,7 +13,8 @@ export default function ConfirmationDevis(){
                         <button className="btn btn-outline-dark ms-2">
                             Retour à la boutique
                         </button>
-                    </Link>                </div>
+                    </Link>
+                </div>
             </div>
 
         </>
