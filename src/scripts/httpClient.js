@@ -118,7 +118,6 @@ export async function getHistorique() {
     }
     return await response.json();
 }
-
 export async function finirCommmande(panierCourant) {
     const response = await fetch(BASE_URL_CLIENT + "/terminerPanier", {
         method: 'POST',

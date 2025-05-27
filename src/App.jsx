@@ -14,6 +14,7 @@ import ModifierProduit from "./components/gestion-produits/Modifier-Produit-adm.
 import SupprimerProduit from "./components/gestion-produits/Supprimer-Produit-adm.jsx";
 import UtilisateurAdm from "./components/gestion-comptes/UtilisateurAdm.jsx";
 import ConfirmationDevis from "./components/devis/Confirmation-devis.jsx";
+import DevisDetail from "./components/compte/DevisDetail.jsx";
 import FooterSection from "./components/footer/FooterSection.jsx";
 export const URL_BACKEND = "http://localhost:8080";
 export const URL_ROUTE_FRONTEND = "";
@@ -57,6 +58,7 @@ function App() {
                     <Route path="GestionUtilisateur" element={<GestionUtilisateurAdm />} />
                     <Route path="utilisateur/:mail" element={<UtilisateurAdm />} />
                     <Route path="confirmation" element={<ConfirmationDevis />} />
+                    <Route path="/commande/:id" element={<DevisDetail/>} />
 
                 </Routes>
                 </div>
