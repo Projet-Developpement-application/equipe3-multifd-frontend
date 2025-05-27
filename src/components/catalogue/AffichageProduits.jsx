@@ -140,7 +140,7 @@ export default function AffichageProduits({filtres}) {
 
                             </div>
                             <nav className="mt-auto">
-                                <ul className="pagination justify-content-center mb-4">
+                                <ul className="pagination justify-content-center mt-5 mb-0">
                                     {Array.from({length: totalPages}, (_, index) => (
                                         <li key={index}
                                             className={`page-item ${pageCourrante === index + 1 ? "active" : ""}`}>
