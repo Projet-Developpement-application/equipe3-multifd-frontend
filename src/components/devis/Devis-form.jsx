@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     ajouteSpecificationPanier,
     changeQuantity,
@@ -43,7 +43,6 @@ function DevisForm() {
 
     function handleChangeQuantite(e, produitPanier) {
         const nouveauProduit = {...produitPanier, quantite: parseInt(e.target.value)};
-
         if (isNaN(nouveauProduit.quantite) || nouveauProduit.quantite <= 0) return;
         changeQuantity(nouveauProduit);
         setPanier((ancienPanier) => ({
@@ -64,7 +63,6 @@ function DevisForm() {
         supprimerProduitFromPanier(idProduitPanier)
     }
 
-
     function envoyerDemandeDevis() {
         finirCommmande(panier).then(value => {
             if (value.status === 202) {
@@ -83,7 +81,6 @@ function DevisForm() {
         });
     }
 
-// Calculs totaux avec 15% de taxes
     if (panier.listeProduitPanier !== undefined && !isFetching) {
         totalHT = panier.listeProduitPanier.reduce((acc, item) => acc + item.quantite * item.prix, 0);
         totalTVA = totalHT * 0.15;
@@ -153,7 +150,6 @@ function DevisForm() {
                     {panier.listeProduitPanier.length > 0 ? (
                         <>
                             <h6>Ajouter des spécifications à votre devis:</h6>
-
                             <textarea
                                 className="form-control"
                                 defaultValue={specification !== "" ? specification : undefined}
@@ -169,68 +165,71 @@ function DevisForm() {
                             </div>
 
                             <h2>Résumé de votre devis</h2>
-                            <table className="table table-bordered table-light">
-                                <thead>
-                                <tr>
-                                    <th className="text-center">Description</th>
-                                    <th className="text-center">Qté</th>
-                                    <th className="text-center">Prix unitaire</th>
-                                    <th className="text-center">Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {panier.listeProduitPanier.map(value => (
-                                    <tr key={value.id}>
-                                        <td className="text-center">{value.produit.nom}</td>
-                                        <td className="text-center">
-                                            <input
-                                                type="number"
-                                                onChange={(e) => handleChangeQuantite(e, value)}
-                                                className="form-control text-center"
-                                                value={value.quantite}
-                                                min={0}
-                                                style={{maxWidth: '80px', margin: '0 auto'}}
-                                            />
-                                        </td>
-                                        <td className="text-center">{value.prix.toFixed(2)}</td>
-                                        <td className="text-center">
-                                            <button
-                                                type="button"
-                                                className="btn btn-danger"
-                                                onClick={() => supprimerDuPanier(value.id)}
-                                                title="Supprimer"
-                                            >
-                                                <i className="bi-trash bi"></i>
-                                            </button>
-                                        </td>
+                            <div className="table-responsive">
+                                <table className="table table-bordered table-light">
+                                    <thead>
+                                    <tr>
+                                        <th className="text-center">Description</th>
+                                        <th className="text-center">Qté</th>
+                                        <th className="text-center">Prix unitaire</th>
+                                        <th className="text-center">Action</th>
                                     </tr>
-                                ))}
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                    {panier.listeProduitPanier.map(value => (
+                                        <tr key={value.id}>
+                                            <td className="text-center">{value.produit.nom}</td>
+                                            <td className="text-center">
+                                                <input
+                                                    type="number"
+                                                    onChange={(e) => handleChangeQuantite(e, value)}
+                                                    className="form-control text-center"
+                                                    value={value.quantite}
+                                                    min={0}
+                                                    style={{maxWidth: '80px', margin: '0 auto'}}
+                                                />
+                                            </td>
+                                            <td className="text-center">{value.prix.toFixed(2)}</td>
+                                            <td className="text-center">
+                                                <button
+                                                    type="button"
+                                                    className="btn btn-danger"
+                                                    onClick={() => supprimerDuPanier(value.id)}
+                                                    title="Supprimer"
+                                                >
+                                                    <i className="bi-trash bi"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                    </tbody>
+                                </table>
+                            </div>
 
-                            <table
-                                className="table table-bordered text-center"
-                                style={{width: '30%', float: 'right'}}
-                            >
-                                <tbody>
-                                <tr>
-                                    <td><strong>Sous-total :</strong></td>
-                                    <td>{totalHT.toFixed(2)} $</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Taxes (15%) :</strong></td>
-                                    <td>{totalTVA.toFixed(2)} $</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Total :</strong></td>
-                                    <td>{totalTTC.toFixed(2)} $</td>
-                                </tr>
-                                </tbody>
-                            </table>
+                            <div className="row justify-content-end">
+                                <div className="col-12 col-sm-8 col-md-6 col-lg-8 col-xl-6">
+                                    <div className="table-responsive">
+                                        <table className="table table-bordered text-center mb-0">
+                                            <tbody>
+                                            <tr>
+                                                <td><strong>Sous-total :</strong></td>
+                                                <td>{totalHT.toFixed(2)} $</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Taxes (15%) :</strong></td>
+                                                <td>{totalTVA.toFixed(2)} $</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Total :</strong></td>
+                                                <td>{totalTTC.toFixed(2)} $</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
 
-                            <div style={{clear: 'both'}}></div>
-
-                            <div className="d-flex justify-content-end mt-5">
+                            <div className="d-flex justify-content-end my-5">
                                 <button
                                     type="button"
                                     className="btn btn-dark"
@@ -249,7 +248,6 @@ function DevisForm() {
             </>
         )
     );
-
 }
 
 export default DevisForm;

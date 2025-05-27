@@ -91,9 +91,13 @@ export default function AffichageProduits({filtres}) {
                                                                alt={product.nom}/>}
 
                                                         <div className="card-body d-flex flex-column">
-                                                            <h5 className="card-title">{product.nom}</h5>
-                                                            <p className="card-text">{product.description}</p>
-                                                            <p className="card-text fw-bold">{product.prix} $</p>
+                                                            <h5 className="card-title fs-4">{product.nom}</h5>
+                                                            <div className="d-flex justify-content-between align-items-center">
+                                                                <p className="card-title ">{product.marque.nom}</p>
+                                                            </div>
+                                                            <div className="d-flex justify-content-end align-items-center">
+                                                                <p className="card-title mb-0 mt-2 ">{product.prix.toFixed(2)} $</p>
+                                                            </div>
                                                         </div>
                                                     </Link>
 

@@ -15,6 +15,7 @@ import SupprimerProduit from "./components/gestion-produits/Supprimer-Produit-ad
 import UtilisateurAdm from "./components/gestion-comptes/UtilisateurAdm.jsx";
 import ConfirmationDevis from "./components/devis/Confirmation-devis.jsx";
 import DevisDetail from "./components/compte/DevisDetail.jsx";
+import FooterSection from "./components/footer/FooterSection.jsx";
 export const URL_BACKEND = "http://localhost:8080";
 export const URL_ROUTE_FRONTEND = "";
 function App() {
@@ -38,8 +39,12 @@ function App() {
 
     return (
         <UtilisateurContext.Provider value={{ utilisateur, setUtilisateur }}>
+            <div className="d-flex flex-column min-vh-100">
+
             <BrowserRouter >
                 <Navbar />
+                <div className="flex-grow-1">
+
                 <Routes>
                     <Route index element={<Catalogue />} />
                     <Route path="compte" element={<Compte />} />
@@ -56,9 +61,12 @@ function App() {
                     <Route path="/commande/:id" element={<DevisDetail/>} />
 
                 </Routes>
+                </div>
+                <FooterSection />
             </BrowserRouter>
+            </div>
         </UtilisateurContext.Provider>
-    );
+    )
 }
 
 export default App;
