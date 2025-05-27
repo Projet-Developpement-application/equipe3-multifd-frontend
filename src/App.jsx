@@ -38,8 +38,12 @@ function App() {
 
     return (
         <UtilisateurContext.Provider value={{ utilisateur, setUtilisateur }}>
+            <div className="d-flex flex-column min-vh-100">
+
             <BrowserRouter >
                 <Navbar />
+                <div className="flex-grow-1">
+
                 <Routes>
                     <Route index element={<Catalogue />} />
                     <Route path="compte" element={<Compte />} />
@@ -55,8 +59,10 @@ function App() {
                     <Route path="confirmation" element={<ConfirmationDevis />} />
 
                 </Routes>
+                </div>
                 <FooterSection />
             </BrowserRouter>
+            </div>
         </UtilisateurContext.Provider>
     )
 }
