@@ -13,7 +13,8 @@ import { useEffect, useState } from "react";
 import ModifierProduit from "./components/gestion-produits/Modifier-Produit-adm.jsx";
 import SupprimerProduit from "./components/gestion-produits/Supprimer-Produit-adm.jsx";
 import UtilisateurAdm from "./components/gestion-comptes/UtilisateurAdm.jsx";
-export const URL_BACKEND = "http://172.20.46.45:8080/backend-projet-prod";
+import ConfirmationDevis from "./components/devis/Confirmation-devis.jsx";
+export const URL_BACKEND = "http://localhost:8080";
 export const URL_ROUTE_FRONTEND = "";
 function App() {
     const [utilisateur, setUtilisateur] = useState({
@@ -36,7 +37,7 @@ function App() {
 
     return (
         <UtilisateurContext.Provider value={{ utilisateur, setUtilisateur }}>
-            <BrowserRouter basename="/siteReact/equipe3-multifd-frontend">
+            <BrowserRouter >
                 <Navbar />
                 <Routes>
                     <Route index element={<Catalogue />} />
@@ -50,6 +51,8 @@ function App() {
                     <Route path="Connexion" element={<Connexion />} />
                     <Route path="GestionUtilisateur" element={<GestionUtilisateurAdm />} />
                     <Route path="utilisateur/:mail" element={<UtilisateurAdm />} />
+                    <Route path="confirmation" element={<ConfirmationDevis />} />
+
                 </Routes>
             </BrowserRouter>
         </UtilisateurContext.Provider>
