@@ -206,29 +206,21 @@ function DevisForm() {
                                 </table>
                             </div>
 
-                            <div className="row justify-content-end">
-                                <div className="col-12 col-sm-8 col-md-6 col-lg-8 col-xl-6">
-                                    <div className="table-responsive">
-                                        <table className="table table-bordered text-center mb-0">
-                                            <tbody>
-                                            <tr>
-                                                <td><strong>Sous-total :</strong></td>
-                                                <td>{totalHT.toFixed(2)} $</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Taxes (15%) :</strong></td>
-                                                <td>{totalTVA.toFixed(2)} $</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Total :</strong></td>
-                                                <td>{totalTTC.toFixed(2)} $</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
 
+                            <div className="text-end mt-4">
+                                <p>
+                                    <strong>Sous-total :</strong>{" "}
+                                    {totalHT.toFixed(2)} $ CAD
+                                </p>
+                                <p>
+                                    <strong>Taxes (15%) :</strong>{" "}
+                                    {totalTVA.toFixed(2) } $ CAD
+                                </p>
+                                <h5>
+                                    <strong>Total TTC
+                                        :</strong> {totalTTC.toFixed(2)} $ CAD
+                                </h5>
+                            </div>
                             <div className="d-flex justify-content-end my-5">
                                 <button
                                     type="button"

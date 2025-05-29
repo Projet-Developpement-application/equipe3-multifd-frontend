@@ -74,12 +74,8 @@ export default function DevisDetail() {
                             {(calculTotalTTC(commande.listeProduitPanier) / 1.14975).toFixed(2)} $ CAD
                         </p>
                         <p>
-                            <strong>TPS (5%) :</strong>{" "}
-                            {(calculTotalTTC(commande.listeProduitPanier) * 0.05 / 1.14975).toFixed(2)} $ CAD
-                        </p>
-                        <p>
-                            <strong>TVQ (9.975%) :</strong>{" "}
-                            {(calculTotalTTC(commande.listeProduitPanier) * 0.09975 / 1.14975).toFixed(2)} $ CAD
+                            <strong>Taxes (15%) :</strong>{" "}
+                            {(calculTotalTTC(commande.listeProduitPanier) * 0.15 / 1.14975).toFixed(2)} $ CAD
                         </p>
                         <h5>
                             <strong>Total TTC :</strong> {calculTotalTTC(commande.listeProduitPanier).toFixed(2)} $ CAD
