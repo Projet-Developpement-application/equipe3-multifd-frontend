@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getHistorique } from "../../scripts/httpClient.js";
 import { useNavigate } from "react-router-dom";
+import { cad } from "../../scripts/formatters.js"
 
 export default function Historique() {
     const navigate = useNavigate();
@@ -72,7 +73,7 @@ export default function Historique() {
                                                 style={{ cursor: "pointer" }}
                                             >
                                                 <td>{dateLisible}</td>
-                                                <td>{calculTotalTTC(item.listeProduitPanier)} $ CAD</td>
+                                                <td>{cad.format(calculTotalTTC(item.listeProduitPanier))}</td>
                                             </tr>
                                         );
                                     })}

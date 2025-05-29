@@ -4,6 +4,7 @@ import { fetchProduitParId } from "../../scripts/http.js";
 import {ajouteProduitPanier} from "../../scripts/httpClient.js";
 import {URL_BACKEND, URL_ROUTE_FRONTEND} from "../../App.jsx";
 import image from "../../assets/generique.jpg";
+import { cad } from "../../scripts/formatters.js";
 
 export default function Produit() {
     const { id } = useParams();
@@ -65,13 +66,15 @@ export default function Produit() {
                         <div>
                             <h2 className="m-0 p-0 "><strong>{produit && produit.nom + produit.marque.nom ? produit.marque.nom +" - "+ produit.nom  : "Nom du produit indisponible"}</strong></h2>
 
-                            <h4 className=" mt-1">
-                                <strong>{produit && produit.prix ? produit.prix + " $" : "Prix non disponible"} –</strong>{" "}
-                                <span className={produit && produit.disponible ? "text-success" : "text-danger"}>
+                            <div className="mt-1 d-flex align-items-center justify-content-start">
+                                <span className="texte-bleu-bouton h4 mb-0">
+                                    {produit && produit.prix ? cad.format(produit.prix): "Prix non disponible"}
+                                </span>
+                                <i className="bi bi-dash ms-1 text-dark"> </i>
+                                <span className="ms-1 h4 mb-0">
                                     {produit && produit.disponible ? "En stock" : "Indisponible"}
                                 </span>
-                            </h4>
-
+                            </div>
                             <h4 className="mt-5"><strong>Détails du produit</strong></h4>
                             <table className="table w-lg-75 w-md-50">
                                 <tbody>
@@ -109,7 +112,7 @@ export default function Produit() {
                                     <i className="bi bi-arrow-left"></i> Retour à la boutique
                                 </button>
                             </Link>
-                            <button className="btn btn-dark ms-2" onClick={()=>{
+                            <button className="btn bg-bleu-bouton ms-2 text-light" onClick={()=>{
                                     ajouteProduit();
                             }}>
                                 <i className="bi bi-cart"></i> Ajouter au panier

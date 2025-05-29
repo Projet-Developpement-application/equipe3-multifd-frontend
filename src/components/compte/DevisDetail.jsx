@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getHistorique } from "../../scripts/httpClient.js";
+import { cad } from "../../scripts/formatters.js"
 
 export default function DevisDetail() {
     const { id } = useParams();
@@ -71,18 +72,18 @@ export default function DevisDetail() {
                     <div className="text-end mt-4">
                         <p>
                             <strong>Sous-total :</strong>{" "}
-                            {(calculTotalTTC(commande.listeProduitPanier) / 1.14975).toFixed(2)} $ CAD
+                            {cad.format(calculTotalTTC(commande.listeProduitPanier) / 1.14975)}
                         </p>
                         <p>
                             <strong>TPS (5%) :</strong>{" "}
-                            {(calculTotalTTC(commande.listeProduitPanier) * 0.05 / 1.14975).toFixed(2)} $ CAD
+                            {cad.format(calculTotalTTC(commande.listeProduitPanier) * 0.05 / 1.14975)}
                         </p>
                         <p>
                             <strong>TVQ (9.975%) :</strong>{" "}
-                            {(calculTotalTTC(commande.listeProduitPanier) * 0.09975 / 1.14975).toFixed(2)} $ CAD
+                            {cad.format(calculTotalTTC(commande.listeProduitPanier) * 0.09975 / 1.14975)}
                         </p>
                         <h5>
-                            <strong>Total TTC :</strong> {calculTotalTTC(commande.listeProduitPanier).toFixed(2)} $ CAD
+                            <strong>Total TTC :</strong> {cad.format(calculTotalTTC(commande.listeProduitPanier))}
                         </h5>
                     </div>
                     <button

@@ -5,6 +5,7 @@ import {fetchAllProduits} from "../../scripts/http.js";
 import {UtilisateurContext} from "../../assets/contexte/UtilisateurContext.jsx";
 import {URL_BACKEND, URL_ROUTE_FRONTEND} from "../../App.jsx";
 import {supprimerProduit} from "../../scripts/httpAdmin.js";
+import { cad } from "../../scripts/formatters.js"
 
 export default function AffichageProduits({filtres}) {
 
@@ -96,7 +97,7 @@ export default function AffichageProduits({filtres}) {
                                                                 <p className="card-title ">{product.marque.nom}</p>
                                                             </div>
                                                             <div className="d-flex justify-content-end align-items-center">
-                                                                <p className="card-title mb-0 mt-2 ">{product.prix.toFixed(2)} $</p>
+                                                                <p className="card-title mb-0 mt-2 texte-bleu-bouton">{cad.format(product.prix)} </p>
                                                             </div>
                                                         </div>
                                                     </Link>
