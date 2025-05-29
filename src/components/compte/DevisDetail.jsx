@@ -97,10 +97,10 @@ export default function DevisDetail() {
                         <tbody>
                         {commande.listeProduitPanier.map((item, index) => (
                             <tr key={index}>
-                                <td>{item.produit.nom}</td>
-                                <td>{item.quantite}</td>
-                                <td>{item.produit.prix.toFixed(2)} $</td>
-                                <td>{(item.produit.prix * item.quantite).toFixed(2)} $</td>
+                                <td>{cad.format(item.produit.nom)}</td>
+                                <td>{cad.format(item.quantite)}</td>
+                                <td>{cad.format(item.produit.prix)}</td>
+                                <td>{cad.format((item.produit.prix * item.quantite))}</td>
                             </tr>
                         ))}
                         </tbody>
