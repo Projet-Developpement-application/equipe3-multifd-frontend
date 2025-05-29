@@ -3,6 +3,7 @@ import {useContext, useEffect, useState} from "react";
 import { getHistorique } from "../../scripts/httpClient.js";
 import {UtilisateurContext} from "../../assets/contexte/UtilisateurContext.jsx";
 import {getHistoriqueTout} from "../../scripts/httpAdmin.js";
+import { cad } from "../../scripts/formatters.js"
 
 export default function DevisDetail() {
     const { id } = useParams();
@@ -108,14 +109,14 @@ export default function DevisDetail() {
                     <div className="text-end mt-4">
                         <p>
                             <strong>Sous-total :</strong>{" "}
-                            {(calculTotalTTC(commande.listeProduitPanier) / 1.14975).toFixed(2)} $ CAD
+                            {cad.format(calculTotalTTC(commande.listeProduitPanier) / 1.14975)}
                         </p>
                         <p>
                             <strong>Taxes (15%) :</strong>{" "}
-                            {(calculTotalTTC(commande.listeProduitPanier) * 0.15 / 1.14975).toFixed(2)} $ CAD
+                            {(cad.format(commande.listeProduitPanier) * 0.15 / 1.14975).toFixed(2)} $ CAD
                         </p>
                         <h5>
-                            <strong>Total TTC :</strong> {calculTotalTTC(commande.listeProduitPanier).toFixed(2)} $ CAD
+                            <strong>Total TTC :</strong> {cad.format(calculTotalTTC(commande.listeProduitPanier))}
                         </h5>
                     </div>
                     {

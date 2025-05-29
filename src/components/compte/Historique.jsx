@@ -3,6 +3,8 @@ import { getHistorique } from "../../scripts/httpClient.js";
 import { useNavigate } from "react-router-dom";
 import CommandeTable from "./CommandeTable.jsx";
 
+import { cad } from "../../scripts/formatters.js"
+
 export default function Historique() {
     const navigate = useNavigate();
     const [listeCommande, setListeCommande] = useState([]);
