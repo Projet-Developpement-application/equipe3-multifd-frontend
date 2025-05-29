@@ -141,5 +141,18 @@ export async function activerUtilisateurByEmail(email) {
         throw new Error("Erreur lors de l'activation de l'utilisateur : " + email);
     }
 
+}
 
+export async function getHistoriqueTout() {
+    const response = await fetch(BASE_URL_ADMIN + "/historiqueToutPanier", {
+        method: 'GET',
+        headers: {
+            'Content-type': 'Application/json',
+            'Authorization': 'Bearer ' + sessionStorage.getItem("token")
+        }
+    });
+    if (!response.ok) {
+        throw new Error("Erreur lors du chargement des commandes")
+    }
+    return await response.json();
 }

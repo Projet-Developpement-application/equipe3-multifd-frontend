@@ -1,25 +1,43 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import {useContext, useEffect, useState} from "react";
 import { getHistorique } from "../../scripts/httpClient.js";
+import {UtilisateurContext} from "../../assets/contexte/UtilisateurContext.jsx";
+import {getHistoriqueTout} from "../../scripts/httpAdmin.js";
 
 export default function DevisDetail() {
     const { id } = useParams();
     const navigate = useNavigate();
     const [commande, setCommande] = useState(null);
     const [isFetching, setIsFetching] = useState(true);
+    const {utilisateur} = useContext(UtilisateurContext);
 
     useEffect(() => {
         setIsFetching(true);
-        getHistorique()
-            .then((historique) => {
-                const cmd = historique.find((c) => String(c.id) === String(id));
-                setCommande(cmd || null);
-                setIsFetching(false);
-            })
-            .catch((error) => {
-                console.error(error);
-                setIsFetching(false);
-            });
+        if(utilisateur.role === "ADMIN"){
+            getHistoriqueTout()
+                .then((historique) => {
+                    const cmd = historique.find((c) => String(c.id) === String(id));
+                    setCommande(cmd || null);
+                    setIsFetching(false);
+                })
+                .catch((error) => {
+                    console.error(error);
+                    setIsFetching(false);
+                });
+        }else if(utilisateur.role === "CLIENT")
+        {
+            getHistorique()
+                .then((historique) => {
+                    const cmd = historique.find((c) => String(c.id) === String(id));
+                    setCommande(cmd || null);
+                    setIsFetching(false);
+                })
+                .catch((error) => {
+                    console.error(error);
+                    setIsFetching(false);
+                });
+        }
+
     }, [id]);
 
     const calculTotalTTC = (listeProduitPanier) => {
@@ -32,6 +50,7 @@ export default function DevisDetail() {
         const tvq = sousTotal * 0.09975;
         return sousTotal + tps + tvq;
     };
+
 
     return (
         <div className="container py-4">
@@ -47,6 +66,24 @@ export default function DevisDetail() {
                 <p>Aucun produit dans cette commande.</p>
             ) : (
                 <>
+                    <div className="mb-4">
+                        <p><strong>Date de la commande : </strong>
+                            {commande.date && new Date(commande.date).toLocaleString("fr-FR", {
+                                day: "2-digit",
+                                month: "long",
+                                year: "numeric",
+                                hour: "2-digit",
+                                minute: "2-digit",
+                            })}
+                        </p>
+                        {utilisateur.role === "ADMIN" && commande.utilisateur && (
+                            <>
+                                <p><strong>Nom du client :</strong> {commande.utilisateur.nom}</p>
+                                <p><strong>Email du client :</strong> {commande.utilisateur.mail}</p>
+                            </>
+                        )}
+                    </div>
+
                     <table className="table table-bordered">
                         <thead>
                         <tr>
@@ -81,12 +118,25 @@ export default function DevisDetail() {
                             <strong>Total TTC :</strong> {calculTotalTTC(commande.listeProduitPanier).toFixed(2)} $ CAD
                         </h5>
                     </div>
-                    <button
-                        className="btn btn-secondary mb-3"
-                        onClick={() => navigate("/compte")}
-                    >
-                        ← Retour à l'historique
-                    </button>
+                    {
+                        utilisateur.role === "CLIENT" &&
+                        <button
+                            className="btn btn-secondary mb-3"
+                            onClick={() => navigate("/compte")}
+                        >
+                            ← Retour à l'historique
+                        </button>
+                    }
+                    {
+                        utilisateur.role === "ADMIN" &&
+                        <button
+                            className="btn btn-secondary mb-3"
+                            onClick={() => navigate("/GestionCommande")}
+                        >
+                            ← Retour aux commandes
+                        </button>
+                    }
+
                 </>
             )}
         </div>
