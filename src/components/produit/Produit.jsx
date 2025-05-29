@@ -75,8 +75,8 @@ export default function Produit() {
                                     {produit && produit.disponible ? "En stock" : "Indisponible"}
                                 </span>
                             </div>
-                            <h4 className="mt-5"><strong>Détails du produit</strong></h4>
-                            <table className="table w-lg-75 w-md-50">
+                            <h4 className="mt-5 mb-4"><strong>Détails du produit</strong></h4>
+                            <table className="table  w-lg-75 w-md-50 table-light">
                                 <tbody>
                                 <tr>
                                     <td className="pe-3 py-2" style={{ width: "40%" }}>État</td>

@@ -16,7 +16,7 @@ const CompteForm = ({ informations, onSave, onCancel }) => {
         const newErrors = {};
         if (!formData.nom) newErrors.nom = "Le nom est requis";
         if (!formData.prenom) newErrors.prenom = "Le prénom est requis";
-        if (!formData.entreprise) newErrors.entreprise = "L'entreprise est requise";
+
         setErrors(newErrors);
 
         return Object.keys(newErrors).length === 0;
@@ -36,6 +36,18 @@ const CompteForm = ({ informations, onSave, onCancel }) => {
 
                 <div className="row mb-2">
                     <div className="col-md-6">
+                        <label htmlFor="prenom" className="form-label"><strong>Prénom</strong></label>
+                        <input
+                            type="text"
+                            id="prenom"
+                            name="prenom"
+                            className="form-control"
+                            value={formData.prenom}
+                            onChange={handleChange}
+                        />
+                        {errors.prenom && <div className="text-danger">{errors.prenom}</div>}
+                    </div>
+                    <div className="col-md-6">
                         <label htmlFor="nom" className="form-label"><strong>Nom</strong></label>
                         <input
                             type="text"
@@ -48,18 +60,7 @@ const CompteForm = ({ informations, onSave, onCancel }) => {
                         {errors.nom && <div className="text-danger">{errors.nom}</div>}
                     </div>
 
-                    <div className="col-md-6">
-                        <label htmlFor="prenom" className="form-label"><strong>Prénom</strong></label>
-                        <input
-                            type="text"
-                            id="prenom"
-                            name="prenom"
-                            className="form-control"
-                            value={formData.prenom}
-                            onChange={handleChange}
-                        />
-                        {errors.prenom && <div className="text-danger">{errors.prenom}</div>}
-                    </div>
+
                 </div>
 
                 <div className="row mb-4">

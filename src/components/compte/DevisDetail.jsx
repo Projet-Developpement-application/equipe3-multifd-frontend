@@ -52,7 +52,7 @@ export default function DevisDetail() {
 
     return (
         <div className="container py-4">
-            <h3 className="my-5">Détails de la commande #{id}</h3>
+            <h3 className="my-5">Détails de la demande #{id}</h3>
 
 
 
@@ -61,11 +61,11 @@ export default function DevisDetail() {
             ) : !commande ? (
                 <p>Commande non trouvée.</p>
             ) : !commande.listeProduitPanier || commande.listeProduitPanier.length === 0 ? (
-                <p>Aucun produit dans cette commande.</p>
+                <p>Aucun produit dans cette demande.</p>
             ) : (
                 <>
                     <div className="mb-4">
-                        <p><strong>Date de la commande : </strong>
+                        <p><strong>Date de la demande : </strong>
                             {commande.date && new Date(commande.date).toLocaleString("fr-FR", {
                                 day: "2-digit",
                                 month: "long",
@@ -77,8 +77,7 @@ export default function DevisDetail() {
                         {utilisateur.role === "ADMIN" && commande.utilisateur && (
                             <>
                                 <p><strong>Email du client :</strong> {commande.utilisateur.mail}</p>
-                                <p><strong>Nom du client :</strong> {commande.utilisateur.prenom}</p>
-                                <p><strong>Nom du client :</strong> {commande.utilisateur.nom}</p>
+                                <p><strong>Nom du client :</strong> {commande.utilisateur.prenom} {commande.utilisateur.nom}</p>
                             </>
                         )}
                         {commande.specification ? (
@@ -87,12 +86,12 @@ export default function DevisDetail() {
                                 <div className="border p-3 bg-light rounded">{commande.specification}</div>
                             </div>
                         ) : (
-                            <p className="text-muted"><em>Aucune spécification fournie pour cette commande.</em></p>
+                            <p className="text-muted"><em>Aucune spécification n'a été ajouté pour cette demande.</em></p>
                         )}
 
                     </div>
 
-                    <table className="table table-bordered">
+                    <table className="table table-bordered table-light">
                         <thead>
                         <tr>
                             <th>Nom du produit</th>
@@ -133,16 +132,16 @@ export default function DevisDetail() {
                             className="btn btn-secondary mb-3"
                             onClick={() => navigate("/compte")}
                         >
-                            ← Retour à l'historique
+                            <i className="bi bi-arrow-left"> </i> Retour à l'historique
                         </button>
                     }
                     {
                         utilisateur.role === "ADMIN" &&
                         <button
-                            className="btn btn-secondary mb-3"
+                            className="btn btn-dark bg-bleu-bouton mb-3"
                             onClick={() => navigate("/GestionUtilisateur")}
                         >
-                            ← Retour aux commandes
+                            <i className="bi bi-arrow-left"> </i> Retour aux commandes
                         </button>
                     }
 

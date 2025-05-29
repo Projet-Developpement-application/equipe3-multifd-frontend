@@ -77,8 +77,8 @@ export default function Navbar() {
                                         </Link>
                                     </li>
                                     <li className="nav-item me-2">
-                                        <button onClick={handleLogout} className="btn text-uppercase">
-                                            <i className="bi bi-box-arrow-left"></i>
+                                        <button onClick={handleLogout} className="btn text-uppercase nav-link">
+                                           <i className="bi bi-box-arrow-left "></i>
                                         </button>
                                     </li>
                                 </>) : undefined}
