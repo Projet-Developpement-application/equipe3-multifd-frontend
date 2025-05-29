@@ -37,7 +37,7 @@ export default function Historique() {
 
     return (
             <div className="row  mt-5 w-100 bg-light ">
-                <div className="col-12 col-md-10 col-lg-8">
+                <div className="col-12">
                     <div className="bg-white border border-2 rounded p-4 mb-5 ">
                         <h3 className="mb-3">Historique de devis</h3>
                         {isFetching ? (
@@ -52,7 +52,7 @@ export default function Historique() {
                                     <thead className="table-primary border-1">
                                     <tr>
                                         <th scope="col">Date</th>
-                                        <th scope="col">Total (TTC)</th>
+                                        <th scope="col">Total</th>
                                     </tr>
                                     </thead>
                                     <tbody>
