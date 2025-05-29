@@ -76,10 +76,20 @@ export default function DevisDetail() {
                         </p>
                         {utilisateur.role === "ADMIN" && commande.utilisateur && (
                             <>
-                                <p><strong>Nom du client :</strong> {commande.utilisateur.nom}</p>
                                 <p><strong>Email du client :</strong> {commande.utilisateur.mail}</p>
+                                <p><strong>Nom du client :</strong> {commande.utilisateur.prenom}</p>
+                                <p><strong>Nom du client :</strong> {commande.utilisateur.nom}</p>
                             </>
                         )}
+                        {commande.specification ? (
+                            <div className="mb-4">
+                                <p><strong>Spécification :</strong></p>
+                                <div className="border p-3 bg-light rounded">{commande.specification}</div>
+                            </div>
+                        ) : (
+                            <p className="text-muted"><em>Aucune spécification fournie pour cette commande.</em></p>
+                        )}
+
                     </div>
 
                     <table className="table table-bordered">
@@ -94,8 +104,8 @@ export default function DevisDetail() {
                         <tbody>
                         {commande.listeProduitPanier.map((item, index) => (
                             <tr key={index}>
-                                <td>{cad.format(item.produit.nom)}</td>
-                                <td>{cad.format(item.quantite)}</td>
+                                <td>{item.produit.nom}</td>
+                                <td>{item.quantite}</td>
 
                                 <td>{cad.format(item.produit.prix)}</td>
                                 <td>{cad.format((item.produit.prix * item.quantite))}</td>
@@ -130,7 +140,7 @@ export default function DevisDetail() {
                         utilisateur.role === "ADMIN" &&
                         <button
                             className="btn btn-secondary mb-3"
-                            onClick={() => navigate("/GestionCommande")}
+                            onClick={() => navigate("/GestionUtilisateur")}
                         >
                             ← Retour aux commandes
                         </button>
