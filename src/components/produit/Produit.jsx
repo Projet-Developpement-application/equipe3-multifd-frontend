@@ -112,7 +112,7 @@ export default function Produit() {
                                     <i className="bi bi-arrow-left"></i> Retour à la boutique
                                 </button>
                             </Link>
-                            <button className="btn bg-bleu-bouton ms-2 text-light" onClick={()=>{
+                            <button className="btn bg-bleu-bouton ms-2 text-light btn-primary" onClick={()=>{
                                     ajouteProduit();
                             }}>
                                 <i className="bi bi-cart"></i> Ajouter au panier

@@ -7,6 +7,7 @@ import {
     supprimerProduitFromPanier
 } from "../../scripts/httpClient.js";
 import {useNavigate} from "react-router-dom";
+import {cad} from "../../scripts/formatters.js";
 
 function DevisForm() {
     const [panier, setPanier] = useState({
@@ -169,35 +170,32 @@ function DevisForm() {
                                 <table className="table table-bordered table-light">
                                     <thead>
                                     <tr>
-                                        <th className="text-center">Description</th>
-                                        <th className="text-center">Qté</th>
-                                        <th className="text-center">Prix unitaire</th>
-                                        <th className="text-center">Action</th>
+
                                     </tr>
                                     </thead>
                                     <tbody>
                                     {panier.listeProduitPanier.map(value => (
                                         <tr key={value.id}>
-                                            <td className="text-center">{value.produit.nom}</td>
-                                            <td className="text-center">
+                                            <td><p className="fs-5 small mb-0">{value.produit.nom}</p><p className="fs-5">{value.produit.marque.nom}</p></td>
+                                            <td className="text-center table-col-width">
                                                 <input
                                                     type="number"
                                                     onChange={(e) => handleChangeQuantite(e, value)}
                                                     className="form-control text-center"
                                                     value={value.quantite}
                                                     min={0}
-                                                    style={{maxWidth: '80px', margin: '0 auto'}}
+                                                    style={{maxWidth: '80px', margin: ''}}
                                                 />
                                             </td>
-                                            <td className="text-center">{value.prix.toFixed(2)}</td>
-                                            <td className="text-center">
+                                            <td className="text-center table-col-width">{cad.format(value.prix)}</td>
+                                            <td className="text-center table-col-width">
                                                 <button
                                                     type="button"
-                                                    className="btn btn-danger"
+                                                    className="btn btn-outline-dark "
                                                     onClick={() => supprimerDuPanier(value.id)}
                                                     title="Supprimer"
                                                 >
-                                                    <i className="bi-trash bi"></i>
+                                                    <i className="bi-x-lg bi"></i>
                                                 </button>
                                             </td>
                                         </tr>
@@ -210,15 +208,15 @@ function DevisForm() {
                             <div className="text-end mt-4">
                                 <p>
                                     <strong>Sous-total :</strong>{" "}
-                                    {totalHT.toFixed(2)} $ CAD
+                                    {cad.format(totalHT)}
                                 </p>
                                 <p>
                                     <strong>Taxes (15%) :</strong>{" "}
-                                    {totalTVA.toFixed(2) } $ CAD
+                                    {cad.format(totalTVA) }
                                 </p>
                                 <h5>
                                     <strong>Total TTC
-                                        :</strong> {totalTTC.toFixed(2)} $ CAD
+                                        :</strong> {cad.format(totalTTC)}
                                 </h5>
                             </div>
                             <div className="d-flex justify-content-end my-5">
