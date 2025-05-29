@@ -1,6 +1,7 @@
 import React from "react";
+import {cad} from "../../scripts/formatters.js";
 
-export default function CommandeTable({ commandes, onClickRow, afficherClient = false }) {
+export default function CommandeTable({ commandes, onClickRow}) {
     const calculTotalTTC = (listeProduitPanier) => {
         if (!Array.isArray(listeProduitPanier)) return "N/A";
         const sousTotal = listeProduitPanier.reduce(
@@ -9,7 +10,7 @@ export default function CommandeTable({ commandes, onClickRow, afficherClient = 
         );
         const tps = sousTotal * 0.05;
         const tvq = sousTotal * 0.09975;
-        return (sousTotal + tps + tvq).toFixed(2);
+        return cad.format(sousTotal + tps + tvq);
     };
 
     return (
@@ -19,8 +20,6 @@ export default function CommandeTable({ commandes, onClickRow, afficherClient = 
                 <tr>
                     <th scope="col">Date</th>
                     <th scope="col">Total</th>
-                    {afficherClient && <th scope="col">Client</th>}
-                    {afficherClient && <th scope="col">Email</th>}
                 </tr>
                 </thead>
                 <tbody>
@@ -40,10 +39,7 @@ export default function CommandeTable({ commandes, onClickRow, afficherClient = 
                             style={{ cursor: "pointer" }}
                         >
                             <td>{dateLisible}</td>
-                            <td>{calculTotalTTC(item.listeProduitPanier)} $ CAD</td>
-                            {afficherClient && <td>{item.utilisateur.nom}</td>}
-                            {afficherClient && <td>{item.utilisateur.mail}</td>}
-
+                            <td>{calculTotalTTC(item.listeProduitPanier)}</td>
                         </tr>
                     );
                 })}

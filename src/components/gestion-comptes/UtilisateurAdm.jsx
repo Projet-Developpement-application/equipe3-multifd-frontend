@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from "react";
 import {useParams, useNavigate} from "react-router-dom";
-import {fetchUtilisateur, modifierUtilisateur} from "../../scripts/httpAdmin.js";
+import {fetchUtilisateur, getHistoriqueAdm, modifierUtilisateur} from "../../scripts/httpAdmin.js";
 import {URL_ROUTE_FRONTEND} from "../../App.jsx";
+import CommandeTable from "../compte/CommandeTable.jsx";
 
 export default function UtilisateurAdm() {
     const {mail} = useParams();
@@ -11,6 +12,7 @@ export default function UtilisateurAdm() {
     const [devis, setDevis] = useState([]);
     const [isFetchingDevis, setIsFetchingDevis] = useState(false);
     const navigate = useNavigate();
+    const [listeCommande, setListeCommande] = useState([]);
 
     useEffect(() => {
         fetchUtilisateur(mail)
@@ -22,10 +24,24 @@ export default function UtilisateurAdm() {
                 console.error("Erreur lors de la récupération de l'utilisateur :", err);
                 setError("Impossible de charger les informations de l'utilisateur.");
             });
-
-    
     }, [mail]);
 
+    useEffect(() => {
+        setIsFetchingDevis(true);
+        getHistoriqueAdm(mail)
+            .then(value => {
+                setListeCommande(value);
+                setIsFetchingDevis(false);
+            })
+            .catch(reason => {
+                setIsFetchingDevis(false);
+                console.log(reason);
+            });
+    }, []);
+
+    const handleClick = (id) => {
+        navigate(`/commande/${id}`);
+    };
     const handleChange = (e) => {
         const {name, value} = e.target;
         setFormData(prev => ({...prev, [name]: value}));
@@ -55,11 +71,6 @@ export default function UtilisateurAdm() {
         } else {
             navigate(-1);
         }
-    };
-
-    const handleViewDevis = (id) => {
-        //Page n'existe pas encore: voir sprint 3
-        navigate(URL_ROUTE_FRONTEND+`/devis/${id}`);
     };
 
     if (error) {
@@ -138,30 +149,26 @@ export default function UtilisateurAdm() {
             </form>
 
             <div className="mt-5">
-                <h3 className="mb-4">Historique des devis</h3>
-                {isFetchingDevis ? (
-                    <div className="d-flex justify-content-center">
-                        <div className="spinner-border" role="status"></div>
+                <div className="row mt-5 w-100 bg-light p-4">
+                    <div className="col-12 col-md-10 mx-auto">
+                        <div className="bg-white border border-2 rounded p-4 mb-5">
+                            <h3 className="mb-3">Gestion des commandes</h3>
+                            {isFetchingDevis ? (
+                                <div className="spinner-border" role="status">
+                                    <span className="sr-only">Chargement...</span>
+                                </div>
+                            ) : listeCommande.length === 0 ? (
+                                <div>Aucune commande</div>
+                            ) : (
+                                <CommandeTable
+                                    commandes={listeCommande}
+                                    onClickRow={handleClick}
+                                    afficherClient
+                                />
+                            )}
+                        </div>
                     </div>
-                ) : (
-                    <>
-                        {devis.map(devis => (
-                            <div key={devis.id} className="row border border-dark p-3 m-4 bg-light rounded">
-                                <div className="col-8">
-                                    <h5 className="mb-3">{devis.date}</h5>
-                                    <h6 className="mb-3">{devis.montant.toFixed(2)} $</h6>
-                                </div>
-                                <div className="col-4 d-flex justify-content-end align-items-center">
-                                    <button
-                                        className="btn btn-dark"
-                                        onClick={() => handleViewDevis(devis.id)}>
-                                        Voir
-                                    </button>
-                                </div>
-                            </div>
-                        ))}
-                    </>
-                )}
+                </div>
             </div>
         </div>
     );

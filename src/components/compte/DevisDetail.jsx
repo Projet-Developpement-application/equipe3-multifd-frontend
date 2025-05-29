@@ -2,7 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import {useContext, useEffect, useState} from "react";
 import { getHistorique } from "../../scripts/httpClient.js";
 import {UtilisateurContext} from "../../assets/contexte/UtilisateurContext.jsx";
-import {getHistoriqueTout} from "../../scripts/httpAdmin.js";
+import {getHistoriqueAdm, getHistoriqueAdmTout} from "../../scripts/httpAdmin.js";
 import { cad } from "../../scripts/formatters.js"
 
 export default function DevisDetail() {
@@ -13,33 +13,30 @@ export default function DevisDetail() {
     const {utilisateur} = useContext(UtilisateurContext);
 
     useEffect(() => {
-        setIsFetching(true);
-        if(utilisateur.role === "ADMIN"){
-            getHistoriqueTout()
-                .then((historique) => {
-                    const cmd = historique.find((c) => String(c.id) === String(id));
-                    setCommande(cmd || null);
-                    setIsFetching(false);
-                })
-                .catch((error) => {
-                    console.error(error);
-                    setIsFetching(false);
-                });
-        }else if(utilisateur.role === "CLIENT")
-        {
-            getHistorique()
-                .then((historique) => {
-                    const cmd = historique.find((c) => String(c.id) === String(id));
-                    setCommande(cmd || null);
-                    setIsFetching(false);
-                })
-                .catch((error) => {
-                    console.error(error);
-                    setIsFetching(false);
-                });
-        }
+        if (!utilisateur) return;
 
-    }, [id]);
+        setIsFetching(true);
+        const fetchData = async () => {
+            try {
+                let historique;
+                if (utilisateur.role === "ADMIN") {
+                    historique = await getHistoriqueAdmTout();
+                    const cmd = historique.find((c) => String(c.id) === String(id));
+                    setCommande(cmd || null);
+                } else if (utilisateur.role === "CLIENT") {
+                    historique = await getHistorique();
+                    const cmd = historique.find((c) => String(c.id) === String(id));
+                    setCommande(cmd || null);
+                }
+            } catch (error) {
+                console.error(error);
+            } finally {
+                setIsFetching(false);
+            }
+        };
+
+        fetchData();
+    }, [id, utilisateur]);
 
     const calculTotalTTC = (listeProduitPanier) => {
         if (!Array.isArray(listeProduitPanier) || listeProduitPanier.length === 0) return 0;
@@ -99,6 +96,7 @@ export default function DevisDetail() {
                             <tr key={index}>
                                 <td>{cad.format(item.produit.nom)}</td>
                                 <td>{cad.format(item.quantite)}</td>
+
                                 <td>{cad.format(item.produit.prix)}</td>
                                 <td>{cad.format((item.produit.prix * item.quantite))}</td>
                             </tr>
@@ -113,7 +111,7 @@ export default function DevisDetail() {
                         </p>
                         <p>
                             <strong>Taxes (15%) :</strong>{" "}
-                            {(cad.format(commande.listeProduitPanier) * 0.15 / 1.14975).toFixed(2)} $ CAD
+                            {cad.format(calculTotalTTC(commande.listeProduitPanier) * 0.14975 / 1.14975) }
                         </p>
                         <h5>
                             <strong>Total TTC :</strong> {cad.format(calculTotalTTC(commande.listeProduitPanier))}
