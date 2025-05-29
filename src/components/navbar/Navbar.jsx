@@ -22,7 +22,7 @@ export default function Navbar() {
 
     return (<>
             <RetourSiteBar/>
-            <nav className="navbar w-100 z-1 navbar-expand-lg text-white bg-gris-fonce" data-bs-theme="dark">
+            <nav className="navbar w-100 z-1 navbar-expand-lg text-white bg-bleu-fonce1" data-bs-theme="dark">
                 <div className="container-fluid d-flex justify-content-between align-items-start">
                     <Link className="navbar-brand navbar-logo ps-5" to={URL_ROUTE_FRONTEND + "/"}>
                         <img src={logo} alt="Logo" style={{height: "40px"}} />
@@ -33,7 +33,7 @@ export default function Navbar() {
                             {utilisateur.mail === null ? (/*utilisateur non connecté*/
                                 <li className="nav-item me-4">
                                     <Link to={URL_ROUTE_FRONTEND + "/Connexion"}
-                                          className="text-uppercase nav-link text-white hover-underline-animation left pb-1">
+                                          className="text-uppercase nav-link text-white hover-underline-animation left">
                                         <i className="bi bi-person me-2"></i> Connexion
                                     </Link>
                                 </li>) : utilisateur.role === "ADMIN" ? (/*utilisateur connecté comme administrateur*/
