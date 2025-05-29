@@ -39,12 +39,6 @@ export default function Navbar() {
                                 </li>) : utilisateur.role === "ADMIN" ? (/*utilisateur connecté comme administrateur*/
                                 <>
                                     <li className="nav-item me-4">
-                                        <Link to={URL_ROUTE_FRONTEND + "/GestionCommande"}
-                                              className="text-uppercase nav-link text-white hover-underline-animation left pb-1">
-                                            <i className="bi bi-box-seam me-2"></i> Commande
-                                        </Link>
-                                    </li>
-                                    <li className="nav-item me-4">
                                         <Link to={URL_ROUTE_FRONTEND + "/GestionUtilisateur"}
                                               className="text-uppercase nav-link text-white hover-underline-animation left pb-1">
                                             <i className="bi bi-people me-2"></i> <strong> Gestion Utilisateur</strong>

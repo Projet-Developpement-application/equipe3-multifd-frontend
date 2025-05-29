@@ -91,8 +91,6 @@ export async function fetchAllUtilisateurs() {
         headers: {
             "Content-type": "application/json",
             "Authorization": "Bearer " + sessionStorage.getItem("token")
-
-
         }
     });
     if (!response.ok) {
@@ -143,8 +141,22 @@ export async function activerUtilisateurByEmail(email) {
 
 }
 
-export async function getHistoriqueTout() {
-    const response = await fetch(BASE_URL_ADMIN + "/historiqueToutPanier", {
+export async function getHistoriqueAdm(email) {
+    const response = await fetch(BASE_URL_ADMIN + "/historiquePanierAdm/" + email, {
+        method: 'GET',
+        headers: {
+            'Content-type': 'Application/json',
+            'Authorization': 'Bearer ' + sessionStorage.getItem("token")
+        }
+    });
+    if (!response.ok) {
+        throw new Error("Erreur lors du chargement des commandes")
+    }
+    return await response.json();
+}
+
+export async function getHistoriqueAdmTout() {
+    const response = await fetch(BASE_URL_ADMIN + "/historiquePanierToutAdm", {
         method: 'GET',
         headers: {
             'Content-type': 'Application/json',
