@@ -17,8 +17,8 @@ export default function ZoneRecherhe({onFilterClick,filtres, setFiltres}) {
             <div className="input-group me-4" style={{maxWidth: "300px"}}>
                 <input
                     type="text"
-                    className="form-control "
-                    placeholder="Rechercher..."
+                    className="form-control"
+                    placeholder="Rechercher le nom d'un produit..."
                     value={filtres.nom || ""}
                     onChange={handleSearch}
                 />

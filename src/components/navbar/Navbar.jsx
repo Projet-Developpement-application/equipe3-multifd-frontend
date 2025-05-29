@@ -38,16 +38,16 @@ export default function Navbar() {
                                     </Link>
                                 </li>) : utilisateur.role === "ADMIN" ? (/*utilisateur connecté comme administrateur*/
                                 <>
-                                    <li className="nav-item me-4">
+                                    <li className="nav-item me-1">
                                         <Link to={URL_ROUTE_FRONTEND + "/GestionUtilisateur"}
                                               className="text-uppercase nav-link text-white hover-underline-animation left pb-1">
-                                            <i className="bi bi-people me-2"></i> Gestion Utilisateur
+                                            <i className="bi bi-people me-2"></i> <strong> Gestion Utilisateur</strong>
                                         </Link>
                                     </li>
-                                    <li className="nav-item me-4">
+                                    <li className="nav-item me-2">
                                         <Link to={URL_ROUTE_FRONTEND + "/AjouterProduit"}
                                               className="text-uppercase nav-link text-white hover-underline-animation left pb-1">
-                                            <i className="bi bi-plus-circle me-2"></i> Ajouter un Produit
+                                            <i className="bi bi-plus-circle me-2"></i> <strong> Ajouter un produit</strong>
                                         </Link>
                                     </li>
 
@@ -58,26 +58,26 @@ export default function Navbar() {
                                     </li>
                                 </>) : utilisateur.role === "CLIENT" ? (/*utilisateur connnecté comme client*/
                                 <>
-                                    <li className="nav-item me-4">
+                                    <li className="nav-item me-1">
                                         <div
                                             className="text-uppercase nav-link text-white  left pb-1">
-                                            <i className="bi bi-emoji-smile me-2"></i> Bonjour {utilisateur.prenom}
+                                            <i className="bi bi-emoji-smile me-1"></i> Bonjour {utilisateur.prenom}
                                         </div>
 
                                     </li>
-                                    <li className="nav-item me-4">
+                                    <li className="nav-item me-1">
                                         <Link to={URL_ROUTE_FRONTEND + "/compte"}
                                               className="text-uppercase nav-link text-white hover-underline-animation left pb-1">
-                                            <i className="bi bi-person me-2"></i> Mon Compte
+                                            <i className="bi bi-person me-1"></i> Mon Compte
                                         </Link>
                                     </li>
-                                    <li className="nav-item me-4">
+                                    <li className="nav-item me-1">
                                         <Link to={URL_ROUTE_FRONTEND + "/panier"}
                                               className="text-uppercase nav-link text-white hover-underline-animation left pb-1">
-                                            <i className="bi bi-cart me-2"></i> Panier
+                                            <i className="bi bi-cart me-1"></i> Panier
                                         </Link>
                                     </li>
-                                    <li className="nav-item me-4">
+                                    <li className="nav-item me-2">
                                         <button onClick={handleLogout} className="btn text-uppercase">
                                             <i className="bi bi-box-arrow-left"></i>
                                         </button>
@@ -95,8 +95,8 @@ export default function Navbar() {
             </nav>
 
             {/* Barre rouge pour l'administrateur */}
-            {utilisateur.role === "ADMIN" && (<div className="w-100 bg-danger text-white text-center py-2">
-                    Connecté Administrateur
+            {utilisateur.role === "ADMIN" && (<div className="w-100 bg-danger text-white text-center py-1 small">
+                  <strong> Connecté Administrateur </strong>
                 </div>)}
 
             <Outlet/>
