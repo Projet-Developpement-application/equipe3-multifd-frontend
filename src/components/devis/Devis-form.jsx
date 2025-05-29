@@ -21,6 +21,7 @@ function DevisForm() {
     const [contactMethod, setContactMethod] = useState('Courriel');
     const [contactValue, setContactValue] = useState('');
     const [isFetching, setIsFetching] = useState(true);
+    const [isSending, setIsSending] = useState(false);
     const navigate = useNavigate();
 
     let specification;
@@ -65,7 +66,10 @@ function DevisForm() {
     }
 
     function envoyerDemandeDevis() {
+        setIsFetching(true);
+
         finirCommmande(panier).then(value => {
+
             if (value.status === 202) {
                 setPanier({
                     id: 0,
@@ -95,8 +99,9 @@ function DevisForm() {
 
     return (
         isFetching ? (
-            <div className="d-flex justify-content-center">
-                <div className="spinner-border" role="status"></div>
+            <div className="d-flex justify-content-center align-items-center min-vh-100">
+                <div className="spinner-border" role="status">
+                </div>
             </div>
         ) : (
             <>
