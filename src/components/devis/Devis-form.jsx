@@ -7,7 +7,7 @@ import {
     supprimerProduitFromPanier
 } from "../../scripts/httpClient.js";
 import {useNavigate} from "react-router-dom";
-import {cad} from "../../scripts/formatters.js";
+import {cad, TAXE} from "../../scripts/formatters.js";
 
 function DevisForm() {
     const [panier, setPanier] = useState({
@@ -66,6 +66,9 @@ function DevisForm() {
     }
 
     function envoyerDemandeDevis() {
+        const validation=confirm("Voulez-vous confirmer votre demande de devis ?");
+        if (!validation) return;
+
         setIsFetching(true);
 
         finirCommmande(panier).then(value => {
@@ -88,7 +91,7 @@ function DevisForm() {
 
     if (panier.listeProduitPanier !== undefined && !isFetching) {
         totalHT = panier.listeProduitPanier.reduce((acc, item) => acc + item.quantite * item.prix, 0);
-        totalTVA = totalHT * 0.15;
+        totalTVA = totalHT * TAXE;
         totalTTC = totalHT + totalTVA;
         specification = panier.specification;
     }

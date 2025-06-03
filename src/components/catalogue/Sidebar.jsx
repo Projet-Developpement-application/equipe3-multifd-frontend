@@ -81,7 +81,7 @@ const Sidebar = ({ouvert, fermeture, filtres, setFiltres}) => {
 
             {/* Marque */}
             <div className="filter-section mb-4">
-                <h6 className="pb-2 "><i class="bi bi-caret-right-fill"></i> Marque</h6>
+                <h6 className="pb-2 "><i className="bi bi-caret-right-fill"></i> Marque</h6>
                 <div className="filter-options ps-2">
                     {marques.map((marque) => (
                         <FiltreMulti key={marque.id} typeFiltre={"marques"} valeur={marque.nom}
