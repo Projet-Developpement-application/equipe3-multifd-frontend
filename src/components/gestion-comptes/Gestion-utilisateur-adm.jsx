@@ -5,7 +5,7 @@ import { UtilisateurContext } from '../../assets/contexte/UtilisateurContext.jsx
 import {deleteUtilisateurByEmail, activerUtilisateurByEmail} from "../../scripts/httpAdmin.js";
 import {URL_ROUTE_FRONTEND} from "../../App.jsx";
 
-const USERS_PER_PAGE = 8;
+const USERS_PER_PAGE = 6;
 
 export default function GestionUtilisateursAdm() {
     const [users, setUsers] = useState([]);
@@ -75,7 +75,7 @@ export default function GestionUtilisateursAdm() {
     }
 
     return (
-        <div className="container mt-4 position-relative" style={{ minHeight: "100vh" }}>
+        <div className="container my-4 mb-5 position-relative" style={{ minHeight: "130vh" }}>
             <h2 className="mt-5 mx-4">Gestion des utilisateurs</h2>
 
             {isFetching ? (
@@ -115,7 +115,7 @@ export default function GestionUtilisateursAdm() {
                     {/* Pagination */}
                     <div className="pagination-container">
                         <nav>
-                            <ul className="pagination justify-content-center">
+                            <ul className="pagination m-0 justify-content-center ">
                                 {Array.from({ length: totalPages }, (_, index) => (
                                     <li key={index} className={`page-item ${currentPage === index + 1 ? "active" : ""}`}>
                                         <button onClick={() => setCurrentPage(index + 1)} className="page-link">
