@@ -97,7 +97,7 @@ export default function AffichageProduits({filtres}) {
                                                                 <p className="card-title ">{product.marque.nom}</p>
                                                             </div>
                                                             <div className="d-flex justify-content-end align-items-center">
-                                                                <p className="card-title mb-0 mt-2 texte-bleu-bouton">{cad.format(product.prix)} </p>
+                                                                <p className="card-title mb-0 mt-2 texte-bleu-bouton fs-5">{cad.format(product.prix)} </p>
                                                             </div>
                                                         </div>
                                                     </Link>

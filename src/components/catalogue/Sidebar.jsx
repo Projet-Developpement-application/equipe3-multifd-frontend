@@ -62,24 +62,7 @@ const Sidebar = ({ouvert, fermeture, filtres, setFiltres}) => {
                 <h5 className="py-4 "> Filtres :</h5>
 
 
-                {/* Ampérage */}
-                {/*<div className="filter-section mb-4">*/}
-                {/*    /!*<div*!/*/}
-                {/*    /!*    className="filter-header d-flex justify-content-between align-items-center"*!/*/}
-                {/*    /!*    onClick={() => setAmperageOuvert(!amperageOuvert)}*!/*/}
-                {/*    /!*>*!/*/}
-                {/*    <span>Ampérage</span>*/}
-                {/*    /!*<i className={`bi ${amperageOuvert ? "bi-chevron-up" : "bi-chevron-down"}`}></i>*!/*/}
-                {/*</div>*/}
 
-                {/*<div className="filter-options">*/}
-                {/*    <FiltreMulti typeFiltre={"amperage"} valeur={10} unite={"A"}*/}
-                {/*                 toggleFiltre={toggleFiltre} filtres={filtres}*/}
-                {/*    />*/}
-                {/*    <FiltreMulti typeFiltre={"amperage"} valeur={20} unite={"A"}*/}
-                {/*                 toggleFiltre={toggleFiltre} filtres={filtres}*/}
-                {/*    />*/}
-                {/*</div>*/}
 
             </div>
 
@@ -111,7 +94,7 @@ const Sidebar = ({ouvert, fermeture, filtres, setFiltres}) => {
             {/* HP */}
             <div className="filter-section mb-4">
 
-                <h6 className="pb-2 "> <i class="bi bi-caret-right-fill"></i> HP</h6>
+                <h6 className="pb-2 "> <i className="bi bi-caret-right-fill"></i> HP</h6>
 
                 <div className="filter-options ps-2">
                     {[1, 2, 3, 5, 7.5, 10, 15, 20, 40, 50, 100].map((v) => (
