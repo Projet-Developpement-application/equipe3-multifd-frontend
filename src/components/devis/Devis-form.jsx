@@ -9,7 +9,7 @@ import {
 import {useNavigate} from "react-router-dom";
 import {cad} from "../../scripts/formatters.js";
 
-function DevisForm() {
+function DevisForm({setPanierCount}) {
     const [panier, setPanier] = useState({
         id: 0,
         status: null,
@@ -56,13 +56,19 @@ function DevisForm() {
     }
 
     function supprimerDuPanier(idProduitPanier) {
-        const message = confirm("Voulez vous vraiment supprimer ce produit ?");
+        const message = confirm("Voulez-vous vraiment supprimer ce produit ?");
         if (!message) return;
-        setPanier((anicenPanier) => ({
-            ...anicenPanier,
-            listeProduitPanier: anicenPanier.listeProduitPanier.filter(p => p.id !== idProduitPanier)
+        setPanier((ancienPanier) => ({
+            ...ancienPanier,
+            listeProduitPanier: ancienPanier.listeProduitPanier.filter(p => p.id !== idProduitPanier)
         }));
+        // Suppression côté serveur et mise à jour du compteur
         supprimerProduitFromPanier(idProduitPanier)
+            .then(() => {
+                getPanierEnCours()
+                    .then(panier => setPanierCount(panier.listeProduitPanier.length))
+                    .catch(() => setPanierCount(0));
+            });
     }
 
     function envoyerDemandeDevis() {

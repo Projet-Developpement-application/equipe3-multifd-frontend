@@ -1,12 +1,23 @@
 import RetourSiteBar from "./RetourSiteBar.jsx";
 import {Link, Outlet, useNavigate} from "react-router-dom";
 import {UtilisateurContext} from "../../assets/contexte/UtilisateurContext.jsx";
-import {useContext} from "react";
+import {useContext, useEffect, useState} from "react";
 import {URL_ROUTE_FRONTEND} from "../../App.jsx";
 import logo from "../../assets/logo/logo.png";
-export default function Navbar() {
+import {getPanierEnCours} from "../../scripts/httpClient.js";
+
+
+export default function Navbar({ panierCount, setPanierCount }) {
     const {utilisateur, setUtilisateur} = useContext(UtilisateurContext);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (utilisateur.role === "CLIENT") {
+            getPanierEnCours()
+                .then(panier => setPanierCount(panier.listeProduitPanier.length))
+                .catch(() => setPanierCount(0));
+        }
+    }, [utilisateur]);
 
     /**
      * TEMPORAIRE SPRINT 1: permet d'effacer le session storage et de rediriger vers la page de connexion
@@ -73,7 +84,7 @@ export default function Navbar() {
                                     <li className="nav-item me-1">
                                         <Link to={URL_ROUTE_FRONTEND + "/panier"}
                                               className="text-uppercase nav-link text-center text-white hover-underline-animation left pb-1">
-                                            <i className="bi bi-cart me-1 text-center"></i> Panier
+                                            <i className={`bi ${panierCount > 0 ? "bi-cart-check" : "bi-cart"} me-1 text-center`}></i> Panier
                                         </Link>
                                     </li>
                                     <li className="nav-item me-2">

@@ -25,6 +25,7 @@ function App() {
         prenom: null,
         nom: null,
     });
+    const [panierCount, setPanierCount] = useState(0);
 
     useEffect(() => {
         if (sessionStorage.getItem("isConnected") === "true") {
@@ -42,14 +43,14 @@ function App() {
             <div className="d-flex flex-column min-vh-100">
 
             <BrowserRouter >
-                <Navbar />
+                <Navbar panierCount={panierCount} setPanierCount={setPanierCount}/>
                 <div className="flex-grow-1">
 
                 <Routes>
                     <Route index element={<Catalogue />} />
                     <Route path="compte" element={<Compte />} />
-                    <Route path="panier" element={<DevisForm />} />
-                    <Route path="produit/:id" element={<Produit />} />
+                    <Route path="panier" element={<DevisForm setPanierCount={setPanierCount} />} />
+                    <Route path="produit/:id" element={<Produit setPanierCount={setPanierCount} />} />
                     <Route path="AjouterProduit" element={<AjouterProduit />} />
                     <Route path="ModifierProduit/:id" element={<ModifierProduit />} />
                     <Route path="SupprimerProduit/:id" element={<SupprimerProduit />} />

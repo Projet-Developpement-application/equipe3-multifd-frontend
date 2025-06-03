@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import {useParams, Link, redirect, useNavigate} from "react-router-dom";
 import { fetchProduitParId } from "../../scripts/http.js";
-import {ajouteProduitPanier} from "../../scripts/httpClient.js";
+import {ajouteProduitPanier, getPanierEnCours} from "../../scripts/httpClient.js";
 import {URL_BACKEND, URL_ROUTE_FRONTEND} from "../../App.jsx";
 import image from "../../assets/generique.jpg";
 import { cad } from "../../scripts/formatters.js";
 
-export default function Produit() {
+export default function Produit({setPanierCount}) {
     const { id } = useParams();
     const [produit, setProduit] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -34,18 +34,17 @@ export default function Produit() {
         return <div className="alert alert-danger">{error}</div>;
     }
 
-    function ajouteProduit(){
-        ajouteProduitPanier(produit.id).then(data=>{
-            if (data==="non connecté"){
-                navigate(URL_ROUTE_FRONTEND+"/Connexion")
-                return
+    function ajouteProduit() {
+        ajouteProduitPanier(produit.id).then(data => {
+            if (data === "non connecté") {
+                navigate(URL_ROUTE_FRONTEND + "/Connexion");
+                return;
             }
-            if (data === 201){
-                alert("Le produit a été ajouté au panier");
+            if (data === 201) {
+                getPanierEnCours().then(panier => setPanierCount(panier.listeProduitPanier.length));
             }
         });
     }
-
     return (
         <div className="container-fluid p-0 mb-5">
             <div className="container py-5 mt-5">
