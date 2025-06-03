@@ -84,7 +84,7 @@ const ModifierProduit = () => {
 
     return (
         <div>
-            <h1 className={"text-center"}>Modifier {produit.nom}</h1>
+            <h1 className="text-center my-5">Modifier {produit.nom}</h1>
             <ProduitForm
                 produitImage={produit.imagePath ?`${URL_BACKEND}/uploads/images/${produit.imagePath}`:null}
                 produit={produit}

@@ -181,24 +181,28 @@ function DevisForm() {
                                     <tbody>
                                     {panier.listeProduitPanier.map(value => (
                                         <tr key={value.id}>
-                                            <td><p className="fs-5 small mb-0">{value.produit.nom}</p><p className="fs-5">{value.produit.marque.nom}</p></td>
+                                            <td>
+                                                <p className="fs-6 fs-sm-6 fs-md-5 mb-0">{value.produit.nom}</p>
+                                                <p className="fs-6 fs-sm-6 fs-md-5">{value.produit.marque.nom}</p>
+                                            </td>
                                             <td className="text-center table-col-width">
                                                 <input
                                                     type="number"
                                                     onChange={(e) => handleChangeQuantite(e, value)}
-                                                    className="form-control text-center"
+                                                    className="form-control w-auto py-1 px-2"
                                                     value={value.quantite}
                                                     min={0}
-                                                    style={{maxWidth: '80px', margin: ''}}
+                                                    style={{maxWidth: '60px', fontSize: '0.95rem'}}
                                                 />
                                             </td>
-                                            <td className="text-center table-col-width">{cad.format(value.prix)}</td>
+                                            <td className="text-center table-col-width" style={{fontSize: '0.95rem'}}>{cad.format(value.prix)}</td>
                                             <td className="text-center table-col-width">
                                                 <button
                                                     type="button"
-                                                    className="btn btn-outline-dark "
+                                                    className="btn btn-outline-dark btn-sm p-1"
                                                     onClick={() => supprimerDuPanier(value.id)}
                                                     title="Supprimer"
+                                                    style={{fontSize: '1rem', width: '2rem', height: '2rem', minWidth: 'unset'}}
                                                 >
                                                     <i className="bi-x-lg bi"></i>
                                                 </button>

@@ -110,7 +110,7 @@ const ProduitForm = ({ produitImage, produit, marques, etats, errors, handleChan
                                 <Link to={URL_ROUTE_FRONTEND+"/"} className="btn btn-dark">
                                     Retour
                                 </Link>
-                                <button type="submit" className="btn btn-dark">
+                                <button type="submit" className="btn btn-dark bg-bleu-bouton">
                                     {isEditMode ? 'Modifier' : 'Enregistrer'}
                                 </button>
                             </div>

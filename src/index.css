@@ -16,6 +16,18 @@ font-weight: 800;
     font-size: 16px;
 }
 
+@media (max-width: 576px) {
+    .table-col-width {
+        font-size: 0.85rem !important;
+        padding: 0.25rem !important;
+    }
+    .btn-outline-dark.btn-sm {
+        font-size: 0.9rem !important;
+        width: 1.8rem !important;
+        height: 1.8rem !important;
+        padding: 0.2rem !important;
+    }
+}
 
 /* Barre de filtre et recherche dans le catalogue */
 
