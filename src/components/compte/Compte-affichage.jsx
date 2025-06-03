@@ -13,9 +13,9 @@ export default function CompteAffichage({ informations, onEdit }){
             </div>
 
             <div className="d-flex justify-content-end">
-                <button className="btn btn-dark btn-sm" onClick={onEdit}>
+                <button className="btn btn-dark btn-sm bg-bleu-bouton" onClick={onEdit}>
 
-                     Modifier <i className="bi bi-pencil"></i>
+                    <i className="bi bi-pencil me-1"></i> Modifier
                 </button>
             </div>
         </div>

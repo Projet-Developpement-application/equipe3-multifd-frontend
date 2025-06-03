@@ -129,7 +129,7 @@ export default function DevisDetail() {
                     {
                         utilisateur.role === "CLIENT" &&
                         <button
-                            className="btn btn-secondary mb-3"
+                            className="btn btn-dark mb-3 bg-bleu-bouton"
                             onClick={() => navigate("/compte")}
                         >
                             <i className="bi bi-arrow-left"> </i> Retour à l'historique

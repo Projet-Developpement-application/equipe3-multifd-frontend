@@ -84,7 +84,7 @@ const CompteForm = ({ informations, onSave, onCancel }) => {
                         Annuler
                     </button>
 
-                    <button type="submit" className="btn btn-dark btn-sm ml-2">
+                    <button type="submit" className="btn btn-dark  bg-bleu-bouton btn-sm ml-2">
                         Sauvegarder
                     </button>
                 </div>

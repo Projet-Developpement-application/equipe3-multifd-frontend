@@ -47,9 +47,9 @@ export default function Produit() {
     }
 
     return (
-        <div className="container-fluid p-0">
+        <div className="container-fluid p-0 mb-5">
             <div className="container py-5 mt-5">
-                <div className="row mx-3">
+                <div className="row mx-3 mb-5">
                     <div className="col-12 col-lg-5 d-flex flex-column align-items-start mb-4 mb-lg-0">
                         <div
                             className="bg-light d-flex justify-content-center align-items-center mb-3 w-100"
