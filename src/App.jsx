@@ -16,6 +16,7 @@ import UtilisateurAdm from "./components/gestion-comptes/UtilisateurAdm.jsx";
 import ConfirmationDevis from "./components/devis/Confirmation-devis.jsx";
 import DevisDetail from "./components/compte/DevisDetail.jsx";
 import FooterSection from "./components/footer/FooterSection.jsx";
+import OauthSuccess from "./components/authentification/OauthSuccess.jsx";
 export const URL_BACKEND = "http://localhost:8080";
 export const URL_ROUTE_FRONTEND = "";
 function App() {
@@ -60,6 +61,7 @@ function App() {
                     <Route path="utilisateur/:mail" element={<UtilisateurAdm />} />
                     <Route path="confirmation" element={<ConfirmationDevis />} />
                     <Route path="/commande/:id" element={<DevisDetail/>} />
+                    <Route path="oauth-sucess" element={<OauthSuccess/>}/>
 
 
                 </Routes>

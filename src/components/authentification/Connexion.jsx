@@ -106,10 +106,15 @@ export default function Connexion() {
                             <button type="submit" className="btn btn-dark">Se connecter</button>
                         </div>
                     </form>
+                    <div className="d-grid mt-3">
+                        <a href="http://localhost:8080/oauth2/authorization/github" className="btn btn-outline-dark">
+                            <i className="bi bi-github me-2"></i> Se connecter avec GitHub
+                        </a>
+                    </div>
                     <div className="pt-5 d-flex align-items-start justify-content-center">
-                    <Link to={URL_ROUTE_FRONTEND+"/Inscription"} className="text-decoration-none text-dark">
+                        <Link to={URL_ROUTE_FRONTEND + "/Inscription"} className="text-decoration-none text-dark">
                             <i className="bi bi-person-add"></i> Créer un compte
-                    </Link></div>
+                        </Link></div>
                 </div>
             </div>
         </div>
