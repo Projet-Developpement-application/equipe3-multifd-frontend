@@ -117,53 +117,54 @@ function DevisForm({setPanierCount}) {
                 <div className="container">
                     <h1 className="my-5">Demande de devis</h1>
 
-                    <div className="mb-5">
-                        <h4 className="pb-3">Veuillez choisir par quel moyen vous souhaitez être contacté:</h4>
-                        <div className="form-check mb-4">
-                            <input
-                                type="radio"
-                                className="form-check-input radio border-black "
-                                name="contactMethod"
-                                id="contactPhone"
-                                value="Téléphone"
-                                onChange={(e) => {
-                                    setContactMethod(e.target.value);
-                                    setContactValue('');
-                                }}
-                            />
-                            <label className="form-check-label" htmlFor="contactPhone">Téléphone</label>
-                        </div>
-                        <div className="form-check">
-                            <input
-                                type="radio"
-                                className="form-check-input border-black"
-                                name="contactMethod"
-                                id="contactEmail"
-                                value="Courriel"
-                                defaultChecked
-                                onChange={(e) => {
-                                    setContactMethod(e.target.value);
-                                    fetchUtilisateur(sessionStorage.getItem("mail")).then(r => {
-                                        setContactValue(r.username);
-                                    });
-                                }}
-                            />
-                            <label className="form-check-label " htmlFor="contactEmail">Courriel</label>
-                        </div>
-                        <div className="mb-3 mt-2">
-                            <input
-                                type={contactMethod === 'Téléphone' ? 'tel' : 'email'}
-                                className="form-control border-black w-25"
-                                id="contactValue"
-                                placeholder={contactMethod === 'Téléphone' ? 'Numéro de téléphone' : 'Adresse courriel'}
-                                value={contactValue}
-                                onChange={(e) => setContactValue(e.target.value)}
-                            />
-                        </div>
-                    </div>
+
 
                     {panier.listeProduitPanier.length > 0 ? (
                         <>
+                            <div className="mb-5">
+                                <h4 className="pb-3">Veuillez choisir par quel moyen vous souhaitez être contacté:</h4>
+                                <div className="form-check mb-4">
+                                    <input
+                                        type="radio"
+                                        className="form-check-input radio border-black "
+                                        name="contactMethod"
+                                        id="contactPhone"
+                                        value="Téléphone"
+                                        onChange={(e) => {
+                                            setContactMethod(e.target.value);
+                                            setContactValue('');
+                                        }}
+                                    />
+                                    <label className="form-check-label" htmlFor="contactPhone">Téléphone</label>
+                                </div>
+                                <div className="form-check">
+                                    <input
+                                        type="radio"
+                                        className="form-check-input border-black"
+                                        name="contactMethod"
+                                        id="contactEmail"
+                                        value="Courriel"
+                                        defaultChecked
+                                        onChange={(e) => {
+                                            setContactMethod(e.target.value);
+                                            fetchUtilisateur(sessionStorage.getItem("mail")).then(r => {
+                                                setContactValue(r.username);
+                                            });
+                                        }}
+                                    />
+                                    <label className="form-check-label " htmlFor="contactEmail">Courriel</label>
+                                </div>
+                                <div className="mb-3 mt-2">
+                                    <input
+                                        type={contactMethod === 'Téléphone' ? 'tel' : 'email'}
+                                        className="form-control border-black w-25"
+                                        id="contactValue"
+                                        placeholder={contactMethod === 'Téléphone' ? 'Numéro de téléphone' : 'Adresse courriel'}
+                                        value={contactValue}
+                                        onChange={(e) => setContactValue(e.target.value)}
+                                    />
+                                </div>
+                            </div>
                             <h6>Ajouter des spécifications à votre devis:</h6>
                             <textarea
                                 className="form-control border-black "

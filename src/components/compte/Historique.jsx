@@ -34,7 +34,6 @@ export default function Historique() {
                     <h3 className="mb-3">Historique de devis</h3>
                     {isFetching ? (
                         <div className="spinner-border" role="status">
-                            <span className="sr-only">Chargement...</span>
                         </div>
                     ) : listeCommande.length === 0 ? (
                         <div>Aucun historique</div>
