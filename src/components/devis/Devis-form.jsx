@@ -221,7 +221,7 @@ function DevisForm({setPanierCount}) {
                         <>
                             <h6>Ajouter des spécifications à votre devis:</h6>
                             <textarea
-                                className="form-control"
+                                className="form-control border-black "
                                 defaultValue={specification !== "" ? specification : undefined}
                                 id="message"
                                 rows="3"
@@ -235,8 +235,8 @@ function DevisForm({setPanierCount}) {
                             </div>
 
                             <h2>Résumé de votre devis</h2>
-                            <div className="table-responsive">
-                                <table className="table table-bordered table-light">
+                            <div className="table-responsive mt-5">
+                                <table className="table table-bordered table-light border-black">
                                     <thead>
                                     <tr>
 

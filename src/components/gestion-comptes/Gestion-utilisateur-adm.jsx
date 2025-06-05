@@ -89,7 +89,7 @@ export default function GestionUtilisateursAdm() {
                     {currentUsers.map(user => (
                         <div key={user.mail} className="row border border-dark p-3 m-4 bg-light rounded">
                             <div className="col-12">
-                                <h5 className="mb-3">{user.prenom} {user.nom}</h5>
+                                <h5 className="mb-3 fs-4">{user.prenom} {user.nom}</h5>
                                 <h6 className="mb-3">{user.mail}</h6>
                             </div>
                             <div className="col-12 d-flex justify-content-end">

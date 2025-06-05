@@ -11,10 +11,10 @@ export default function FooterSection() {
                     </p>
                     <p className="mb-1">
                         Réalisé par :&nbsp;
-                        <a href="https://github.com/jajanel" className=" text-decoration-none hover-underline-animation">Janelle Bédard</a>,&nbsp;
-                        <a href="https://github.com/Sara-Maud" className=" text-decoration-none hover-underline-animation">Sara-Maud Lupien</a>&nbsp;
+                        <a href="https://github.com/jajanel" className=" text-decoration-none hover-underline-animation texte-bleu-pale">Janelle Bédard</a>,&nbsp;
+                        <a href="https://github.com/Sara-Maud" className=" text-decoration-none hover-underline-animation texte-bleu-pale">Sara-Maud Lupien</a>&nbsp;
                         et&nbsp;
-                        <a href="https://github.com/lateigne9" className=" text-decoration-none hover-underline-animation">Fabien Terres</a>
+                        <a href="https://github.com/lateigne9" className=" text-decoration-none hover-underline-animation texte-bleu-pale">Fabien Terres</a>
                     </p>
                 </div>
                 <div className="col-md-6 text-md-end">

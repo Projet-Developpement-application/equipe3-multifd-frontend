@@ -96,7 +96,7 @@ const Sidebar = ({ouvert, fermeture, filtres, setFiltres}) => {
 
                 <h6 className="pb-2 "> <i className="bi bi-caret-right-fill"></i> HP</h6>
 
-                <div className="filter-options ps-2">
+                <div className="filter-options ps-2 ">
                     {[1, 2, 3, 5, 7.5, 10, 15, 20, 40, 50, 100].map((v) => (
                         <FiltreMulti key={v} typeFiltre={"hp"} valeur={v} unite={"hp"} toggleFiltre={toggleFiltre}
                                      filtres={filtres}/>

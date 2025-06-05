@@ -67,5 +67,6 @@ export const UtilisateurContext = createContext({
     mail: null,
     role: null,
     nom: '',
-    prenom: ''
+    prenom: '',
+    entreprise:''
 });

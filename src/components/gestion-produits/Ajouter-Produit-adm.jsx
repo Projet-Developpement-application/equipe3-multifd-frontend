@@ -45,24 +45,44 @@ const AjouterProduit = () => {
 
     const validate = () => {
         const newErrors = {};
-        const requiredFields = ['nom', 'prix', 'courant'];
+        const requiredFields = ['nom', 'prix', 'courant', 'voltage', 'hp', 'amperage', 'poids', 'image'];
 
+        // Champs requis
         requiredFields.forEach(field => {
             const value = produit[field];
             if (!value && value !== 0) {
                 newErrors[field] = 'Ce champ est requis.';
-            } else if (['prix', 'poids', 'voltage', 'hp', 'amperage', 'courant'].includes(field)) {
+            }
+        });
+
+        // Marque requise
+        if (!produit.marque || !produit.marque.nom || produit.marque.nom.trim() === '') {
+            newErrors.marque = 'La marque est requise.';
+        }
+
+        // Validation numérique bornée
+        ['prix', 'poids', 'voltage', 'hp', 'amperage', 'courant'].forEach(field => {
+            const value = produit[field];
+            if (value !== '' && value !== undefined) {
                 const num = Number(value);
                 if (isNaN(num)) {
                     newErrors[field] = 'Doit être un nombre.';
                 } else if (num < 0) {
                     newErrors[field] = 'La valeur ne peut pas être négative.';
+                } else if (num > 9999) {
+                    newErrors[field] = 'La valeur ne peut pas dépasser 9999.';
                 }
             }
-            if (produit.marque.nom === ' ') {
-                newErrors.marque = 'La marque est requise.';
-            }
         });
+
+        // Validation image
+        if (produit.image) {
+            const validTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/jpg'];
+            if (!validTypes.includes(produit.image.type)) {
+                newErrors.image = "Format d'image non supporté (jpg, jpeg, png, gif uniquement).";
+            }
+        }
+
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };

@@ -82,7 +82,7 @@ export default function AffichageProduits({filtres}) {
                                     {currentProducts.map((product) => (
                                         <div key={product.id} className="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
                                             <div
-                                                    className="card  h-100 border-1 rounded-top shadow-lg product-card-hover">
+                                                    className="card  h-100 border-2 rounded-top shadow-lg product-card-hover bg-gris-plus-pale">
                                                     <Link to={URL_ROUTE_FRONTEND+`produit/${product.id}`}
                                                           className="text-decoration-none text-dark">
                                                         {product.imagePath != null ? (

@@ -30,11 +30,10 @@ export default function Historique() {
     return (
         <div className="row mt-5  bg-light">
             <div className="col-12">
-                <div className="bg-white border border-2 rounded p-4 mb-5">
+                <div className="bg-gris-plus-pale border border-2 rounded p-4 mb-5">
                     <h3 className="mb-3">Historique de devis</h3>
                     {isFetching ? (
                         <div className="spinner-border" role="status">
-                            <span className="sr-only">Chargement...</span>
                         </div>
                     ) : listeCommande.length === 0 ? (
                         <div>Aucun historique</div>
