@@ -104,7 +104,6 @@ export async function ajouteSpecificationPanier(message) {
     })
 }
 
-//TODO finir d'implementer ca
 export async function getHistorique() {
     const response = await fetch(BASE_URL_CLIENT + "/historiquePanier", {
         method: 'GET',
@@ -118,14 +117,15 @@ export async function getHistorique() {
     }
     return await response.json();
 }
-export async function finirCommmande(panierCourant) {
+export async function finirCommmande(panier,contact) {
+    const demande= {panier,contact}
     const response = await fetch(BASE_URL_CLIENT + "/terminerPanier", {
         method: 'POST',
         headers: {
             'Content-type': 'Application/json',
             'Authorization': 'Bearer ' + sessionStorage.getItem("token")
         },
-        body:JSON.stringify(panierCourant)
+        body:JSON.stringify(demande)
     });
     if (!response.ok) {
         throw new Error("Erreur lors du chargement des commandes")

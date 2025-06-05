@@ -21,7 +21,7 @@ function DevisForm({setPanierCount}) {
     const [contactMethod, setContactMethod] = useState('Courriel');
     const [contactValue, setContactValue] = useState('');
     const [isFetching, setIsFetching] = useState(true);
-    const [isSending, setIsSending] = useState(false);
+    const [errorContactValue, setErrorContactValue] = useState({error: false, message: undefined})
     const navigate = useNavigate();
 
     let specification;
@@ -71,13 +71,38 @@ function DevisForm({setPanierCount}) {
             });
     }
 
+    function verifieNumTel(numero) {
+        const regex = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
+        return regex.test(numero);
+    }
+
+    function verifieCourriel(email) {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
+    }
+
+    function verifieContactValue() {
+        if (contactMethod === 'Téléphone' && !verifieNumTel(contactValue)) {
+            setErrorContactValue({error: true, message: "le numéro de téléphone n'est pas bon"})
+            return false;
+        }
+        if (contactMethod === 'Courriel' && !verifieCourriel(contactValue)) {
+            setErrorContactValue({error: true, message: "le mail est invalide"})
+            return false;
+        }
+        return true;
+    }
+
     function envoyerDemandeDevis() {
-        const validation=confirm("Voulez-vous confirmer votre demande de devis ?");
+        const good = verifieContactValue();
+        if (!good) return;
+
+        const validation = confirm("Voulez-vous confirmer votre demande de devis ?");
         if (!validation) return;
 
         setIsFetching(true);
 
-        finirCommmande(panier).then(value => {
+        finirCommmande(panier,contactValue).then(value => {
 
             if (value.status === 202) {
                 setPanier({
@@ -151,14 +176,44 @@ function DevisForm({setPanierCount}) {
                             <label className="form-check-label" htmlFor="contactEmail">Courriel</label>
                         </div>
                         <div className="mb-3 mt-2">
-                            <input
-                                type={contactMethod === 'Téléphone' ? 'tel' : 'email'}
-                                className="form-control"
-                                id="contactValue"
-                                placeholder={contactMethod === 'Téléphone' ? 'Numéro de téléphone' : 'Adresse courriel'}
-                                value={contactValue}
-                                onChange={(e) => setContactValue(e.target.value)}
-                            />
+                            {errorContactValue.error ? <div className="alert alert-danger" role="alert">
+                                {errorContactValue.message}
+                            </div> : undefined}
+                            {contactMethod === "Téléphone" ?
+                                <input
+                                    type={'tel'}
+                                    className="form-control"
+                                    maxLength={13}
+                                    placeholder={'Numéro de téléphone format : xxx-xxxx-xxxx'}
+                                    value={contactValue}
+                                    onChange={(e) =>{
+                                        const input = e.target.value;
+
+                                        // Retirer tout ce qui n'est pas un chiffre
+                                        const digits = input.replace(/\D/g, '');
+
+                                        // Appliquer le format XXX-XXX-XXXX
+                                        let formatted = digits;
+                                        if (digits.length > 3 && digits.length <= 6) {
+                                            formatted = `${digits.slice(0, 3)}-${digits.slice(3)}`;
+                                        } else if (digits.length > 6) {
+                                            formatted = `${digits.slice(0, 3)}-${digits.slice(3, 6)}-${digits.slice(6, 10)}`;
+                                        }
+                                        setContactValue(formatted)
+                                    }
+                                    }
+                                /> :
+                                <input
+                                    type={'email'}
+                                    className="form-control"
+                                    placeholder={'Adresse courriel'}
+                                    value={sessionStorage.getItem("mail")}
+                                    onChange={(e) =>
+                                        setContactValue(e.target.value)
+                                    }
+                                />
+                            }
+
                         </div>
                     </div>
 
@@ -204,14 +259,20 @@ function DevisForm({setPanierCount}) {
                                                     style={{maxWidth: '60px', fontSize: '0.95rem'}}
                                                 />
                                             </td>
-                                            <td className="text-center table-col-width" style={{fontSize: '0.95rem'}}>{cad.format(value.prix)}</td>
+                                            <td className="text-center table-col-width"
+                                                style={{fontSize: '0.95rem'}}>{cad.format(value.prix)}</td>
                                             <td className="text-center table-col-width">
                                                 <button
                                                     type="button"
                                                     className="btn btn-outline-dark btn-sm p-1"
                                                     onClick={() => supprimerDuPanier(value.id)}
                                                     title="Supprimer"
-                                                    style={{fontSize: '1rem', width: '2rem', height: '2rem', minWidth: 'unset'}}
+                                                    style={{
+                                                        fontSize: '1rem',
+                                                        width: '2rem',
+                                                        height: '2rem',
+                                                        minWidth: 'unset'
+                                                    }}
                                                 >
                                                     <i className="bi-x-lg bi"></i>
                                                 </button>
@@ -230,7 +291,7 @@ function DevisForm({setPanierCount}) {
                                 </p>
                                 <p>
                                     <strong>Taxes (15%) :</strong>{" "}
-                                    {cad.format(totalTVA) }
+                                    {cad.format(totalTVA)}
                                 </p>
                                 <h5>
                                     <strong>Total TTC
