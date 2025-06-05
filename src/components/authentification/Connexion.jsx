@@ -36,6 +36,7 @@ export default function Connexion() {
                 role: sessionStorage.getItem("role"),
                 nom: sessionStorage.getItem("nom"),
                 prenom: sessionStorage.getItem("prenom"),
+                entreprise :sessionStorage.getItem("entreprise")
             });
             navigate(URL_ROUTE_FRONTEND+"../");
         }

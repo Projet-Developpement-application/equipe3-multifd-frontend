@@ -79,6 +79,7 @@ export async function connexion(formData, setError) {
     sessionStorage.setItem("isConnected", true);
     sessionStorage.setItem("nom", data.nom);
     sessionStorage.setItem("prenom", data.prenom);
+    sessionStorage.setItem("entreprise", data.entreprise);
     return data; // Retourne les informations utilisateur
 }
 
