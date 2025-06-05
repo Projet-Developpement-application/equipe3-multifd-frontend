@@ -30,7 +30,7 @@ const CompteForm = ({ informations, onSave, onCancel }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="bg-light">
+        <form onSubmit={handleSubmit} className="bg-gris-plus-pale">
             <div className="border rounded border-2 p-4">
                 <h3 className="mb-3">Modifier mes informations de contact</h3>
 

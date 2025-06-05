@@ -42,8 +42,8 @@ export default function Connexion() {
     }
 
     return (
-        <div className="container-fluid min-vh-100 d-flex align-items-start justify-content-center">
-            <div className="row w-100 shadow-lg rounded overflow-hidden border border-2 marge-custom"
+        <div className="container-fluid min-vh-100 d-flex align-items-start justify-content-center ">
+            <div className="row w-100 shadow-lg rounded overflow-hidden border border-2 marge-custom "
                  style={{maxWidth: '1000px'}}>
                 <div className="col-md-5 d-flex justify-content-center align-items-center bg-bleu-fonce1">
                     <img src={logo} alt="Logo multifd" className="w-100 p-4" style={{maxHeight: "90%"}}/>

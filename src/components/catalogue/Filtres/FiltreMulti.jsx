@@ -4,7 +4,7 @@ function FiltreMulti({typeFiltre, valeur, toggleFiltre, unite,filtres}) {
     return (
         <div className="form-check">
             <input
-                className="form-check-input"
+                className="form-check-input border-dark"
                 type="checkbox"
                 id={typeFiltre + valeur}
                 name={typeFiltre + valeur}

@@ -1,6 +1,6 @@
 export default function CompteAffichage({ informations, onEdit }){
     return (
-        <div className="border rounded border-2 p-4 bg-light">
+        <div className="border rounded border-2 p-4 bg-gris-plus-pale">
             <h3 className="mb-3">Mes informations de contact</h3>
             <div className="row mb-2">
                 <div className="col-md-6"><strong>Prénom :</strong> {informations.prenom}</div>

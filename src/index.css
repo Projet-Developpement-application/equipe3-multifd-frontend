@@ -174,3 +174,10 @@ font-weight: 800;
     width: 7%;
 
 }
+
+@media (max-width: 576px) {
+    .btn {
+        padding: 0.25rem 0.5rem !important;
+        font-size: 0.875rem !important;
+    }
+}

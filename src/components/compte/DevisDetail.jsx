@@ -93,7 +93,7 @@ export default function DevisDetail() {
 
                     <table className="table table-bordered table-light">
                         <thead>
-                        <tr>
+                        <tr className="table-primary">
                             <th>Nom du produit</th>
                             <th>Quantité</th>
                             <th>Prix unitaire</th>
