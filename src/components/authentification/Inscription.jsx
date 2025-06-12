@@ -35,6 +35,7 @@ export default function Inscription() {
 
 
     const navigate = useNavigate();
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
     const handleChange = (e) => {
         const {name, value} = e.target;
@@ -44,7 +45,7 @@ export default function Inscription() {
             setValid(prev => ({...prev, email: /\S+@\S+\.\S+/.test(value)}));
         }
         if (name === "password") {
-            setValid(prev => ({...prev, password: value.length >= 8}));
+            setValid(prev => ({...prev, password: passwordRegex.test(value)}));
         }
         if (name === "confirmPassword") {
             setValid(prev => ({...prev, confirmPassword: value === formData.password}));

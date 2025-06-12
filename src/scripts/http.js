@@ -1,5 +1,5 @@
-//export const BASE_URL_ENDPOINT = "http://172.20.46.45:8080/backend-projet-prod";
-export const BASE_URL_ENDPOINT = "http://localhost:8080";
+export const BASE_URL_ENDPOINT = "http://172.20.46.45:8080/backend-projet-prod";
+//export const BASE_URL_ENDPOINT = "http://localhost:8080";
 
 export async function fetchTexteClient() {
     const response = await fetch(BASE_URL_ENDPOINT + "/user/produits");

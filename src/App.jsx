@@ -16,7 +16,7 @@ import UtilisateurAdm from "./components/gestion-comptes/UtilisateurAdm.jsx";
 import ConfirmationDevis from "./components/devis/Confirmation-devis.jsx";
 import DevisDetail from "./components/compte/DevisDetail.jsx";
 import FooterSection from "./components/footer/FooterSection.jsx";
-export const URL_BACKEND = "http://localhost:8080";
+export const URL_BACKEND = "http://172.20.46.45:8080/backend-projet-prod";
 export const URL_ROUTE_FRONTEND = "";
 function App() {
     const [utilisateur, setUtilisateur] = useState({
